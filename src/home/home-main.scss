@@ -1,0 +1,16 @@
+.home-navigation {
+  background-color: #81ecec;
+  width: 200px;
+  height: 200px;
+}
+
+.home-content {
+  width: calc(100% - 200px - 200px - 24px - 24px);
+  margin: 0 24px;
+}
+
+.home-sidebar {
+  background-color: #a29bfe;
+  width: 200px;
+  height: 200px;
+}

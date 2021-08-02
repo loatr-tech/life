@@ -1,0 +1,35 @@
+import React from 'react';
+import { Avatar } from 'antd';
+import { LikeOutlined, EyeOutlined, CommentOutlined } from '@ant-design/icons';
+
+import './post-card.scss';
+
+function PostCard() {
+  return (
+    <div className="post-card">
+      <section className="post-card__stats">
+        <Avatar className="post-card__stats-avatar">U</Avatar>
+        <div className="post-card__stats-icon">
+          <LikeOutlined /> 123
+        </div>
+        <div className="post-card__stats-icon">
+          <EyeOutlined /> 100k
+        </div>
+        <div className="post-card__stats-icon">
+          <CommentOutlined /> 1.2k
+        </div>
+      </section>
+      <section className="post-card__details">
+        <h3 className="post-card__details-title">Title</h3>
+        <p className="post-card__details-content">
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi nemo
+          mollitia repellendus, laudantium unde, vel iste tempora eum nihil
+          aperiam aliquid? Deleniti cum beatae iste sapiente molestias ullam
+          consequatur alias.
+        </p>
+      </section>
+    </div>
+  );
+}
+
+export default PostCard;

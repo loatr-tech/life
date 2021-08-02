@@ -1,12 +1,16 @@
 import React from 'react';
-import { Button } from 'antd';
-import './App.css';
+import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import './App.scss';
+
+import Home from './home/home';
 
 function App() {
   return (
-    <div className="App">
-      <Button type="primary">Life</Button>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/" exact component={Home} />
+      </Switch>
+    </Router>
   );
 }
 

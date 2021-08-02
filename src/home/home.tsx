@@ -9,7 +9,7 @@ function Home() {
     <div className="home">
       {/* Header */}
       <header className="home-header">
-        <div>Logo</div>
+        <div>上岸</div>
         <div className="home-header-search">Search</div>
         <div className="home-header-user">
           <Badge count={5}>

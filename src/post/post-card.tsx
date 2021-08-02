@@ -1,6 +1,5 @@
 import React from 'react';
 import { Avatar } from 'antd';
-import { LikeOutlined, EyeOutlined, CommentOutlined } from '@ant-design/icons';
 
 import './post-card.scss';
 
@@ -10,13 +9,13 @@ function PostCard() {
       <section className="post-card__stats">
         <Avatar className="post-card__stats-avatar">U</Avatar>
         <div className="post-card__stats-icon">
-          <LikeOutlined /> 123
+          <i className="far fa-eye"></i> 100k
         </div>
         <div className="post-card__stats-icon">
-          <EyeOutlined /> 100k
+          <i className="far fa-thumbs-up"></i> 123
         </div>
         <div className="post-card__stats-icon">
-          <CommentOutlined /> 1.2k
+          <i className="far fa-comment"></i> 1.2k
         </div>
       </section>
       <section className="post-card__details">

@@ -38,8 +38,9 @@ function HomeNavigation() {
         icon={<i className="far fa-id-card"></i>}
         title="身份移民"
       >
-        <Menu.Item key="5">Option 5</Menu.Item>
-        <Menu.Item key="6">Option 6</Menu.Item>
+        <Menu.Item key="h1">工作签证</Menu.Item>
+        <Menu.Item key="eb">移民绿卡</Menu.Item>
+        <Menu.Item key="f1">学生签证</Menu.Item>
         <SubMenu key="sub3" title="Submenu">
           <Menu.Item key="7">Option 7</Menu.Item>
           <Menu.Item key="8">Option 8</Menu.Item>

@@ -8,6 +8,10 @@ function PostCard() {
     <div className="post-card">
       <section className="post-card__stats">
         <Avatar className="post-card__stats-avatar">U</Avatar>
+        <div className="post-card__stats-username">
+          <div>Michael Jackson</div>
+          <div className="post-card__stats-ago">1 小时前</div>
+        </div>
         <div className="post-card__stats-icon">
           <i className="far fa-eye"></i> 100k
         </div>
@@ -18,6 +22,7 @@ function PostCard() {
           <i className="far fa-comment"></i> 1.2k
         </div>
       </section>
+      <hr className="post-card__divider" />
       <section className="post-card__details">
         <h3 className="post-card__details-title">Title</h3>
         <p className="post-card__details-content">

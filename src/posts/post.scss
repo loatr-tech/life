@@ -1,0 +1,15 @@
+.post {
+  min-height: calc(100vh - 50px);
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.post__path {
+  margin-bottom: 20px;
+}
+
+.post__container {
+  display: flex;
+  flex-direction: row;
+}

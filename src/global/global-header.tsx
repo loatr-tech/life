@@ -3,6 +3,7 @@ import { Avatar, Badge, Input } from 'antd';
 
 import { BellOutlined } from '@ant-design/icons';
 import './global-header.scss';
+import { Link } from 'react-router-dom';
 
 const { Search } = Input;
 
@@ -14,10 +15,10 @@ function GlobalHeader() {
   return (
     <header className="global-header">
       <div className="global-header__container">
-        <div className="global-header__logo">
+        <Link className="global-header__logo" to="/">
           <h1>上岸</h1>
           <span>beta</span>
-        </div>
+        </Link>
         <div className="global-header__search">
           <Search
             placeholder="你在想啥？"

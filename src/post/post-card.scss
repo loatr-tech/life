@@ -53,9 +53,9 @@
   .post-card__details-content {
     white-space: pre-wrap;
     overflow: hidden;
-    // text-overflow: ellipsis;
     width: 100%;
     max-height: 80px;
+    line-height: 20px;
     margin: 0;
   }
 }

@@ -4,6 +4,7 @@ import './App.scss';
 import GlobalHeader from './global/global-header';
 
 import Home from './home/home';
+import Post from './posts/post';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <GlobalHeader />
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/post/:postId" component={Post} />
       </Switch>
     </Router>
   );

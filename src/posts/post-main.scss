@@ -23,7 +23,6 @@
     border-bottom-width: 12px;
     margin-top: -16px;
     margin-left: -16px;
-    // box-shadow: 0 3px 10px rgba(0, 0, 0, 0.03);
   }
 
   > h1 {
@@ -33,10 +32,16 @@
 
 .post-main__content {
   background-color: #fff;
-  padding: 24px;
+  padding: 24px 32px;
   min-height: 50vh;
 }
 
+.post-main_copyright-disclaimer {
+  margin-top: 24px;
+  text-align: center;
+  color: darkgrey;
+  user-select: none;
+}
 .post-main__interactions {
   margin: 24px;
   text-align: center;

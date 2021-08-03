@@ -5,6 +5,7 @@ import GlobalHeader from './global/global-header';
 
 import Home from './home/home';
 import Post from './posts/post';
+import PostCreation from './post-creation/post-creation';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/post/:postId" component={Post} />
+        <Route path="/new-post" component={PostCreation} />
       </Switch>
     </Router>
   );

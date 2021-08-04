@@ -12,3 +12,31 @@
   width: 200px;
   height: 480px;
 }
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  .home-content {
+    width: calc(100% - 200px - 24px);
+    margin-right: 0;
+  }
+  .home-sidebar {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .home-main {
+    padding: 24px 8px;
+  }
+  .home-navigation {
+    display: none;
+  }
+
+  .home-content {
+    width: 100%;
+    margin: 0;
+  }
+
+  .home-sidebar {
+    display: none;
+  }
+}

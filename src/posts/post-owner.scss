@@ -22,3 +22,10 @@
   margin: 12px auto 0 auto;
   color: #bbb;
 }
+
+@media only screen and (max-width: 576px) {
+  .post-owner {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+}

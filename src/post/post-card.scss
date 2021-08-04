@@ -44,7 +44,10 @@
 }
 
 .post-card__details {
-  cursor: pointer;
+  color: black;
+  &:hover {
+    color: darkgrey;
+  }
   .post-card__details-title {
     white-space: nowrap;
     overflow: hidden;

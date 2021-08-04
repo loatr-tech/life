@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Avatar } from 'antd';
 
 import './post-card.scss';
+
 
 function PostCard() {
   return (
@@ -23,7 +25,7 @@ function PostCard() {
         </div>
       </section>
       <hr className="post-card__divider" />
-      <section className="post-card__details">
+      <Link to={`/post/${123}`} className="post-card__details">
         <h3 className="post-card__details-title">Title</h3>
         <p className="post-card__details-content">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi nemo
@@ -31,7 +33,7 @@ function PostCard() {
           aperiam aliquid? Deleniti cum beatae iste sapiente molestias ullam
           consequatur alias.
         </p>
-      </section>
+      </Link>
     </div>
   );
 }

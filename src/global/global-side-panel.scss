@@ -1,0 +1,16 @@
+.global-side-panel {
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  right: -200px;
+  width: 200px;
+  background-color: white;
+  z-index: 2;
+  border-left: 1px solid lightgrey;
+
+  &.side-panel-opened {
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    right: 0;
+  }
+}

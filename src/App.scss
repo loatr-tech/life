@@ -4,6 +4,16 @@ body {
   background-color: #f0f2f5;
 }
 
-button > i:first-child {
+.app-container {
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  position: relative;
+  right: 0;
+  &.app-container-pushed {
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    right: 200px;
+  }
+}
+
+button > i:first-child:not(:last-child) {
   margin-right: 8px;
 }

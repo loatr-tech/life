@@ -5,7 +5,7 @@ import { Avatar } from 'antd';
 import './post-card.scss';
 
 
-function PostCard() {
+function PostCard({ post }: any) {
   return (
     <div className="post-card">
       <section className="post-card__stats">
@@ -25,13 +25,10 @@ function PostCard() {
         </div>
       </section>
       <hr className="post-card__divider" />
-      <Link to={`/post/${123}`} className="post-card__details">
-        <h3 className="post-card__details-title">Title</h3>
+      <Link to={`/post/${post.id}`} className="post-card__details">
+        <h3 className="post-card__details-title">{post.title}</h3>
         <p className="post-card__details-content">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi nemo
-          mollitia repellendus, laudantium unde, vel iste tempora eum nihil
-          aperiam aliquid? Deleniti cum beatae iste sapiente molestias ullam
-          consequatur alias.
+          {post.content || 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi nemo mollitia repellendus, laudantium unde, vel iste tempora eum nihil aperiam aliquid? Deleniti cum beatae iste sapiente molestias ullam consequatur alias.'}
         </p>
       </Link>
     </div>

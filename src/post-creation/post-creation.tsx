@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { Button, Input } from 'antd';
 import Editor from 'rich-markdown-editor';
 import './post-creation.scss';
+import api from '../_utils/api';
 
-function PostCreation() {
+function PostCreation(props: any) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -16,10 +17,12 @@ function PostCreation() {
     setContent(value);
   };
 
-  const onPublish = () => {
+  const onPublish = async () => {
     if (title.length && content.length) {
       const payload = { title, content };
-      console.log(payload);
+      await api.post('post', payload);
+      // Redirect back to homepage
+      props.history.push('/');
     }
   }
   return (

@@ -48,17 +48,44 @@
   &:hover {
     color: darkgrey;
   }
-  .post-card__details-title {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+}
+
+.post-card__details-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.post-card__details-content {
+  white-space: pre-wrap;
+  overflow: hidden;
+  width: 100%;
+  max-height: 80px;
+  line-height: 20px;
+  margin: 0;
+}
+
+@keyframes placeHolderSwept {
+  0% {
+    background-position: -400px 0
   }
-  .post-card__details-content {
-    white-space: pre-wrap;
-    overflow: hidden;
+
+  100% {
+    background-position: 400px 0
+  }
+}
+
+.post-card-placeholder {
+  animation: placeHolderSwept 1s infinite linear forwards;
+  background: #ebebec;
+  background-image: linear-gradient(to right, #ebebec 0%, #e0e0e2 20%, #ebebec 40%, #ebebec 100%);
+  background-repeat: no-repeat;
+  &.post-card__details-title {
+    height: 25px;
+    max-width: 200px;
+  }
+  &.post-card__details-content {
     width: 100%;
-    max-height: 80px;
-    line-height: 20px;
-    margin: 0;
+    height: 80px;
   }
 }

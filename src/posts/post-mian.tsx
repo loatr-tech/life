@@ -32,18 +32,20 @@ was how to get out of his current situation of being naked in a tree
 with snow falling all around and no way for him to get down.
 `;
 
-function PostMain() {
+function PostMain({ post }: any) {
   return (
     <div className="post-main">
       {/* Header */}
       <header className="post-main__title">
-        <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</h1>
+        <h1>{post.title}</h1>
       </header>
       {/* Content */}
       <main className="post-main__content">
-        <Editor defaultValue={exampleText} readOnly={true} />
+        <Editor value={post.content} readOnly={true} />
       </main>
-      <p className="post-main_copyright-disclaimer">著作权归作者所有，未经授权禁止转载</p>
+      <p className="post-main_copyright-disclaimer">
+        著作权归作者所有，未经授权禁止转载
+      </p>
       {/* Interactions */}
       <section className="post-main__interactions">
         <Button type="primary" shape="circle">

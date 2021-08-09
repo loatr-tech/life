@@ -48,6 +48,11 @@
   text-align: right;
 }
 
+.post-creation__missing-field {
+  border: 2px solid #ff4d4f;
+  color: #ff4d4f;
+}
+
 @media only screen and (min-width: 576px) and (max-width: 768px) {
   .post-creation__editor {
     width: calc(100% - 200px - 24px);

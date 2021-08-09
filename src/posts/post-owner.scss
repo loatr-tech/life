@@ -18,9 +18,11 @@
 }
 
 .post-owner__stats {
-  width: 70px;
   margin: 12px auto 0 auto;
+  max-width: 200px;
   color: #bbb;
+  display: flex;
+  justify-content: space-between;
 }
 
 @media only screen and (max-width: 576px) {

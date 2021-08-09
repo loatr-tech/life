@@ -25,12 +25,12 @@ function HomeNavigation() {
         title="打工人儿"
       >
         <Menu.ItemGroup key="career-exp" title="经验分享">
-          <Menu.Item key="experience-sharing">上岸指南</Menu.Item>
+          <Menu.Item key="experience_sharing">上岸指南</Menu.Item>
           <Menu.Item key="promotion">升职加薪</Menu.Item>
         </Menu.ItemGroup>
         <Menu.ItemGroup key="career-data" title="数据分享">
-          <Menu.Item key="total-package">我的包裹</Menu.Item>
-          <Menu.Item key="interview-questions">北美面经</Menu.Item>
+          <Menu.Item key="total_package">我的包裹</Menu.Item>
+          <Menu.Item key="interview_questions">北美面经</Menu.Item>
         </Menu.ItemGroup>
       </SubMenu>
       <SubMenu
@@ -38,25 +38,25 @@ function HomeNavigation() {
         icon={<i className="far fa-id-card"></i>}
         title="身份移民"
       >
-        <Menu.Item key="work-visa">工作签证</Menu.Item>
-        <Menu.Item key="green-card">移民绿卡</Menu.Item>
-        <Menu.Item key="student-visa">学生签证</Menu.Item>
+        <Menu.Item key="work_visa">工作签证</Menu.Item>
+        <Menu.Item key="green_card">移民绿卡</Menu.Item>
+        <Menu.Item key="student_visa">学生签证</Menu.Item>
       </SubMenu>
       <SubMenu
         key="study"
         icon={<i className="fas fa-book-reader"></i>}
         title="天天向上"
       >
-        <Menu.Item key="lets-study">自习</Menu.Item>
-        <Menu.Item key="leet-code">组队刷题</Menu.Item>
+        <Menu.Item key="lets_study">自习</Menu.Item>
+        <Menu.Item key="leet_code">组队刷题</Menu.Item>
       </SubMenu>
       <SubMenu
         key="neighborhood"
         icon={<i className="fas fa-book-reader"></i>}
         title="街坊领居"
       >
-        <Menu.Item key="used-items">二手市场</Menu.Item>
-        <Menu.Item key="house-rental">房屋出租</Menu.Item>
+        <Menu.Item key="used_items">二手市场</Menu.Item>
+        <Menu.Item key="house_rental">房屋出租</Menu.Item>
       </SubMenu>
     </Menu>
   );

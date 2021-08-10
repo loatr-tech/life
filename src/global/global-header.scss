@@ -27,18 +27,11 @@
 .global-header__search {
   margin-right: auto;
   margin-left: 24px;
-  .global-header__search-input {
+  .global-header__search {
     width: 400px;
-    @media only screen and (min-width: 576px) and (max-width: 768px) {
-      width: 200px;
-    }
-    @media only screen and (max-width: 576px) {
-      width: 145px;
-      input {
-        font-size: 1rem;
-        line-height: 1rem;
-      }
-    }
+  }
+  .global-header__search-input {
+    width: auto;
   }
 }
 
@@ -50,5 +43,22 @@
 
   .global-header-nofitication-bell {
     font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 768px) {
+  .global-header__search {
+    width: 240px;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .global-header__search {
+    width: calc(100% - 85px - 45px - 24px - 10px);
+
+    input {
+      font-size: 1rem;
+      line-height: 1rem;
+    }
   }
 }

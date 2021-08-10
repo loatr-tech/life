@@ -3,14 +3,30 @@
   position: fixed;
   height: 100vh;
   top: 0;
-  right: -200px;
-  width: 200px;
+  right: -240px;
+  width: 240px;
   background-color: white;
   z-index: 2;
   border-left: 1px solid lightgrey;
+  overflow: auto;
+  padding-top: 24px;
 
   &.side-panel-opened {
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     right: 0;
+  }
+}
+
+.global-side-panel__user {
+  padding: 8px 16px 8px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  > .global-side-panel__user-name {
+    margin: 0 auto 0 8px;
+  }
+  > i:last-child {
+    color: darkgrey;
   }
 }

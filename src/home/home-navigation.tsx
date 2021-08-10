@@ -52,7 +52,7 @@ function HomeNavigation() {
       </SubMenu>
       <SubMenu
         key="neighborhood"
-        icon={<i className="fas fa-book-reader"></i>}
+        icon={<i className="fas fa-people-arrows"></i>}
         title="街坊领居"
       >
         <Menu.Item key="used_items">二手市场</Menu.Item>

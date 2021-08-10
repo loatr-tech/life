@@ -6,8 +6,6 @@ import './global-header.scss';
 import { Link } from 'react-router-dom';
 import { SCREEN, ScreenSizeContext } from '../_context/screen-size.context';
 
-const { Search } = Input;
-
 function GlobalHeader() {
   const { screenSize, toggleSidePanel } = useContext(ScreenSizeContext);
   const onSearch = (value: string) => {
@@ -24,7 +22,7 @@ function GlobalHeader() {
         </Link>
         {/* Search */}
         <div className="global-header__search">
-          <Search
+          <Input.Search
             placeholder="你在想啥？"
             allowClear
             onSearch={onSearch}

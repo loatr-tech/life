@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-import { Avatar, Badge, Button, Input } from 'antd';
-
-import { BellOutlined } from '@ant-design/icons';
+import { Avatar, Button, Input } from 'antd';
 import './global-header.scss';
 import { Link } from 'react-router-dom';
 import { SCREEN, ScreenSizeContext } from '../_context/screen-size.context';
@@ -35,12 +33,9 @@ function GlobalHeader() {
             <i className="fas fa-bars"></i>
           </Button>
         ) : (
-          <div className="global-header-user">
-            <Badge count={5}>
-              <BellOutlined className="global-header-nofitication-bell" />
-            </Badge>
+          <Link to="/user">
             <Avatar>U</Avatar>
-          </div>
+          </Link>
         )}
       </div>
     </header>

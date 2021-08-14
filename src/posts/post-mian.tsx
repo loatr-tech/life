@@ -49,7 +49,7 @@ function PostMain({ post, fetching }: any) {
               <i className="far fa-bookmark"></i>
             </Button>
           </section>
-          <PostComments post={post} fetching={fetching} />
+          <PostComments post={post} />
         </>
       )}
     </div>

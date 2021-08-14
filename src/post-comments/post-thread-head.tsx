@@ -4,7 +4,7 @@ import './post-thread-head.scss';
 import api from '../_utils/api';
 import { timeSince } from '../_utils/time';
 
-function PostThreadHead({ thread, children }: any) {
+function PostThreadHead({ thread, refreshReplies, children }: any) {
   const [startReply, setStartReply] = useState(false);
   const [reply, setReply] = useState('');
   const [replySubmitting, setReplySubmitting] = useState(false);
@@ -20,6 +20,7 @@ function PostThreadHead({ thread, children }: any) {
     setReply('');
     setStartReply(false);
     setReplySubmitting(false);
+    refreshReplies();
   };
 
   return (

@@ -6,43 +6,52 @@ import PostReply from './post-reply';
 import LoadingSpinner from '../_shared/loading-spinner';
 import PostThreadHead from './post-thread-head';
 
+const REPLIES_LIMIT = 10;
+
 function PostThread({ thread }: any) {
   const [viewReply, setViewReply] = useState(false);
   const [replies, setReplies] = useState([]);
   const [repliesPage, setRepliesPage] = useState(1);
-  const [totalReplies, setTotalReplies] = useState(0);
+  const [totalReplies, setTotalReplies] = useState(thread?.replies || 0);
   const [fetchingReplies, setFetchingReplies] = useState(false);
   const [fetchingMoreReplies, setFetchingMoreReplies] = useState(false);
+
+  const _loadReplies = async (page: number) =>{
+    const { data } = await api.get(
+      `post/${thread.post_id}/comment/${thread.id}/replies`,
+      {
+        params: { page, limit: REPLIES_LIMIT },
+      }
+    );
+    return data;
+  }
 
   const onViewReply = async () => {
     if (viewReply) {
       setViewReply(false);
       setReplies([]);
       setRepliesPage(1);
-      setTotalReplies(0);
     } else {
       setViewReply(true);
       setFetchingReplies(true);
-      const { data } = await api.get(
-        `post/${thread.post_id}/comment/${thread.id}/replies`
-      );
+      const data = await _loadReplies(repliesPage);
       setFetchingReplies(false);
       setReplies(data.replies);
       setTotalReplies(data.count);
     }
   }
 
+  const refreshReplies = async () => {
+    const data = await _loadReplies(1);
+    setRepliesPage(1);
+    setReplies(data.replies);
+    setTotalReplies(data.count);
+  }
+
   const loadMoreReplies = async () => {
     setFetchingMoreReplies(true);
     const nextRepliesPage = repliesPage + 1;
-    const { data } = await api.get(
-      `post/${thread.post_id}/comment/${thread.id}/replies`,
-      {
-        params: {
-          page: nextRepliesPage,
-        },
-      }
-    );
+    const data = await _loadReplies(nextRepliesPage);
     setRepliesPage(nextRepliesPage);
     setReplies(replies.concat(data.replies));
     setTotalReplies(data.count);
@@ -51,16 +60,16 @@ function PostThread({ thread }: any) {
 
   return (
     <div className="post-thread">
-      <PostThreadHead thread={thread}>
+      <PostThreadHead thread={thread} refreshReplies={refreshReplies}>
         {/* View reply */}
-        {thread?.replies > 0 && (
+        {totalReplies > 0 && (
           <Button
             className="post-thread__view-reply"
             type="link"
             onClick={() => onViewReply()}
           >
             <i className={`fas fa-caret-${viewReply ? 'up' : 'down'}`}></i>{' '}
-            {viewReply ? '收起回复' : `查看${thread.replies}条回复`}
+            {viewReply ? '收起回复' : `查看${totalReplies}条回复`}
           </Button>
         )}
       </PostThreadHead>
@@ -73,11 +82,11 @@ function PostThread({ thread }: any) {
               <LoadingSpinner />
             </div>
           )}
-          {replies.map((reply: any, index: number) => {
+          {replies.map((reply: any) => {
             return (
               <PostReply
                 reply={reply}
-                key={index}
+                key={reply.id}
                 isHero={reply.user_id === 2}
               />
             );

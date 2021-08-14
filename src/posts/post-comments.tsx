@@ -47,21 +47,25 @@ function PostComments({ post }: any) {
 
   return (
     <section className="post-comments">
-      <h3>
-        <i className="far fa-comments"></i> 评论区 ({post.comments})
-      </h3>
-      {threads.map((thread: any) => (
-        <PostThread thread={thread} key={thread.id}/>
-      ))}
-      <Pagination
-        className="post-comments__pagination"
-        size="small"
-        defaultCurrent={1}
-        pageSize={THREAD_LIMIT}
-        onChange={onPageChange}
-        showSizeChanger={false}
-        total={threadCount}
-      />
+      {threads?.length > 0 && (
+        <>
+          <h3>
+            <i className="far fa-comments"></i> 评论区 ({post.comments})
+          </h3>
+          {threads.map((thread: any) => (
+            <PostThread thread={thread} key={thread.id} />
+          ))}
+          <Pagination
+            className="post-comments__pagination"
+            size="small"
+            defaultCurrent={1}
+            pageSize={THREAD_LIMIT}
+            onChange={onPageChange}
+            showSizeChanger={false}
+            total={threadCount}
+          />
+        </>
+      )}
       <Divider />
       <div className="post-comments__textarea-container">
         <span className="post-comments__textarea-avatar">
@@ -73,6 +77,7 @@ function PostComments({ post }: any) {
           rows={4}
           value={comment}
           onChange={(e) => setComment(e.target.value)}
+          disabled={commentSubmitting}
         ></textarea>
       </div>
       <div className="post-comments__textarea-actions">

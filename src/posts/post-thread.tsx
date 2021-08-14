@@ -5,9 +5,10 @@ import api from '../_utils/api';
 
 function PostThread({ thread }: any) {
   const [viewReply, setViewReply] = useState(false);
-  const [startComment, setStartComment] = useState(false);
+  const [startReply, setStartReply] = useState(false);
   const [reply, setReply] = useState('');
   const [replies, setReplies] = useState([]);
+  const [totalReplies, setTotalReplies] = useState(0);
   const [fetchingReplies, setFetchingReplies] = useState(false);
   const [replySubmitting, setReplySubmitting] = useState(false);
 
@@ -22,6 +23,7 @@ function PostThread({ thread }: any) {
       );
       setFetchingReplies(false);
       setReplies(data.replies);
+      setTotalReplies(data.count);
     }
   }
 
@@ -34,7 +36,7 @@ function PostThread({ thread }: any) {
       user_id: 1,
     });
     setReply('');
-    setStartComment(false);
+    setStartReply(false);
     setReplySubmitting(false);
   };
 
@@ -46,16 +48,16 @@ function PostThread({ thread }: any) {
           actions={[
             <span
               key="comment-action-reply-to"
-              onClick={() => setStartComment(!startComment)}
+              onClick={() => setStartReply(!startReply)}
             >
-              <i className="fas fa-reply"></i> 回复
+              回复
             </span>,
           ]}
           author={<span>岸上某位用户</span>}
           avatar={<Avatar>A</Avatar>}
           content={<p>{thread?.comment}</p>}
         />
-        {startComment && (
+        {startReply && (
           <div className="post-thread__reply">
             <div className="post-thread__reply-textarea-container">
               <span className="post-thread__reply-textarea-avatar">
@@ -74,7 +76,7 @@ function PostThread({ thread }: any) {
               <Button
                 size="small"
                 type="text"
-                onClick={() => setStartComment(false)}
+                onClick={() => setStartReply(false)}
                 disabled={replySubmitting}
               >
                 取消
@@ -110,7 +112,7 @@ function PostThread({ thread }: any) {
                 key={index}
                 actions={[
                   <span key="comment-action-quote">
-                    <i className="fas fa-quote-left"></i> 引用
+                    引用
                   </span>,
                 ]}
                 author={<span>岸上某位用户</span>}
@@ -119,7 +121,12 @@ function PostThread({ thread }: any) {
               />
             );
           })}
-          <div className="post-thread__expand">展开更多回复 (12)</div>
+          {totalReplies > replies.length && (
+            <Button type="link" className="post-thread__expand">
+              <span className="post-thread__expand-line"></span>
+              展开更多回复 ({totalReplies - replies.length})
+            </Button>
+          )}
         </div>
       )}
     </div>

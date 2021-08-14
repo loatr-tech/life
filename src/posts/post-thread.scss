@@ -29,8 +29,7 @@
     align-items: center;
     cursor: pointer;
 
-    &::before {
-      content: ' ';
+    .post-thread__expand-line {
       display: inline-block;
       width: 32px;
       height: 1px;
@@ -63,5 +62,11 @@
     padding-top: 12px;
     display: flex;
     justify-content: flex-end;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .post-thread__reply-textarea {
+    font-size: 1rem;
   }
 }

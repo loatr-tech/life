@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Menu } from 'antd';
 import { MenuInfo } from 'rc-menu/lib/interface';
 import { CATEGORIES, CATEGORIES_MAP } from '../_utils/categories';
+import { NavigationContext } from '../_context/navigation.context';
 
 function HomeNavigation() {
+  const { activeCategory, setActiveCategory } = useContext(NavigationContext);
+
   const handleClick = (menuInfo: MenuInfo) => {
-    console.log('menuInfo ', menuInfo);
+    setActiveCategory(menuInfo.key);
   };
+
   return (
     <Menu
       onClick={(menuInfo) => handleClick(menuInfo)}
-      defaultSelectedKeys={['all']}
+      defaultSelectedKeys={[activeCategory]}
       defaultOpenKeys={['career']}
       mode="inline"
     >

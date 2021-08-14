@@ -7,23 +7,28 @@ import HomeNavigation from './home-navigation';
 import { Button } from 'antd';
 import api from '../_utils/api';
 import PostCardPlaceholder from '../post/post-card-placeholder';
+import { NavigationContext } from '../_context/navigation.context';
 
 
 function HomeMain() {
   const { screenSize } = useContext(ScreenSizeContext);
+  const { activeCategory } = useContext(NavigationContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchAllPosts = async () => {
       setLoading(true);
-      const { data } = await api.get('posts');
+      const params: any = {};
+      if (activeCategory && activeCategory !== 'all')
+        params.category = activeCategory;
+      const { data } = await api.get('posts', { params });
       setPosts(data.items);
       setLoading(false);
-    }
+    };
 
     fetchAllPosts();
-  }, [])
+  }, [activeCategory]);
   return (
     <main className="home-main">
       <section className="home-navigation">
@@ -40,7 +45,7 @@ function HomeMain() {
           </div>
         )}
         {loading
-          ? new Array(10).fill(null).map(() => <PostCardPlaceholder />)
+          ? new Array(5).fill(null).map((_, index) => <PostCardPlaceholder key={index}/>)
           : posts.map((post: any) => {
               return <PostCard post={post} key={post.id} />;
             })}

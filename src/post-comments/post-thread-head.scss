@@ -28,6 +28,18 @@
   .post-thread__head-action {
     margin: 8px 0;
 
+    >.post-card__head-interaction {
+      margin-right: 8px;
+      font-size: 12px;
+      color: #6c7a89;
+      cursor: pointer;
+      opacity: 0.6;
+      &:hover {
+        color: black;
+        opacity: 1;
+      }
+    }
+
     >button {
       color: #6c7a89;
       font-size: 13px;

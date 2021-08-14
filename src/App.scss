@@ -28,3 +28,20 @@ body {
 button > i:first-child:not(:last-child) {
   margin-right: 8px;
 }
+
+@keyframes placeHolderSwept {
+  0% {
+    background-position: -400px 0
+  }
+
+  100% {
+    background-position: 400px 0
+  }
+}
+
+.loading-placeholder {
+  animation: placeHolderSwept 1s infinite linear forwards;
+  background: #ebebec;
+  background-image: linear-gradient(to right, #ebebec 0%, #e0e0e2 20%, #ebebec 40%, #ebebec 100%);
+  background-repeat: no-repeat;
+}

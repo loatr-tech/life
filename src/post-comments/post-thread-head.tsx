@@ -40,6 +40,12 @@ function PostThreadHead({ thread, children }: any) {
           </div>
           <p className="post-thread__head-content-message">{thread?.comment}</p>
           <div className="post-thread__head-action">
+            <span className="post-card__head-interaction">
+              <i className="far fa-thumbs-up"></i> 123
+            </span>
+            <span className="post-card__head-interaction">
+              <i className="far fa-thumbs-down"></i> 45
+            </span>
             <Button
               size="small"
               type="text"

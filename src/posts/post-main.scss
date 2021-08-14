@@ -48,21 +48,21 @@
   }
 }
 
-@keyframes placeHolderSwept {
-  0% {
-    background-position: -400px 0
-  }
+// @keyframes placeHolderSwept {
+//   0% {
+//     background-position: -400px 0
+//   }
 
-  100% {
-    background-position: 400px 0
-  }
-}
+//   100% {
+//     background-position: 400px 0
+//   }
+// }
 
 .post-mian__placeholder {
-  animation: placeHolderSwept 1s infinite linear forwards;
-  background: #ebebec;
-  background-image: linear-gradient(to right, #ebebec 0%, #e0e0e2 20%, #ebebec 40%, #ebebec 100%);
-  background-repeat: no-repeat;
+  // animation: placeHolderSwept 1s infinite linear forwards;
+  // background: #ebebec;
+  // background-image: linear-gradient(to right, #ebebec 0%, #e0e0e2 20%, #ebebec 40%, #ebebec 100%);
+  // background-repeat: no-repeat;
   &.post-main__title-text {
     height: 33px;
     width: 200px;

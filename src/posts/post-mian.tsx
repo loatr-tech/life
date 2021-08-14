@@ -11,7 +11,7 @@ function PostMain({ post, fetching }: any) {
       <header className="post-main__title">
         <h1
           className={`post-main__title-text ${
-            fetching ? 'post-mian__placeholder' : ''
+            fetching ? 'post-mian__placeholder loading-placeholder' : ''
           }`}
         >
           {post.title}
@@ -21,9 +21,9 @@ function PostMain({ post, fetching }: any) {
       <main className="post-main__content">
         {fetching ? (
           <div className="post-main__content-placeholder">
-            <div className="post-mian__placeholder"></div>
-            <div className="post-mian__placeholder"></div>
-            <div className="post-mian__placeholder"></div>
+            <div className="loading-placeholder"></div>
+            <div className="loading-placeholder"></div>
+            <div className="loading-placeholder"></div>
           </div>
         ) : (
           <Editor value={post.content} readOnly={true} />
@@ -33,21 +33,25 @@ function PostMain({ post, fetching }: any) {
         著作权归作者所有，未经授权禁止转载
       </p>
       {/* Interactions */}
-      <section className="post-main__interactions">
-        <Button type="primary" shape="circle">
-          A
-        </Button>
-        <Button type="primary" shape="circle">
-          B
-        </Button>
-        <Button type="primary" shape="circle">
-          C
-        </Button>
-        <Button type="primary" shape="circle">
-          D
-        </Button>
-      </section>
-      <PostComments post={post}/>
+      {!fetching && (
+        <>
+          <section className="post-main__interactions">
+            <Button type="primary" shape="circle">
+              <i className="far fa-thumbs-up"></i>
+            </Button>
+            <Button type="primary" shape="circle">
+              <i className="far fa-star"></i>
+            </Button>
+            <Button type="primary" shape="circle">
+              <i className="fas fa-share-alt"></i>
+            </Button>
+            <Button type="primary" shape="circle">
+              <i className="far fa-bookmark"></i>
+            </Button>
+          </section>
+          <PostComments post={post} fetching={fetching} />
+        </>
+      )}
     </div>
   );
 }

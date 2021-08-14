@@ -14,12 +14,17 @@
   }
   .post-owner__ago {
     color: darkgrey;
+    &.post-owner__ago-loading {
+      width: 100%;
+      height: 20px;
+    }
   }
 }
 
 .post-owner__stats {
   margin: 12px auto 0 auto;
   max-width: 200px;
+  font-size: 13px;
   color: #bbb;
   display: flex;
   justify-content: space-between;

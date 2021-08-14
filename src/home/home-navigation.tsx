@@ -1,9 +1,7 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { MenuInfo } from 'rc-menu/lib/interface';
-
-const { SubMenu } = Menu;
-// import './home-navigation.scss';
+import { CATEGORIES, CATEGORIES_MAP } from '../_utils/categories';
 
 function HomeNavigation() {
   const handleClick = (menuInfo: MenuInfo) => {
@@ -16,48 +14,38 @@ function HomeNavigation() {
       defaultOpenKeys={['career']}
       mode="inline"
     >
+      {/* All */}
       <Menu.Item key="all" icon={<i className="fas fa-rss"></i>}>
         最新动态
       </Menu.Item>
-      <SubMenu
-        key="career"
-        icon={<i className="fas fa-suitcase"></i>}
-        title="打工人儿"
-      >
-        <Menu.ItemGroup key="career-exp" title="经验分享">
-          <Menu.Item key="experience_sharing">上岸指南</Menu.Item>
-          <Menu.Item key="promotion">升职加薪</Menu.Item>
-        </Menu.ItemGroup>
-        <Menu.ItemGroup key="career-data" title="数据分享">
-          <Menu.Item key="total_package">我的包裹</Menu.Item>
-          <Menu.Item key="interview_questions">北美面经</Menu.Item>
-        </Menu.ItemGroup>
-      </SubMenu>
-      <SubMenu
-        key="immigration"
-        icon={<i className="far fa-id-card"></i>}
-        title="身份移民"
-      >
-        <Menu.Item key="work_visa">工作签证</Menu.Item>
-        <Menu.Item key="green_card">移民绿卡</Menu.Item>
-        <Menu.Item key="student_visa">学生签证</Menu.Item>
-      </SubMenu>
-      <SubMenu
-        key="study"
-        icon={<i className="fas fa-book-reader"></i>}
-        title="天天向上"
-      >
-        <Menu.Item key="lets_study">自习</Menu.Item>
-        <Menu.Item key="leet_code">组队刷题</Menu.Item>
-      </SubMenu>
-      <SubMenu
-        key="neighborhood"
-        icon={<i className="fas fa-people-arrows"></i>}
-        title="街坊领居"
-      >
-        <Menu.Item key="used_items">二手市场</Menu.Item>
-        <Menu.Item key="house_rental">房屋出租</Menu.Item>
-      </SubMenu>
+      {/* By Categories */}
+      {CATEGORIES.map((topCategory) => {
+        return (
+          <Menu.SubMenu
+            key={topCategory.id}
+            icon={<i className={topCategory.icon}></i>}
+            title={topCategory.name}
+          >
+            {topCategory.subcategories.map((subCategory: any) => {
+              return subCategory.type === 'group' ? (
+                <Menu.ItemGroup key={subCategory.id} title={subCategory.name}>
+                  {subCategory.subcategories.map((category: any) => {
+                    return (
+                      <Menu.Item key={category.id}>
+                        {CATEGORIES_MAP[category.id]}
+                      </Menu.Item>
+                    );
+                  })}
+                </Menu.ItemGroup>
+              ) : (
+                <Menu.Item key={subCategory.id}>
+                  {CATEGORIES_MAP[subCategory.id]}
+                </Menu.Item>
+              );
+            })}
+          </Menu.SubMenu>
+        );
+      })}
     </Menu>
   );
 }

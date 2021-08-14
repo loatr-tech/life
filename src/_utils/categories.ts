@@ -1,38 +1,45 @@
 export const CATEGORIES = [
   {
     id: 'career',
-    name: '打工人儿儿',
-    type: 'category',
+    name: '打工人儿',
+    icon: 'fas fa-suitcase',
     subcategories: [
       {
-        id: 'career-exp',
+        id: 'career_exp',
         type: 'group',
+        name: '经验分享',
         subcategories: [
           {
             id: 'experience_sharing',
-            name: '上岸指南',
-            type: 'category',
           },
           {
             id: 'promotion',
-            name: '升职加薪',
-            type: 'category',
           },
         ],
       },
       {
-        id: 'career-data',
+        id: 'career_data',
         type: 'group',
+        name: '数据分享',
         subcategories: [
           {
             id: 'total_package',
-            name: '我的包裹',
-            type: 'category',
           },
           {
             id: 'interview_questions',
-            name: '北美面经',
-            type: 'category',
+          },
+        ],
+      },
+      {
+        id: 'career_opportunities',
+        type: 'group',
+        name: '职位分享',
+        subcategories: [
+          {
+            id: 'need_referral',
+          },
+          {
+            id: 'we_re_hiring',
           },
         ],
       },
@@ -40,86 +47,106 @@ export const CATEGORIES = [
   },
   {
     id: 'immigration',
-    name: '身份移民',
-    type: 'category',
+    name: '留学移民',
+    icon: 'far fa-id-card',
     subcategories: [
       {
-        id: 'work_visa',
-        name: '工作签证',
-        type: 'category',
+        id: 'international_student',
+        type: 'group',
+        name: '留学申请',
+        subcategories: [
+          {
+            id: 'apply_school',
+          },
+          {
+            id: 'application_results',
+          },
+        ],
       },
       {
-        id: 'green_card',
-        name: '移民绿卡',
-        type: 'category',
-      },
-      {
-        id: 'student_visa',
-        name: '学生签证',
-        type: 'category',
+        id: 'immigration',
+        type: 'group',
+        name: '移民签证',
+        subcategories: [
+          {
+            id: 'work_visa',
+          },
+          {
+            id: 'green_card',
+          },
+          {
+            id: 'student_visa',
+          },
+        ],
       },
     ],
   },
   {
     id: 'study',
-    name: '身份移民',
-    type: 'category',
+    name: '天天向上',
+    icon: 'fas fa-book-reader',
     subcategories: [
       {
         id: 'lets_study',
-        name: '自习',
-        type: 'category',
       },
       {
         id: 'leet_code',
-        name: '组队刷题',
-        type: 'category',
       },
     ],
   },
   {
     id: 'neighborhood',
-    name: '街坊领居',
-    type: 'category',
+    name: '街坊邻居',
+    icon: 'fas fa-people-arrows',
     subcategories: [
       {
         id: 'used_items',
-        name: '二手市场',
-        type: 'category',
       },
       {
         id: 'house_rental',
-        name: '房屋出租',
-        type: 'category',
       },
     ],
   },
 ];
 
 export const CATEGORIES_MAP: any = {
+  // 打工人儿
   experience_sharing: '经验分享',
   promotion: '升职加薪',
   total_package: '我的包裹',
   interview_questions: '北美面经',
+  need_referral: '跪求内推',
+  we_re_hiring: '我要招人',
+  // 留学签证
+  apply_school: '申请学校',
+  application_results: '申请结果',
   work_visa: '工作签证',
   green_card: '移民绿卡',
   student_visa: '学生签证',
-  lets_study: '自习',
+  // 好好学习
+  lets_study: '我要自习',
   leet_code: '组队刷题',
+  // 街坊邻居
   used_items: '二手市场',
   house_rental: '房屋出租',
 };
 
 export const CATEGORIES_PARENT: any = {
+  // 打工人儿
   experience_sharing: '打工人儿',
   promotion: '打工人儿',
   total_package: '打工人儿',
   interview_questions: '打工人儿',
-  work_visa: '身份移民',
-  green_card: '身份移民',
-  student_visa: '身份移民',
+  need_referral: '打工人儿',
+  we_re_hiring: '打工人儿',
+  // 留学签证
+  work_visa: '留学移民',
+  green_card: '留学移民',
+  student_visa: '留学移民',
+  // 好好学习
   lets_study: '天天向上',
   leet_code: '天天向上',
+  // 街坊邻居
   used_items: '街坊领居',
   house_rental: '街坊领居',
 };

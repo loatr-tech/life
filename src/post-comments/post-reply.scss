@@ -1,0 +1,48 @@
+.post-reply {
+  display: flex;
+  padding: 10px 16px;
+  &:hover {
+    background-color: #eeeeee;
+  }
+}
+
+.post-reply__avatar {
+  margin-right: 12px;
+}
+
+.post-reply__header {
+  margin-bottom: 4px;
+
+  .post-reply__header-username {
+    margin-right: 8px;
+    color: #727477;
+    font-size: 13px;
+  }
+
+  .post-reply__header-ago {
+    color: #b7b8b8;
+    font-size: 12px;
+  }
+}
+
+.post-reply__content-message {
+  padding: 6px 10px;
+  width: 80%;
+  background-color: #e8ecf1;
+  border-radius: 8px;
+}
+
+.post-reply--hero {
+  flex-direction: row-reverse;
+  .post-reply__avatar {
+    margin-right: 0;
+    margin-left: 12px;
+  }
+  .post-reply__header {
+    text-align: right;
+  }
+  .post-reply__content-message {
+    background-color: #d2d4e1;
+    margin-left: auto;
+  }
+}

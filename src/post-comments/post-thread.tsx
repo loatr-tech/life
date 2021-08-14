@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Comment, Avatar, Button, Spin } from 'antd';
+import { Avatar, Button, Spin } from 'antd';
 import './post-thread.scss';
 import api from '../_utils/api';
+import PostReply from './post-reply';
+import { timeSince } from '../_utils/time';
 
 function PostThread({ thread }: any) {
   const [viewReply, setViewReply] = useState(false);
@@ -15,6 +17,7 @@ function PostThread({ thread }: any) {
   const onViewReply = async () => {
     if (viewReply) {
       setViewReply(false);
+      setReplies([]);
     } else {
       setViewReply(true);
       setFetchingReplies(true);
@@ -44,19 +47,34 @@ function PostThread({ thread }: any) {
     <div className="post-thread">
       <div className="post-thread__head">
         {/* Thread head comment */}
-        <Comment
-          actions={[
-            <span
-              key="comment-action-reply-to"
-              onClick={() => setStartReply(!startReply)}
-            >
-              回复
-            </span>,
-          ]}
-          author={<span>岸上某位用户</span>}
-          avatar={<Avatar>A</Avatar>}
-          content={<p>{thread?.comment}</p>}
-        />
+        <div className="post-thread__head-container">
+          <section className="post-thread__head-avatar">
+            <Avatar>R</Avatar>
+          </section>
+          <section className="post-thread__head-content">
+            <div className="post-thread__head-header">
+              <span className="post-thread__head-header-username">
+                岸上某位用户
+              </span>
+              <span className="post-thread__head-header-ago">
+                {timeSince(thread?.createdAt)}
+              </span>
+            </div>
+            <div className="post-thread__head-content-message">
+              {thread?.comment}
+            </div>
+            <div className="post-thread__head-action">
+              <Button
+                size="small"
+                type="text"
+                onClick={() => setStartReply(!startReply)}
+                disabled={replySubmitting}
+              >
+                回复
+              </Button>
+            </div>
+          </section>
+        </div>
         {startReply && (
           <div className="post-thread__reply">
             <div className="post-thread__reply-textarea-container">
@@ -93,12 +111,14 @@ function PostThread({ thread }: any) {
         )}
         {/* View reply */}
         {thread?.replies > 0 && (
-          <div className="post-thread__view-reply">
-            <Button type="link" onClick={() => onViewReply()}>
-              <i className={`fas fa-caret-${viewReply ? 'up' : 'down'}`}></i>{' '}
-              {viewReply ? '收起回复' : `查看${thread.replies}条回复`}
-            </Button>
-          </div>
+          <Button
+            className="post-thread__view-reply"
+            type="link"
+            onClick={() => onViewReply()}
+          >
+            <i className={`fas fa-caret-${viewReply ? 'up' : 'down'}`}></i>{' '}
+            {viewReply ? '收起回复' : `查看${thread.replies}条回复`}
+          </Button>
         )}
       </div>
 
@@ -107,21 +127,9 @@ function PostThread({ thread }: any) {
         <div className="post-thread__replys">
           {fetchingReplies && <Spin />}
           {replies.map((reply: any, index: number) => {
-            return (
-              <Comment
-                key={index}
-                actions={[
-                  <span key="comment-action-quote">
-                    引用
-                  </span>,
-                ]}
-                author={<span>岸上某位用户</span>}
-                avatar={<Avatar>R</Avatar>}
-                content={<p>{reply?.reply}</p>}
-              />
-            );
+            return <PostReply reply={reply} key={index} isHero={reply.user_id === 2}/>;
           })}
-          {totalReplies > replies.length && (
+          {!fetchingReplies && totalReplies > replies.length && (
             <Button type="link" className="post-thread__expand">
               <span className="post-thread__expand-line"></span>
               展开更多回复 ({totalReplies - replies.length})

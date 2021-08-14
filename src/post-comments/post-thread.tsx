@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
-import { Avatar, Button, Spin } from 'antd';
+import { Button } from 'antd';
 import './post-thread.scss';
 import api from '../_utils/api';
 import PostReply from './post-reply';
-import { timeSince } from '../_utils/time';
+import LoadingSpinner from '../_shared/loading-spinner';
+import PostThreadHead from './post-thread-head';
 
 function PostThread({ thread }: any) {
   const [viewReply, setViewReply] = useState(false);
-  const [startReply, setStartReply] = useState(false);
-  const [reply, setReply] = useState('');
   const [replies, setReplies] = useState([]);
+  const [repliesPage, setRepliesPage] = useState(1);
   const [totalReplies, setTotalReplies] = useState(0);
   const [fetchingReplies, setFetchingReplies] = useState(false);
-  const [replySubmitting, setReplySubmitting] = useState(false);
+  const [fetchingMoreReplies, setFetchingMoreReplies] = useState(false);
 
   const onViewReply = async () => {
     if (viewReply) {
       setViewReply(false);
       setReplies([]);
+      setRepliesPage(1);
+      setTotalReplies(0);
     } else {
       setViewReply(true);
       setFetchingReplies(true);
@@ -30,85 +32,26 @@ function PostThread({ thread }: any) {
     }
   }
 
-  const onReply = async () => {
-    setReplySubmitting(true);
-    await api.post('post/reply', {
-      post_id: thread.post_id,
-      thread_id: thread.id,
-      reply,
-      user_id: 1,
-    });
-    setReply('');
-    setStartReply(false);
-    setReplySubmitting(false);
-  };
+  const loadMoreReplies = async () => {
+    setFetchingMoreReplies(true);
+    const nextRepliesPage = repliesPage + 1;
+    const { data } = await api.get(
+      `post/${thread.post_id}/comment/${thread.id}/replies`,
+      {
+        params: {
+          page: nextRepliesPage,
+        },
+      }
+    );
+    setRepliesPage(nextRepliesPage);
+    setReplies(replies.concat(data.replies));
+    setTotalReplies(data.count);
+    setFetchingMoreReplies(false);
+  }
 
   return (
     <div className="post-thread">
-      <div className="post-thread__head">
-        {/* Thread head comment */}
-        <div className="post-thread__head-container">
-          <section className="post-thread__head-avatar">
-            <Avatar>R</Avatar>
-          </section>
-          <section className="post-thread__head-content">
-            <div className="post-thread__head-header">
-              <span className="post-thread__head-header-username">
-                岸上某位用户
-              </span>
-              <span className="post-thread__head-header-ago">
-                {timeSince(thread?.createdAt)}
-              </span>
-            </div>
-            <div className="post-thread__head-content-message">
-              {thread?.comment}
-            </div>
-            <div className="post-thread__head-action">
-              <Button
-                size="small"
-                type="text"
-                onClick={() => setStartReply(!startReply)}
-                disabled={replySubmitting}
-              >
-                回复
-              </Button>
-            </div>
-          </section>
-        </div>
-        {startReply && (
-          <div className="post-thread__reply">
-            <div className="post-thread__reply-textarea-container">
-              <span className="post-thread__reply-textarea-avatar">
-                <Avatar>M</Avatar>
-              </span>
-              <textarea
-                className="post-thread__reply-textarea"
-                name="comment-textarea"
-                rows={2}
-                value={reply}
-                onChange={(e) => setReply(e.target.value)}
-                disabled={replySubmitting}
-              ></textarea>
-            </div>
-            <div className="post-thread__reply-textarea-actions">
-              <Button
-                size="small"
-                type="text"
-                onClick={() => setStartReply(false)}
-                disabled={replySubmitting}
-              >
-                取消
-              </Button>
-              <Button
-                size="small"
-                onClick={() => onReply()}
-                loading={replySubmitting}
-              >
-                回复
-              </Button>
-            </div>
-          </div>
-        )}
+      <PostThreadHead thread={thread}>
         {/* View reply */}
         {thread?.replies > 0 && (
           <Button
@@ -120,17 +63,32 @@ function PostThread({ thread }: any) {
             {viewReply ? '收起回复' : `查看${thread.replies}条回复`}
           </Button>
         )}
-      </div>
+      </PostThreadHead>
 
       {/* Replys */}
       {viewReply && (
         <div className="post-thread__replys">
-          {fetchingReplies && <Spin />}
+          {fetchingReplies && (
+            <div className="post-thread__replys-loading">
+              <LoadingSpinner />
+            </div>
+          )}
           {replies.map((reply: any, index: number) => {
-            return <PostReply reply={reply} key={index} isHero={reply.user_id === 2}/>;
+            return (
+              <PostReply
+                reply={reply}
+                key={index}
+                isHero={reply.user_id === 2}
+              />
+            );
           })}
           {!fetchingReplies && totalReplies > replies.length && (
-            <Button type="link" className="post-thread__expand">
+            <Button
+              type="link"
+              className="post-thread__expand"
+              onClick={() => loadMoreReplies()}
+              loading={fetchingMoreReplies}
+            >
               <span className="post-thread__expand-line"></span>
               展开更多回复 ({totalReplies - replies.length})
             </Button>

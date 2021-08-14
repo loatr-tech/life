@@ -1,7 +1,7 @@
 export const CATEGORIES = [
   {
     id: 'career',
-    name: '打工人儿',
+    name: '打工人儿儿',
     type: 'category',
     subcategories: [
       {
@@ -111,10 +111,10 @@ export const CATEGORIES_MAP: any = {
 };
 
 export const CATEGORIES_PARENT: any = {
-  experience_sharing: '打工人',
-  promotion: '打工人',
-  total_package: '打工人',
-  interview_questions: '打工人',
+  experience_sharing: '打工人儿',
+  promotion: '打工人儿',
+  total_package: '打工人儿',
+  interview_questions: '打工人儿',
   work_visa: '身份移民',
   green_card: '身份移民',
   student_visa: '身份移民',

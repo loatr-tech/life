@@ -4,11 +4,12 @@ import { MenuInfo } from 'rc-menu/lib/interface';
 import { CATEGORIES, CATEGORIES_MAP } from '../_utils/categories';
 import { NavigationContext } from '../_context/navigation.context';
 
-function HomeNavigation() {
+function HomeNavigation({ onCategoryChange }: any) {
   const { activeCategory, setActiveCategory } = useContext(NavigationContext);
 
-  const handleClick = (menuInfo: MenuInfo) => {
-    setActiveCategory(menuInfo.key);
+  const handleClick = ({ key }: MenuInfo) => {
+    setActiveCategory(key);
+    onCategoryChange(key);
   };
 
   return (

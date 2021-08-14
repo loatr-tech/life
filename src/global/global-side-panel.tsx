@@ -29,7 +29,7 @@ function GlobalSidePanel() {
       <Divider />
       <Switch>
         <Route path="/" exact>
-          <HomeNavigation />
+          <HomeNavigation onCategoryChange={() => toggleSidePanel()} />
         </Route>
       </Switch>
     </div>

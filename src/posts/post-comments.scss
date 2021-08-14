@@ -1,32 +1,6 @@
-.post-comments__thread {
-  &:not(:last-of-type) {
-    border-bottom: 1px solid #f2f3f3;
-  }
-  border: 1px solid transparent;
-  &:hover {
-    border: 1px solid lightgray;
-  }
-  .post-comments__thread-head {
-    padding: 16px 24px 0;
-    background-color: #fdfdfd;
-  }
-  .post-comments__thread-replys {
-    padding: 16px 24px 16px 60px;
-    background-color: #f2f3f3;
-  }
-  .post-comments__thread-expand {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    &::before {
-      content: ' ';
-      display: inline-block;
-      width: 32px;
-      height: 1px;
-      background-color: black;
-      margin-right: 8px;
-    }
-  }
+.post-comments__pagination {
+  margin-top: 24px;
+  text-align: center;
 }
 
 .post-comments__textarea-container {
@@ -42,6 +16,7 @@
     border: none;
   }
 }
+
 .post-comments__textarea-actions {
   padding-left: 48px;
   padding-top: 12px;

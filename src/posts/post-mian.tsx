@@ -47,7 +47,7 @@ function PostMain({ post, fetching }: any) {
           D
         </Button>
       </section>
-      <PostComments />
+      <PostComments post={post}/>
     </div>
   );
 }

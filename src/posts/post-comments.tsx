@@ -1,60 +1,67 @@
-import React from 'react';
-import { Comment, Avatar, Divider, Button } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Avatar, Divider, Button, Pagination } from 'antd';
 import './post-comments.scss';
+import api from '../_utils/api';
+import PostThread from './post-thread';
 
-const ExampleComment = ({ children }: any) => (
-  <Comment
-    actions={[
-      <span key="comment-nested-reply-to">
-        <i className="fas fa-reply"></i> 回复
-      </span>,
-      <span key="comment-nested-reply-to">
-        <i className="fas fa-quote-left"></i> 引用
-      </span>,
-    ]}
-    author={<span>岸上某位用户</span>}
-    avatar={<Avatar>A</Avatar>}
-    content={
-      <p>
-        We supply a series of design principles, practical patterns and high
-        quality design resources (Sketch and Axure).
-      </p>
+const THREAD_LIMIT = 10;
+
+function PostComments({ post }: any) {
+  const [threads, setThreads] = useState([]);
+  const [comment, setComment] = useState('');
+  const [threadCount, setThreadCount] = useState(0);
+  const [commentSubmitting, setCommentSubmitting] = useState(false);
+
+  async function _loadComments(currentPost: any, page = 1) {
+    const { data } = await api.get(`post/${currentPost.id}/comments`, {
+      params: {
+        page,
+        limit: THREAD_LIMIT,
+      },
+    });
+    setThreads(data.threads);
+    setThreadCount(data.count);
+  }
+
+  useEffect(() => {
+    if (post?.id) {
+      _loadComments(post);
     }
-  >
-    {children}
-  </Comment>
-);
+  }, [post])
 
-function PostComments() {
+  const onPageChange = (page: number) => {
+    _loadComments(post, page);
+  }
+
+  const onComment = async () => {
+    setCommentSubmitting(true);
+    await api.post('post/comment', {
+      post_id: post.id,
+      comment,
+      user_id: 1,
+    });
+    setComment('');
+    setCommentSubmitting(false);
+    _loadComments(post);
+  }
+
   return (
     <section className="post-comments">
       <h3>
-        <i className="far fa-comments"></i> 评论区 (24)
+        <i className="far fa-comments"></i> 评论区 ({post.comments})
       </h3>
-      <div className="post-comments__thread">
-        <div className="post-comments__thread-head">
-          <ExampleComment />
-        </div>
-        <div className="post-comments__thread-replys">
-          <ExampleComment />
-          <ExampleComment />
-          <ExampleComment />
-          <div className="post-comments__thread-expand">展开更多回复 (12)</div>
-        </div>
-      </div>
-      <div className="post-comments__thread">
-        <div className="post-comments__thread-head">
-          <ExampleComment />
-        </div>
-      </div>
-      <div className="post-comments__thread">
-        <div className="post-comments__thread-head">
-          <ExampleComment />
-        </div>
-        <div className="post-comments__thread-replys">
-          <ExampleComment />
-        </div>
-      </div>
+      {threads.map((thread: any) => (
+        <PostThread thread={thread} key={thread.id}/>
+      ))}
+      <Pagination
+        className="post-comments__pagination"
+        size="small"
+        defaultCurrent={1}
+        pageSize={THREAD_LIMIT}
+        onChange={onPageChange}
+        showSizeChanger={false}
+        total={threadCount}
+      />
       <Divider />
       <div className="post-comments__textarea-container">
         <span className="post-comments__textarea-avatar">
@@ -64,10 +71,14 @@ function PostComments() {
           className="post-comments__textarea"
           name="comment-textarea"
           rows={4}
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
         ></textarea>
       </div>
       <div className="post-comments__textarea-actions">
-        <Button>留言</Button>
+        <Button onClick={() => onComment()} loading={commentSubmitting}>
+          留言
+        </Button>
       </div>
     </section>
   );

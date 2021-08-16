@@ -1,21 +1,20 @@
 @import '~antd/dist/antd.css';
 
-body, html {
+body, html, #root {
   background-color: #f5f5f7;
   overscroll-behavior: none;
+  overflow: hidden;
 }
 
 .app-container {
   transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
   position: relative;
   right: 0;
+  height: 100vh;
+  overflow: scroll;
   &.app-container-pushed {
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     right: 240px;
-    height: 100vh;
-    max-height: 100vh;
-    max-height: -webkit-fill-available;
-    height: -webkit-fill-available;
     overflow: hidden;
     &::after {
       content: '';

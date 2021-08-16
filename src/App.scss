@@ -7,22 +7,23 @@ body, html, #root {
 }
 
 .app-container {
-  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-  position: relative;
+  transition: right 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  position: fixed;
+  top: 0;
   right: 0;
+  width: 100%;
   height: 100vh;
-  overflow: scroll;
+  overflow: auto;
   &.app-container-pushed {
-    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: right 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     right: 240px;
     overflow: hidden;
     &::after {
       content: '';
-      position: absolute;
-      position: absolute;
+      position: fixed;
       top: 50px;
       width: 100%;
-      height: calc(100vh - 50px);
+      height: 100%;
       background-color: rgba(0, 0, 0, 0.3);
     }
   }

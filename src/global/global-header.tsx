@@ -5,13 +5,15 @@ import { Link } from 'react-router-dom';
 import { SCREEN, ScreenSizeContext } from '../_context/screen-size.context';
 
 function GlobalHeader() {
-  const { screenSize, toggleSidePanel } = useContext(ScreenSizeContext);
+  const { screenSize, toggleSidePanel, sidePanelOpen } = useContext(ScreenSizeContext);
   const onSearch = (value: string) => {
     console.log(value);
   };
 
   return (
-    <header className="global-header">
+    <header
+      className={`global-header ${sidePanelOpen ? 'global-header-pushed' : ''}`}
+    >
       <div className="global-header__container">
         {/* Logo */}
         <Link className="global-header__logo" to="/">

@@ -24,6 +24,17 @@
   }
 }
 
+.global-header {
+  position: fixed;
+  transition: right 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  right: 0;
+  width: 100%;
+  &.global-header-pushed {
+    transition: right 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    right: 240px;
+  }
+}
+
 .global-header__search {
   margin-right: auto;
   margin-left: 24px;

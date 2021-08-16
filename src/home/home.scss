@@ -3,7 +3,7 @@ $footer_height: 60px;
 
 .home {
   background-color: #f0f2f5;
-  min-height: 100vh;
+  min-height: calc(100vh - #{$header_height});
 }
 
 .home-main {

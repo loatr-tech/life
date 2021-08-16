@@ -40,26 +40,29 @@ function PostCreationCategory(props: any) {
       >
         {CATEGORIES.map((topCategory: any) => {
           return (
-            <>
+            <section
+              className="post-creation-category__modal-section"
+              key={topCategory.name}
+            >
               <h3>{topCategory.name}</h3>
               <Radio.Group onChange={onCategoryChanged} value={category}>
                 {topCategory.subcategories.map((subCategory: any) => {
                   return subCategory.type === 'group' ? (
                     subCategory.subcategories.map((category: any) => {
                       return (
-                        <Radio value={category.id}>
+                        <Radio value={category.id} key={category.id}>
                           {CATEGORIES_MAP[category.id]}
                         </Radio>
                       );
                     })
                   ) : (
-                    <Radio value={subCategory.id}>
+                    <Radio value={subCategory.id} key={subCategory.id}>
                       {CATEGORIES_MAP[subCategory.id]}
                     </Radio>
                   );
                 })}
               </Radio.Group>
-            </>
+            </section>
           );
         })}
       </Modal>

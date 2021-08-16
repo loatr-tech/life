@@ -9,7 +9,7 @@ function HomeNavigation({ onCategoryChange }: any) {
 
   const handleClick = ({ key }: MenuInfo) => {
     setActiveCategory(key);
-    onCategoryChange(key);
+    onCategoryChange?.(key);
   };
 
   return (

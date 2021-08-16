@@ -3,7 +3,8 @@
 }
 .post-creation-category__modal {
   top: 20px;
-  .ant-modal-body > h3:not(:first-of-type) {
-    margin-top: 10px;
-  }
+}
+
+.post-creation-category__modal-section:not(:first-of-type) {
+  margin-top: 12px;
 }

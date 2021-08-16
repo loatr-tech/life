@@ -34,7 +34,7 @@ function GlobalHeader() {
           </Button>
         ) : (
           <Link to="/user">
-            <Avatar>U</Avatar>
+            <Avatar src="https://www.w3schools.com/howto/img_avatar.png" />
           </Link>
         )}
       </div>

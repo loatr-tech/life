@@ -1,0 +1,39 @@
+.user {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.user-path {
+  margin-bottom: 24px;
+}
+
+.user-avatar {
+  text-align: center;
+  > img {
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+  }
+}
+
+.user-details {
+  background-color: white;
+  padding: 84px 24px 24px;
+  margin-top: -60px;
+}
+
+.user-name {
+  text-align: center;
+}
+
+.user-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  max-width: 768px;
+  margin: 0 auto;
+  > span {
+    text-align: center;
+  }
+}

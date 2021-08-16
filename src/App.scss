@@ -1,10 +1,7 @@
 @import '~antd/dist/antd.css';
 
 body {
-  background-color: #f5f5f7;
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  height: -webkit-fill-available;
+  background-color: #f5f5f7
 }
 
 .app-container {
@@ -15,6 +12,9 @@ body {
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     right: 240px;
     height: 100vh;
+    max-height: 100vh;
+    max-height: -webkit-fill-available;
+    height: -webkit-fill-available;
     overflow: hidden;
     &::after {
       content: '';

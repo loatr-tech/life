@@ -2,7 +2,9 @@
   transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
   position: fixed;
   height: 100vh;
+  max-height: -webkit-fill-available;
   top: 0;
+  bottom: 0;
   right: -240px;
   width: 240px;
   background-color: white;

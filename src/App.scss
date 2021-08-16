@@ -7,7 +7,6 @@ body, html, #root {
 .app-container {
   transition: right 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
   position: relative;
-  padding-top: 50px;
   right: 0;
   &.app-container-pushed {
     transition: right 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);

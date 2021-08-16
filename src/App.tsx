@@ -15,8 +15,8 @@ function App() {
   const { screenSize, sidePanelOpen } = useContext(ScreenSizeContext);
   return (
     <Router>
-      <GlobalHeader />
       <main className={`app-container ${sidePanelOpen ? 'app-container-pushed':''}`}>
+        <GlobalHeader />
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/post/:postId" component={Post} />

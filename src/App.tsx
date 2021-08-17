@@ -10,6 +10,7 @@ import Post from './posts/post';
 import PostCreation from './post-creation/post-creation';
 import GlobalSidePanel from './global/global-side-panel';
 import Login from './login/login';
+import Calculator from './calculator/calculator';
 
 
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/new-post" component={PostCreation} />
           <Route path="/login" component={Login} />
           <Route path="/user" component={User} />
+          <Route path="/calculator" component={Calculator} />
         </Switch>
       </main>
       {screenSize === SCREEN.MOBILE && <GlobalSidePanel />}

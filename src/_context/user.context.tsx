@@ -7,7 +7,7 @@ export default function UserContextProvider(props: any) {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    const userData = JSON.parse(window.localStorage.getItem('userInfo') || '');
+    const userData = JSON.parse(window.localStorage.getItem('userInfo') || 'null');
     if (userData) {
       setUserInfo(userData);
       setLoggedIn(true);

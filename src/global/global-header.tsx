@@ -30,16 +30,14 @@ function GlobalHeader() {
           />
         </div>
         {/* User */}
-        {loggedIn ? (
-          screenSize === SCREEN.MOBILE ? (
-            <Button onClick={() => toggleSidePanel()}>
-              <i className="fas fa-bars"></i>
-            </Button>
-          ) : (
-            <Link to="/user">
-              <Avatar src="https://www.w3schools.com/howto/img_avatar.png" />
-            </Link>
-          )
+        {screenSize === SCREEN.MOBILE ? (
+          <Button onClick={() => toggleSidePanel()}>
+            <i className="fas fa-bars"></i>
+          </Button>
+        ) : loggedIn ? (
+          <Link to="/user">
+            <Avatar src="https://www.w3schools.com/howto/img_avatar.png" />
+          </Link>
         ) : (
           <Link to="/login">
             <Button type="primary">

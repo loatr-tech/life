@@ -9,6 +9,7 @@ import User from './user/user';
 import Post from './posts/post';
 import PostCreation from './post-creation/post-creation';
 import GlobalSidePanel from './global/global-side-panel';
+import Login from './login/login';
 
 
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/post/:postId" component={Post} />
           <Route path="/new-post" component={PostCreation} />
+          <Route path="/login" component={Login} />
           <Route path="/user" component={User} />
         </Switch>
       </main>

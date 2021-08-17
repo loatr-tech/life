@@ -1,0 +1,17 @@
+.login {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.login-form {
+  padding: 24px;
+  background-color: white;
+  text-align: center;
+  > button {
+    width: 200px;
+    .fa-google {
+      color: red;
+    }
+  }
+}

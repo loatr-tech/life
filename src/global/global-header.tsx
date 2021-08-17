@@ -3,9 +3,11 @@ import { Avatar, Button, Input } from 'antd';
 import './global-header.scss';
 import { Link } from 'react-router-dom';
 import { SCREEN, ScreenSizeContext } from '../_context/screen-size.context';
+import { UserContext } from '../_context/user.context';
 
 function GlobalHeader() {
   const { screenSize, toggleSidePanel } = useContext(ScreenSizeContext);
+  const { loggedIn } = useContext(UserContext);
   const onSearch = (value: string) => {
     console.log(value);
   };
@@ -28,13 +30,21 @@ function GlobalHeader() {
           />
         </div>
         {/* User */}
-        {screenSize === SCREEN.MOBILE ? (
-          <Button onClick={() => toggleSidePanel()}>
-            <i className="fas fa-bars"></i>
-          </Button>
+        {loggedIn ? (
+          screenSize === SCREEN.MOBILE ? (
+            <Button onClick={() => toggleSidePanel()}>
+              <i className="fas fa-bars"></i>
+            </Button>
+          ) : (
+            <Link to="/user">
+              <Avatar src="https://www.w3schools.com/howto/img_avatar.png" />
+            </Link>
+          )
         ) : (
-          <Link to="/user">
-            <Avatar src="https://www.w3schools.com/howto/img_avatar.png" />
+          <Link to="/login">
+            <Button type="primary">
+              <i className="fas fa-sign-in-alt"></i> 登录
+            </Button>
           </Link>
         )}
       </div>

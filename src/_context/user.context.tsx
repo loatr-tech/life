@@ -20,9 +20,15 @@ export default function UserContextProvider(props: any) {
     window.localStorage.setItem('userInfo', JSON.stringify(userData));
   }
 
+  const logout = () => {
+    setUserInfo(undefined);
+    setLoggedIn(false);
+    window.localStorage.removeItem('userInfo');
+  }
+
   return (
     <UserContext.Provider
-      value={{ userInfo, setupUser, loggedIn, setLoggedIn }}
+      value={{ userInfo, setupUser, loggedIn, setLoggedIn, logout }}
     >
       {props.children}
     </UserContext.Provider>

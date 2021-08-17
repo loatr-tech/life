@@ -63,7 +63,6 @@ function CalculatorOffer() {
         accumulated,
       };
     })
-    console.log('editedOffers', editedOffers);
     setOffers(editedOffers);
   }, []);
 

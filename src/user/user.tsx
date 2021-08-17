@@ -1,22 +1,29 @@
 import React, { useContext, useEffect } from 'react';
 import './user.scss';
 
-import { Breadcrumb, Divider } from 'antd';
+import { Breadcrumb, Button, Divider } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import { UserContext } from '../_context/user.context';
 
 function User() {
   const history = useHistory();
-  const { userInfo, loggedIn } = useContext(UserContext);
+  const { userInfo, loggedIn, logout } = useContext(UserContext);
+
   useEffect(() => {
     if (history && !loggedIn) {
       history.push('/login');
     }
   }, [history, loggedIn]);
 
+  const onLogout = () => {
+    logout();
+    history.push('/');
+  }
+
   return (
     <div className="user">
+      {/* Path */}
       <Breadcrumb className="user-path">
         <Breadcrumb.Item>
           <Link to="/">
@@ -25,11 +32,15 @@ function User() {
         </Breadcrumb.Item>
         <Breadcrumb.Item>用户</Breadcrumb.Item>
       </Breadcrumb>
+
+      {/* User Header */}
       <header className="user-header">
         <div className="user-avatar">
           <img src={userInfo?.avatarUrl} alt="User avatar" />
         </div>
       </header>
+
+      {/* User details */}
       <section className="user-details">
         <h2 className="user-name">{userInfo?.name}</h2>
         <Divider />
@@ -38,6 +49,13 @@ function User() {
           <span>粉丝 12</span>
           <span>关注 4</span>
         </div>
+      </section>
+
+      {/* Logout */}
+      <section className="user-logout">
+        <Button type="dashed" danger onClick={onLogout}>
+          <i className="fas fa-sign-out-alt"></i> 退出账户
+        </Button>
       </section>
     </div>
   );

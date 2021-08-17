@@ -2,11 +2,17 @@ import React from 'react';
 import './login.scss';
 
 import { Breadcrumb } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import LoginGoogle from './login-google';
 
 function Login() {
+  const history = useHistory();
+
+  const onLoginFinished = () => {
+    history.goBack();
+  }
+
   return (
     <div className="login">
       <Breadcrumb className="user-path">
@@ -19,7 +25,7 @@ function Login() {
       </Breadcrumb>
       <form className="login-form">
         <h3>选择登录方式</h3>
-        <LoginGoogle />
+        <LoginGoogle onLoginFinished={onLoginFinished} />
       </form>
     </div>
   );

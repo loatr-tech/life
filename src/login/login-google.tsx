@@ -1,9 +1,10 @@
-import React, { useContext, useEffect } from 'react';
-// import './login.scss';
+import React, { useContext, useEffect, useState } from 'react';
+import './login-google.scss';
 
 import { Button } from 'antd';
 import api from '../_utils/api';
 import { UserContext } from '../_context/user.context';
+import { LoginGoogleSvg } from './login-google-svg';
 
 function loadScript(onLoad = () => {}, onError = () => {}) {
   const element = document.getElementsByTagName('script')[0];
@@ -28,13 +29,14 @@ function removeScript() {
   }
 }
 
-function LoginGoogle() {
+function LoginGoogle({ onLoginFinished }: any) {
   const { setupUser } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    let unmounted = false
+    let unmounted = false;
     loadScript(() => {
-      const gapi = (window  as any).gapi;
+      const gapi = (window as any).gapi;
       gapi.load('auth2', () => {
         const GoogleAuth = gapi.auth2.getAuthInstance();
         if (!GoogleAuth) {
@@ -42,19 +44,17 @@ function LoginGoogle() {
             client_id: `${process.env.REACT_APP_GAUTH_CLIENT_ID}.apps.googleusercontent.com`,
             cookie_policy: 'single_host_origin',
           };
-          gapi.auth2.init(params).then(
-            (res: any) => {
-              if (!unmounted) {
-                console.log(res);
-                const isSignedIn = res.isSignedIn.get();
-                console.log('isSignedIn', isSignedIn);
-                if (isSignedIn) {
-                  const userInfo = res.currentUser.get();
-                  console.log(userInfo);
-                }
+          gapi.auth2.init(params).then((res: any) => {
+            if (!unmounted) {
+              console.log(res);
+              const isSignedIn = res.isSignedIn.get();
+              console.log('isSignedIn', isSignedIn);
+              if (isSignedIn) {
+                const userInfo = res.currentUser.get();
+                console.log(userInfo);
               }
             }
-          );
+          });
         } else {
           // GoogleAuth.then(
           //   () => {
@@ -76,15 +76,16 @@ function LoginGoogle() {
           // );
         }
       });
-    })
+    });
 
     return () => {
-      unmounted = true
+      unmounted = true;
       removeScript();
-    }
+    };
   });
 
   const signinWithGoogle = () => {
+    setLoading(true);
     const GoogleAuth = (window as any).gapi.auth2.getAuthInstance();
     GoogleAuth.signIn({}).then(
       (res: any) => {
@@ -105,23 +106,30 @@ function LoginGoogle() {
           familyName: basicProfile.getFamilyName(),
         };
         console.log('data', data);
-        api.post('login', {
-          method: 'google',
-          googleId: data.googleId,
-          user: data.profileObj,
-        }).then(({ data: userData }) => {
-          setupUser(userData);
-        })
+        api
+          .post('login', {
+            method: 'google',
+            googleId: data.googleId,
+            user: data.profileObj,
+          })
+          .then(({ data: userData }) => {
+            setupUser(userData);
+            setLoading(false);
+            onLoginFinished();
+          });
       },
       (err: any) => {
+        setLoading(false);
         console.log('login failed', err);
       }
     );
-  }
+  };
 
   return (
-    <Button onClick={() => signinWithGoogle()}>
-      <i className="fab fa-google"></i> 使用Google登录
+    <Button
+      className="login-google-btn"
+      onClick={() => signinWithGoogle()} loading={loading} size="large">
+      <LoginGoogleSvg /> 使用Google登录
     </Button>
   );
 }

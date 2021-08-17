@@ -7,7 +7,7 @@ import { UserContext } from '../_context/user.context';
 
 function GlobalHeader() {
   const { screenSize, toggleSidePanel } = useContext(ScreenSizeContext);
-  const { loggedIn } = useContext(UserContext);
+  const { loggedIn, userInfo } = useContext(UserContext);
   const onSearch = (value: string) => {
     console.log(value);
   };
@@ -36,7 +36,7 @@ function GlobalHeader() {
           </Button>
         ) : loggedIn ? (
           <Link to="/user">
-            <Avatar src="https://www.w3schools.com/howto/img_avatar.png" />
+            <Avatar src={userInfo.avatarUrl} />
           </Link>
         ) : (
           <Link to="/login">

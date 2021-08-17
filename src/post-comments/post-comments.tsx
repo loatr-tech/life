@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Avatar, Divider, Button, Pagination } from 'antd';
 import './post-comments.scss';
 import api from '../_utils/api';
 import PostThread from './post-thread';
+import { UserContext } from '../_context/user.context';
 
 const THREAD_LIMIT = 10;
 
 function PostComments({ post }: any) {
+  const { userInfo } = useContext(UserContext);
   const [threads, setThreads] = useState([]);
   const [comment, setComment] = useState('');
   const [threadCount, setThreadCount] = useState(0);
@@ -38,7 +40,7 @@ function PostComments({ post }: any) {
     await api.post('post/comment', {
       post_id: post.id,
       comment,
-      user_id: 1,
+      user_id: userInfo.id,
     });
     setComment('');
     setCommentSubmitting(false);

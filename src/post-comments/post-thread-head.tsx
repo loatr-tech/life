@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Avatar, Button } from 'antd';
 import './post-thread-head.scss';
 import api from '../_utils/api';
 import { timeSince } from '../_utils/time';
+import { UserContext } from '../_context/user.context';
 
 function PostThreadHead({ thread, refreshReplies, children }: any) {
+  const { userInfo } = useContext(UserContext);
   const [startReply, setStartReply] = useState(false);
   const [reply, setReply] = useState('');
   const [replySubmitting, setReplySubmitting] = useState(false);
@@ -15,7 +17,7 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
       post_id: thread.post_id,
       thread_id: thread.id,
       reply,
-      user_id: 1,
+      user_id: userInfo.id,
     });
     setReply('');
     setStartReply(false);

@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 // import './login.scss';
 
 import { Button } from 'antd';
+import api from '../_utils/api';
+import { UserContext } from '../_context/user.context';
 
 function loadScript(onLoad = () => {}, onError = () => {}) {
   const element = document.getElementsByTagName('script')[0];
@@ -27,6 +29,8 @@ function removeScript() {
 }
 
 function LoginGoogle() {
+  const { setupUser } = useContext(UserContext);
+
   useEffect(() => {
     let unmounted = false
     loadScript(() => {
@@ -101,6 +105,13 @@ function LoginGoogle() {
           familyName: basicProfile.getFamilyName(),
         };
         console.log('data', data);
+        api.post('login', {
+          method: 'google',
+          googleId: data.googleId,
+          user: data.profileObj,
+        }).then(({ data: userData }) => {
+          setupUser(userData);
+        })
       },
       (err: any) => {
         console.log('login failed', err);

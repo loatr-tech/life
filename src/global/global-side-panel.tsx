@@ -9,7 +9,7 @@ import { UserContext } from '../_context/user.context';
 function GlobalSidePanel() {
   const history = useHistory();
   const { sidePanelOpen, toggleSidePanel } = useContext(ScreenSizeContext);
-  const { loggedIn } = useContext(UserContext);
+  const { loggedIn, userInfo } = useContext(UserContext);
 
   const toUserPage = () => {
     toggleSidePanel();
@@ -28,8 +28,8 @@ function GlobalSidePanel() {
           className="global-side-panel__user"
           onClick={() => toUserPage()}
         >
-          <Avatar>U</Avatar>
-          <span className="global-side-panel__user-name">Michael Jackson</span>
+          <Avatar src={userInfo.avatarUrl} />
+          <span className="global-side-panel__user-name">{userInfo.name}</span>
           <i className="fas fa-chevron-right"></i>
         </section>
       ) : (

@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import './user.scss';
 
 import { Breadcrumb, Divider } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
+import { UserContext } from '../_context/user.context';
 
 function User() {
+  const history = useHistory();
+  const { userInfo, loggedIn } = useContext(UserContext);
+  useEffect(() => {
+    if (history && !loggedIn) {
+      history.push('/login');
+    }
+  }, [history, loggedIn]);
+
   return (
     <div className="user">
       <Breadcrumb className="user-path">
@@ -18,14 +27,11 @@ function User() {
       </Breadcrumb>
       <header className="user-header">
         <div className="user-avatar">
-          <img
-            src="https://www.w3schools.com/howto/img_avatar.png"
-            alt="User avatar"
-          />
+          <img src={userInfo?.avatarUrl} alt="User avatar" />
         </div>
       </header>
       <section className="user-details">
-        <h2 className="user-name">Alexej Fausta</h2>
+        <h2 className="user-name">{userInfo?.name}</h2>
         <Divider />
         <div className="user-stats">
           <span>帖子 12</span>

@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button } from 'antd';
 import './post-thread.scss';
 import api from '../_utils/api';
 import PostReply from './post-reply';
 import LoadingSpinner from '../_shared/loading-spinner';
 import PostThreadHead from './post-thread-head';
+import { UserContext } from '../_context/user.context';
 
 const REPLIES_LIMIT = 10;
 
 function PostThread({ thread }: any) {
+  const { userInfo } = useContext(UserContext);
   const [viewReply, setViewReply] = useState(false);
   const [replies, setReplies] = useState([]);
   const [repliesPage, setRepliesPage] = useState(1);
@@ -87,7 +89,7 @@ function PostThread({ thread }: any) {
               <PostReply
                 reply={reply}
                 key={reply.id}
-                isHero={reply.user_id === 2}
+                isHero={reply.user_id === userInfo.id}
               />
             );
           })}

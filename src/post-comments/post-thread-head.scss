@@ -49,7 +49,6 @@
 
 .post-thread__reply {
   margin-left: 32px;
-  border-radius: 3px;
   border-top: 1px solid #f2f3f3;
   padding: 12px 0;
   margin-bottom: 8px;
@@ -75,8 +74,16 @@
     padding-left: 48px;
     padding-top: 12px;
     display: flex;
-    // justify-content: flex-end;
   }
+}
+
+.post-thread__reply-login {
+  margin-left: 32px;
+  border-radius: 3px;
+  text-align: center;
+  background-color: #f2f3f3;
+  padding: 12px 0;
+  margin-bottom: 8px;
 }
 
 @media only screen and (max-width: 576px) {

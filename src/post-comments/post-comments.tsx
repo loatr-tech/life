@@ -4,11 +4,12 @@ import './post-comments.scss';
 import api from '../_utils/api';
 import PostThread from './post-thread';
 import { UserContext } from '../_context/user.context';
+import { Link } from 'react-router-dom';
 
 const THREAD_LIMIT = 10;
 
 function PostComments({ post }: any) {
-  const { userInfo } = useContext(UserContext);
+  const { loggedIn, userInfo } = useContext(UserContext);
   const [threads, setThreads] = useState([]);
   const [comment, setComment] = useState('');
   const [threadCount, setThreadCount] = useState(0);
@@ -69,24 +70,38 @@ function PostComments({ post }: any) {
         </>
       )}
       <Divider />
-      <div className="post-comments__textarea-container">
-        <span className="post-comments__textarea-avatar">
-          <Avatar size={36}>M</Avatar>
-        </span>
-        <textarea
-          className="post-comments__textarea"
-          name="comment-textarea"
-          rows={4}
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          disabled={commentSubmitting}
-        ></textarea>
-      </div>
-      <div className="post-comments__textarea-actions">
-        <Button onClick={() => onComment()} loading={commentSubmitting}>
-          留言
-        </Button>
-      </div>
+      {loggedIn ? (
+        <>
+          <div className="post-comments__textarea-container">
+            <span className="post-comments__textarea-avatar">
+              <Avatar size={36} src={userInfo?.avatarUrl} />
+            </span>
+            <textarea
+              className="post-comments__textarea"
+              name="comment-textarea"
+              placeholder="说点啥儿..."
+              rows={4}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+              disabled={commentSubmitting}
+            ></textarea>
+          </div>
+          <div className="post-comments__textarea-actions">
+            <Button onClick={() => onComment()} loading={commentSubmitting}>
+              留言
+            </Button>
+          </div>
+        </>
+      ) : (
+        <div className="post-comments__textarea-login">
+          <p>登录后即可留言</p>
+          <Link to="/login">
+            <Button type="primary">
+              <i className="fas fa-sign-in-alt"></i> 登录
+            </Button>
+          </Link>
+        </div>
+      )}
     </section>
   );
 }

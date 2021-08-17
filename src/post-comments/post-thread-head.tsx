@@ -4,9 +4,10 @@ import './post-thread-head.scss';
 import api from '../_utils/api';
 import { timeSince } from '../_utils/time';
 import { UserContext } from '../_context/user.context';
+import { Link } from 'react-router-dom';
 
 function PostThreadHead({ thread, refreshReplies, children }: any) {
-  const { userInfo } = useContext(UserContext);
+  const { loggedIn, userInfo } = useContext(UserContext);
   const [startReply, setStartReply] = useState(false);
   const [reply, setReply] = useState('');
   const [replySubmitting, setReplySubmitting] = useState(false);
@@ -60,41 +61,51 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
           </div>
         </section>
       </div>
-      {startReply && (
-        <div className="post-thread__reply">
-          <div className="post-thread__reply-textarea-container">
-            <span className="post-thread__reply-textarea-avatar">
-              <Avatar>M</Avatar>
-            </span>
-            <textarea
-              className="post-thread__reply-textarea"
-              name="comment-textarea"
-              rows={2}
-              placeholder="说点什么..."
-              value={reply}
-              onChange={(e) => setReply(e.target.value)}
-              disabled={replySubmitting}
-            ></textarea>
+      {startReply &&
+        (loggedIn ? (
+          <div className="post-thread__reply">
+            <div className="post-thread__reply-textarea-container">
+              <span className="post-thread__reply-textarea-avatar">
+                <Avatar src={userInfo?.avatarUrl} />
+              </span>
+              <textarea
+                className="post-thread__reply-textarea"
+                name="comment-textarea"
+                rows={2}
+                placeholder="说点什么..."
+                value={reply}
+                onChange={(e) => setReply(e.target.value)}
+                disabled={replySubmitting}
+              ></textarea>
+            </div>
+            <div className="post-thread__reply-textarea-actions">
+              <Button
+                size="small"
+                onClick={() => onReply()}
+                loading={replySubmitting}
+              >
+                回复
+              </Button>
+              <Button
+                size="small"
+                type="text"
+                onClick={() => setStartReply(false)}
+                disabled={replySubmitting}
+              >
+                取消
+              </Button>
+            </div>
           </div>
-          <div className="post-thread__reply-textarea-actions">
-            <Button
-              size="small"
-              onClick={() => onReply()}
-              loading={replySubmitting}
-            >
-              回复
-            </Button>
-            <Button
-              size="small"
-              type="text"
-              onClick={() => setStartReply(false)}
-              disabled={replySubmitting}
-            >
-              取消
-            </Button>
+        ) : (
+          <div className="post-thread__reply-login">
+            <p>登录后即可回复</p>
+            <Link to="/login">
+              <Button type="primary">
+                <i className="fas fa-sign-in-alt"></i> 登录
+              </Button>
+            </Link>
           </div>
-        </div>
-      )}
+        ))}
 
       {/* Others */}
       {children}

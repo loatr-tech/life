@@ -24,6 +24,10 @@
   justify-content: flex-end;
 }
 
+.post-comments__textarea-login {
+  text-align: center;
+}
+
 @media only screen and (max-width: 576px) {
   .post-comments__textarea {
     font-size: 1rem;

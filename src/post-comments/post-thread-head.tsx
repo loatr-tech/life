@@ -18,7 +18,7 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
       post_id: thread.post_id,
       thread_id: thread.id,
       reply,
-      user_id: userInfo.id,
+      owner_id: userInfo.id,
     });
     setReply('');
     setStartReply(false);
@@ -31,12 +31,12 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
       {/* Thread head comment */}
       <div className="post-thread__head-container">
         <section className="post-thread__head-avatar">
-          <Avatar>R</Avatar>
+          <Avatar src={thread?.owner?.avatar_url}/>
         </section>
         <section className="post-thread__head-content">
           <div className="post-thread__head-header">
             <span className="post-thread__head-header-username">
-              岸上某位用户
+              {thread?.owner?.name}
             </span>
             <span className="post-thread__head-header-ago">
               {timeSince(thread?.createdAt)}
@@ -66,7 +66,7 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
           <div className="post-thread__reply">
             <div className="post-thread__reply-textarea-container">
               <span className="post-thread__reply-textarea-avatar">
-                <Avatar src={userInfo?.avatarUrl} />
+                <Avatar src={userInfo?.avatar_url} />
               </span>
               <textarea
                 className="post-thread__reply-textarea"

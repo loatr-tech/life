@@ -36,7 +36,7 @@ function User() {
       {/* User Header */}
       <header className="user-header">
         <div className="user-avatar">
-          <img src={userInfo?.avatarUrl} alt="User avatar" />
+          <img src={userInfo?.avatar_url} alt="User avatar" />
         </div>
       </header>
 

@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Divider, Input } from 'antd';
 import Editor from 'rich-markdown-editor';
 import './post-creation.scss';
 import api from '../_utils/api';
 import PostCreationCategory from './post-creation-category';
+import { UserContext } from '../_context/user.context';
+import { Link } from 'react-router-dom';
 
 function PostCreation(props: any) {
+  const { loggedIn, userInfo } = useContext(UserContext);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -25,7 +28,12 @@ function PostCreation(props: any) {
     setShowMissingField(true);
     if (title.length && content.length && selectedCategory) {
       setPublishing(true);
-      const payload = { title, content, category: selectedCategory };
+      const payload = {
+        title,
+        content,
+        category: selectedCategory,
+        owner_id: userInfo.id,
+      };
       await api.post('post', payload);
       setPublishing(false);
       // Redirect back to homepage
@@ -33,7 +41,7 @@ function PostCreation(props: any) {
     }
   }
 
-  return (
+  return loggedIn ? (
     <div className="post-creation">
       <section className="post-creation__actions">
         <PostCreationCategory
@@ -86,6 +94,15 @@ function PostCreation(props: any) {
           </Button>
         </div>
       </section>
+    </div>
+  ) : (
+    <div className="post-creation__login">
+      <p>登录后即可发布帖子</p>
+      <Link to="/login">
+        <Button type="primary">
+          <i className="fas fa-sign-in-alt"></i> 登录
+        </Button>
+      </Link>
     </div>
   );
 }

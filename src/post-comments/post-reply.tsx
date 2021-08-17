@@ -8,11 +8,13 @@ function PostReply({ isHero, reply }: any) {
   return (
     <div className={`post-reply ${isHero ? 'post-reply--hero' : ''}`}>
       <section className="post-reply__avatar">
-        <Avatar>R</Avatar>
+        <Avatar src={reply.owner?.avatar_url} />
       </section>
       <section className="post-reply__content">
         <div className="post-reply__header">
-          <span className="post-reply__header-username">岸上某位用户</span>
+          <span className="post-reply__header-username">
+            {reply.owner?.name}
+          </span>
           <span className="post-reply__header-ago">
             {timeSince(reply?.createdAt)}
           </span>

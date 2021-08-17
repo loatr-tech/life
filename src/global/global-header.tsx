@@ -36,7 +36,7 @@ function GlobalHeader() {
           </Button>
         ) : loggedIn ? (
           <Link to="/user">
-            <Avatar src={userInfo.avatarUrl} />
+            <Avatar src={userInfo.avatar_url} />
           </Link>
         ) : (
           <Link to="/login">

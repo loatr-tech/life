@@ -28,7 +28,7 @@ function GlobalSidePanel() {
           className="global-side-panel__user"
           onClick={() => toUserPage()}
         >
-          <Avatar src={userInfo.avatarUrl} />
+          <Avatar src={userInfo.avatar_url} />
           <span className="global-side-panel__user-name">{userInfo.name}</span>
           <i className="fas fa-chevron-right"></i>
         </section>

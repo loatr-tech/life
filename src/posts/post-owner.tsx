@@ -13,6 +13,7 @@ function PostOwner({ post, fetching }: any) {
             fetching ? 'loading-placeholder' : ''
           }`}
           size={64}
+          src={post?.owner?.avatar_url}
         >
           {post?.owner?.name[0]}
         </Avatar>

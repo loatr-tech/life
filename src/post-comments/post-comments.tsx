@@ -41,7 +41,7 @@ function PostComments({ post }: any) {
     await api.post('post/comment', {
       post_id: post.id,
       comment,
-      user_id: userInfo.id,
+      owner_id: userInfo.id,
     });
     setComment('');
     setCommentSubmitting(false);
@@ -74,7 +74,7 @@ function PostComments({ post }: any) {
         <>
           <div className="post-comments__textarea-container">
             <span className="post-comments__textarea-avatar">
-              <Avatar size={36} src={userInfo?.avatarUrl} />
+              <Avatar size={36} src={userInfo?.avatar_url} />
             </span>
             <textarea
               className="post-comments__textarea"

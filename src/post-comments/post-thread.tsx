@@ -89,7 +89,7 @@ function PostThread({ thread }: any) {
               <PostReply
                 reply={reply}
                 key={reply.id}
-                isHero={reply.user_id === userInfo?.id}
+                isHero={reply.owner?.id === userInfo?.id}
               />
             );
           })}

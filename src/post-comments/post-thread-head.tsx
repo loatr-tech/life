@@ -10,7 +10,9 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
   const { loggedIn, userInfo } = useContext(UserContext);
   const [startReply, setStartReply] = useState(false);
   const [reply, setReply] = useState('');
+  const [interaction, setInteraction] = useState({ likes: thread?.likes, dislikes: thread?.dislikes });
   const [replySubmitting, setReplySubmitting] = useState(false);
+  const [interacting, setInteracting] = useState(false);
 
   const onReply = async () => {
     setReplySubmitting(true);
@@ -26,12 +28,32 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
     refreshReplies();
   };
 
+  const onLike = async () => {
+    setInteracting(true);
+    const { data } = await api.post(`post/comment/${thread.id}/interact`, {
+      user_id: userInfo.id,
+      like: true,
+    });
+    setInteracting(false);
+    setInteraction(data);
+  }
+
+  const onDislike = async () => {
+    setInteracting(true);
+    const { data } = await api.post(`post/comment/${thread.id}/interact`, {
+      user_id: userInfo.id,
+      dislike: true,
+    });
+    setInteracting(false);
+    setInteraction(data);
+  }
+
   return (
     <div className="post-thread__head">
       {/* Thread head comment */}
       <div className="post-thread__head-container">
         <section className="post-thread__head-avatar">
-          <Avatar src={thread?.owner?.avatar_url}/>
+          <Avatar src={thread?.owner?.avatar_url} />
         </section>
         <section className="post-thread__head-content">
           <div className="post-thread__head-header">
@@ -44,12 +66,20 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
           </div>
           <p className="post-thread__head-content-message">{thread?.comment}</p>
           <div className="post-thread__head-action">
-            <span className="post-card__head-interaction">
-              <i className="far fa-thumbs-up"></i> 123
-            </span>
-            <span className="post-card__head-interaction">
-              <i className="far fa-thumbs-down"></i> 45
-            </span>
+            <button
+              className="post-card__head-interaction"
+              onClick={onLike}
+              disabled={interacting}
+            >
+              <i className="far fa-thumbs-up"></i> {interaction?.likes || ''}
+            </button>
+            <button
+              className="post-card__head-interaction"
+              onClick={onDislike}
+              disabled={interacting}
+            >
+              <i className="far fa-thumbs-down"></i> {interaction?.dislikes || ''}
+            </button>
             <Button
               size="small"
               type="text"

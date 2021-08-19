@@ -8,6 +8,7 @@ import { Button } from 'antd';
 import api from '../_utils/api';
 import PostCardPlaceholder from '../post/post-card-placeholder';
 import { NavigationContext } from '../_context/navigation.context';
+import HomeEmptyPosts from './home-empty-posts';
 
 
 function HomeMain() {
@@ -44,11 +45,17 @@ function HomeMain() {
             </Link>
           </div>
         )}
-        {loading
-          ? new Array(5).fill(null).map((_, index) => <PostCardPlaceholder key={index}/>)
-          : posts.map((post: any) => {
-              return <PostCard post={post} key={post.id} />;
-            })}
+        {loading ? (
+          new Array(5)
+            .fill(null)
+            .map((_, index) => <PostCardPlaceholder key={index} />)
+        ) : posts.length ? (
+          posts.map((post: any) => {
+            return <PostCard post={post} key={post.id} />;
+          })
+        ) : (
+          <HomeEmptyPosts />
+        )}
       </section>
       <section className="home-sidebar">
         <Link to="/new-post">

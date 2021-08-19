@@ -11,7 +11,7 @@ function PostCard({ post }: any) {
   return (
     <div className="post-card">
       <section className="post-card__stats">
-        <Avatar className="post-card__stats-avatar">U</Avatar>
+        <Avatar className="post-card__stats-avatar" src={post?.owner?.avatar_url} />
         <div className="post-card__stats-username">
           <div>{post?.owner?.name}</div>
           <div className="post-card__stats-ago">

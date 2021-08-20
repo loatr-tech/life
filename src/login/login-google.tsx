@@ -107,7 +107,7 @@ function LoginGoogle({ onLoginFinished }: any) {
         };
         console.log('data', data);
         api
-          .post('login', {
+          .post('third-party-login', {
             method: 'google',
             googleId: data.googleId,
             user: data.profileObj,

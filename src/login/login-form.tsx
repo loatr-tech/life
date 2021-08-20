@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './login-form.scss';
 
-import { Button, Input } from 'antd';
+import { Button, Input, message } from 'antd';
+import api from '../_utils/api';
+import { UserContext } from '../_context/user.context';
 
 function LoginForm({ onLoginFinished }: any) {
+  const { setupUser } = useContext(UserContext);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,24 +17,41 @@ function LoginForm({ onLoginFinished }: any) {
     setIsSignup(!isSignup);
   };
 
-  const onSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const onSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault(); // Prevent form default
     if (isSignup) {
       // Sign up
-      const payload = {
+      try {
+        const { data: userData } = await api.post('signup', {
         username,
         email,
         password,
-      };
-      console.log(payload);
+      });
+        setupUser(userData);
+        onLoginFinished();
+      } catch ({ response }) {
+        if (response.status === 409) {
+          message.error(response.data);
+        } else {
+          message.error('Oops something wrong happened');
+        }
+      }
     } else {
       // Sign in
-      const payload = {
+      try {
+        const { data: userData } = await api.post('login', {
         username,
         password,
+      });
+        setupUser(userData);
+        onLoginFinished();
+      } catch ({ response }) {
+        if ([401, 404].includes(response.status)) {
+          message.error(response.data);
+        } else {
+          message.error('Oops something wrong happened');
+        }
       }
-      console.log(payload);
-      onLoginFinished();
     }
   };
 

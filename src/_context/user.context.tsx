@@ -4,6 +4,7 @@ export const UserContext = createContext({} as any);
 
 export default function UserContextProvider(props: any) {
   const [userInfo, setUserInfo] = useState();
+  const [initialized, setInitialized] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -12,6 +13,7 @@ export default function UserContextProvider(props: any) {
       setUserInfo(userData);
       setLoggedIn(true);
     }
+    setInitialized(true);
   }, [])
 
   const setupUser = (userData: any) => {
@@ -28,7 +30,7 @@ export default function UserContextProvider(props: any) {
 
   return (
     <UserContext.Provider
-      value={{ userInfo, setupUser, loggedIn, setLoggedIn, logout }}
+      value={{ userInfo, setupUser, initialized, loggedIn, setLoggedIn, logout }}
     >
       {props.children}
     </UserContext.Provider>

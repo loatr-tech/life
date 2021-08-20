@@ -1,20 +1,20 @@
 import React, { useContext, useEffect } from 'react';
 import './user.scss';
 
-import { Breadcrumb, Button, Divider } from 'antd';
+import { Breadcrumb, Button, Divider, Avatar } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import { UserContext } from '../_context/user.context';
 
 function User() {
   const history = useHistory();
-  const { userInfo, loggedIn, logout } = useContext(UserContext);
+  const { userInfo, loggedIn, initialized, logout } = useContext(UserContext);
 
   useEffect(() => {
-    if (history && !loggedIn) {
-      history.push('/login');
+    if (history && initialized && !loggedIn) {
+      history.push('/');
     }
-  }, [history, loggedIn]);
+  }, [history, initialized, loggedIn]);
 
   const onLogout = () => {
     logout();
@@ -36,7 +36,7 @@ function User() {
       {/* User Header */}
       <header className="user-header">
         <div className="user-avatar">
-          <img src={userInfo?.avatar_url} alt="User avatar" />
+          <Avatar src={userInfo?.avatar_url} size={120} />
         </div>
       </header>
 

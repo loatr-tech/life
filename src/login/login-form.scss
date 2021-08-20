@@ -1,0 +1,32 @@
+.login-form {
+  padding: 24px;
+  background-color: white;
+  text-align: center;
+}
+
+.login-form-field {
+  >label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 16px;
+  }
+
+  >.login-form-input {
+    width: 300px;
+    margin-bottom: 12px;
+    max-width: 100%;
+  }
+}
+
+.login-form-ask-signup {
+  margin-top: 12px;
+
+  >button {
+    background-color: transparent;
+    border: none;
+    text-decoration: underline;
+    padding: 0;
+    cursor: pointer;
+    color: #1890ff;
+  }
+}

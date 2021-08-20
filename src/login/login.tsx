@@ -1,10 +1,11 @@
 import React from 'react';
 import './login.scss';
 
-import { Breadcrumb } from 'antd';
+import { Breadcrumb, Divider } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import LoginGoogle from './login-google';
+import LoginForm from './login-form';
 
 function Login() {
   const history = useHistory();
@@ -23,10 +24,18 @@ function Login() {
         </Breadcrumb.Item>
         <Breadcrumb.Item>用户登录</Breadcrumb.Item>
       </Breadcrumb>
-      <form className="login-form">
-        <h3>选择登录方式</h3>
-        <LoginGoogle onLoginFinished={onLoginFinished} />
-      </form>
+
+      <main className="login-container">
+        {/* Login Form */}
+        <LoginForm onLoginFinished={onLoginFinished}/>
+
+        {/* Other Login Method */}
+        <Divider />
+        <section className="login-other-method">
+          <h3>选择其他方式登录</h3>
+          <LoginGoogle onLoginFinished={onLoginFinished} />
+        </section>
+      </main>
     </div>
   );
 }

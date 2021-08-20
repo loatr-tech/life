@@ -28,25 +28,17 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
     refreshReplies();
   };
 
-  const onLike = async () => {
-    setInteracting(true);
-    const { data } = await api.post(`post/comment/${thread.id}/interact`, {
-      user_id: userInfo.id,
-      like: true,
-    });
-    setInteracting(false);
-    setInteraction(data);
-  }
-
-  const onDislike = async () => {
-    setInteracting(true);
-    const { data } = await api.post(`post/comment/${thread.id}/interact`, {
-      user_id: userInfo.id,
-      dislike: true,
-    });
-    setInteracting(false);
-    setInteraction(data);
-  }
+  const onInteract = async (action: 'like' | 'dislike') => {
+    if (loggedIn) {
+      setInteracting(true);
+      const { data } = await api.post(`post/comment/${thread.id}/interact`, {
+        user_id: userInfo.id,
+        [action]: true
+      });
+      setInteracting(false);
+      setInteraction(data);
+    }
+  };
 
   return (
     <div className="post-thread__head">
@@ -68,17 +60,18 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
           <div className="post-thread__head-action">
             <button
               className="post-card__head-interaction"
-              onClick={onLike}
+              onClick={() => onInteract('like')}
               disabled={interacting}
             >
               <i className="far fa-thumbs-up"></i> {interaction?.likes || ''}
             </button>
             <button
               className="post-card__head-interaction"
-              onClick={onDislike}
+              onClick={() => onInteract('dislike')}
               disabled={interacting}
             >
-              <i className="far fa-thumbs-down"></i> {interaction?.dislikes || ''}
+              <i className="far fa-thumbs-down"></i>{' '}
+              {interaction?.dislikes || ''}
             </button>
             <Button
               size="small"

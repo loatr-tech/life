@@ -4,14 +4,11 @@
   padding: 24px;
 }
 
-.login-form {
+.login-container {
   padding: 24px;
   background-color: white;
+}
+
+.login-other-method {
   text-align: center;
-  > button {
-    width: 200px;
-    .fa-google {
-      color: red;
-    }
-  }
 }

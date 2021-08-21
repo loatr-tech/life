@@ -20,7 +20,7 @@ function PostThread({ thread }: any) {
 
   const _loadReplies = async (page: number) =>{
     const { data } = await api.get(
-      `post/${thread.post_id}/comment/${thread.id}/replies`,
+      `post/${thread.post_id}/thread/${thread.id}/replies`,
       {
         params: { page, limit: REPLIES_LIMIT },
       }

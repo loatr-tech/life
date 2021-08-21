@@ -16,7 +16,7 @@ function PostComments({ post }: any) {
   const [commentSubmitting, setCommentSubmitting] = useState(false);
 
   async function _loadComments(currentPost: any, page = 1) {
-    const { data } = await api.get(`post/${currentPost.id}/comments`, {
+    const { data } = await api.get(`post/${currentPost.id}/threads`, {
       params: {
         page,
         limit: THREAD_LIMIT,
@@ -38,7 +38,7 @@ function PostComments({ post }: any) {
 
   const onComment = async () => {
     setCommentSubmitting(true);
-    await api.post('post/comment', {
+    await api.post('post/thread', {
       post_id: post.id,
       comment,
       owner_id: userInfo.id,

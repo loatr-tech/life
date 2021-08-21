@@ -31,7 +31,7 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
   const onInteract = async (action: 'like' | 'dislike') => {
     if (loggedIn) {
       setInteracting(true);
-      const { data } = await api.post(`post/comment/${thread.id}/interact`, {
+      const { data } = await api.post(`post/thread/${thread.id}/interact`, {
         user_id: userInfo.id,
         [action]: true
       });

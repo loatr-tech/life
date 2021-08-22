@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 
+axios.defaults.withCredentials = true;
+
 const BASE_URL = `${process.env.REACT_APP_BASE_URL}life`;
 
 const api = {
@@ -8,6 +10,9 @@ const api = {
   },
   post: (url: string, payload: any) => {
     return axios.post(`${BASE_URL}/${url}`, payload);
+  },
+  patch: (url: string, payload: any) => {
+    return axios.patch(`${BASE_URL}/${url}`, payload);
   },
 };
 

@@ -1,0 +1,26 @@
+.user-avatar {
+  text-align: center;
+  position: relative;
+
+  >img {
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+  }
+
+  >.user-avatar__edit {
+    position: absolute;
+    top: calc(50% + 35px);
+    left: calc(50% + 25px);
+    display: none;
+  }
+
+  &:hover>.user-avatar__edit {
+    display: inline-block;
+  }
+}
+
+.user-avatar__preview {
+  text-align: center;
+  margin-top: 24px;
+}

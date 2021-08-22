@@ -1,20 +1,28 @@
 import React, { useContext, useEffect } from 'react';
 import './user.scss';
 
-import { Breadcrumb, Button, Divider, Avatar } from 'antd';
+import { Breadcrumb, Button, Divider } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import { UserContext } from '../_context/user.context';
+import UserAvatar from './user-avatar';
+import api from '../_utils/api';
 
 function User() {
   const history = useHistory();
-  const { userInfo, loggedIn, initialized, logout } = useContext(UserContext);
+  const { userInfo, loggedIn, initialized, logout, setupUser } =
+    useContext(UserContext);
 
   useEffect(() => {
     if (history && initialized && !loggedIn) {
       history.push('/');
     }
   }, [history, initialized, loggedIn]);
+
+  const onEdited = async () => {
+    const { data } = await api.get('user');
+    setupUser(data);
+  }
 
   const onLogout = () => {
     logout();
@@ -35,9 +43,7 @@ function User() {
 
       {/* User Header */}
       <header className="user-header">
-        <div className="user-avatar">
-          <Avatar src={userInfo?.avatar_url} size={120} />
-        </div>
+        <UserAvatar userInfo={userInfo} onEdited={onEdited}/>
       </header>
 
       {/* User details */}
@@ -45,9 +51,9 @@ function User() {
         <h2 className="user-name">{userInfo?.name}</h2>
         <Divider />
         <div className="user-stats">
-          <span>帖子 12</span>
-          <span>粉丝 12</span>
-          <span>关注 4</span>
+          <span>帖子 {userInfo?.posts || 0}</span>
+          <span>粉丝 {userInfo?.fans || 0}</span>
+          <span>关注 {userInfo?.follows || 0}</span>
         </div>
       </section>
 

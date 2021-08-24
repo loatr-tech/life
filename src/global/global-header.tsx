@@ -31,7 +31,7 @@ function GlobalHeader() {
         </div>
         {/* User */}
         {screenSize === SCREEN.MOBILE ? (
-          <Button onClick={() => toggleSidePanel()}>
+          <Button type="text" onClick={() => toggleSidePanel()}>
             <i className="fas fa-bars"></i>
           </Button>
         ) : loggedIn ? (

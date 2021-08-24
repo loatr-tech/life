@@ -13,17 +13,18 @@ export default function ScreenSizeContextProvider(props: any) {
   const [screenSize, setScreenSize] = useState(SCREEN.DESKTOP);
   const [sidePanelOpen, setSidePanelOpen] = useState(false);
 
-  useEffect(() => {
-    function handleResize() {
-      if (window.innerWidth > 768) {
-        setScreenSize(SCREEN.DESKTOP);
-      } else if (window.innerWidth >= 576) {
-        setScreenSize(SCREEN.TABLET);
-      } else {
-        setScreenSize(SCREEN.MOBILE);
-      }
+  function handleResize() {
+    if (window.innerWidth > 768) {
+      setScreenSize(SCREEN.DESKTOP);
+    } else if (window.innerWidth >= 576) {
+      setScreenSize(SCREEN.TABLET);
+    } else {
+      setScreenSize(SCREEN.MOBILE);
     }
+  }
 
+  useEffect(() => {
+    handleResize();
     window.addEventListener('resize', handleResize);
 
     return () => {

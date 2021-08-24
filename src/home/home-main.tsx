@@ -21,8 +21,8 @@ function HomeMain() {
     const fetchAllPosts = async () => {
       setLoading(true);
       const params: any = {};
-      if (activeCategory && activeCategory !== 'all')
-        params.category = activeCategory;
+      if (activeCategory && activeCategory.category !== 'all')
+        params.category = activeCategory.category;
       const { data } = await api.get('posts', { params });
       setPosts(data.items);
       setLoading(false);
@@ -32,9 +32,11 @@ function HomeMain() {
   }, [activeCategory]);
   return (
     <main className="home-main">
-      <section className="home-navigation">
-        <HomeNavigation />
-      </section>
+      {screenSize !== SCREEN.MOBILE && (
+        <section className="home-navigation">
+          <HomeNavigation />
+        </section>
+      )}
       <section className="home-content">
         {screenSize !== SCREEN.DESKTOP && (
           <div className="home-content__actions">

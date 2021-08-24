@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar } from 'antd';
 
-import './post-card.scss';
+import './post-card-placeholder.scss';
 
 function PostCardPlaceholder() {
   return (
@@ -11,15 +11,6 @@ function PostCardPlaceholder() {
         <div className="post-card__stats-username">
           <div></div>
           <div className="post-card__stats-ago"></div>
-        </div>
-        <div className="post-card__stats-icon">
-          <i className="far fa-eye"></i>
-        </div>
-        <div className="post-card__stats-icon">
-          <i className="far fa-thumbs-up"></i>
-        </div>
-        <div className="post-card__stats-icon">
-          <i className="far fa-comment"></i>
         </div>
       </section>
       <hr className="post-card__divider" />

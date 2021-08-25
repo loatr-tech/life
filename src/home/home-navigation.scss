@@ -90,13 +90,16 @@
     background-color: rgba($color: #d1d8e0, $alpha: 0.5);
   }
   &.home-navigation__category--active {
-    background-color: #a55eea;
-    color: white;
+    background-color: rgba($color: #fff, $alpha: 0.7);
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
   }
 }
 
 @media only screen and (max-width: 576px) {
-  .home-navigation::before {
-    display: none;
+  .home-navigation {
+    width: 100%;
+    &::before {
+      display: none;
+    }
   }
 }

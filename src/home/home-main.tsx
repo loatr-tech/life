@@ -38,15 +38,17 @@ function HomeMain() {
         </section>
       )}
       <section className="home-content">
+        {/* Actions */}
         {screenSize !== SCREEN.DESKTOP && (
           <div className="home-content__actions">
             <Link to="/new-post">
-              <Button shape="round" size="middle">
+              <Button shape="round" size="middle" type="primary">
                 <i className="fas fa-pen"></i> 发帖
               </Button>
             </Link>
           </div>
         )}
+        {/* Post Lists */}
         {loading ? (
           new Array(5)
             .fill(null)
@@ -61,8 +63,8 @@ function HomeMain() {
       </section>
       <section className="home-sidebar">
         <Link to="/new-post">
-          <Button shape="round" size="middle" block>
-            <i className="fas fa-pen"></i> 发帖
+          <Button shape="round" size="middle" block type="primary">
+            <i className="fas fa-plus"></i> 发帖
           </Button>
         </Link>
       </section>

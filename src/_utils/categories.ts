@@ -119,7 +119,7 @@ export const CATEGORIES_MAP: any = {
   we_re_hiring: '我要招人',
   // 留学签证
   apply_school: '申请学校',
-  application_results: '申请结果',
+  application_results: '申校结果',
   work_visa: '工作签证',
   green_card: '移民绿卡',
   student_visa: '学生签证',

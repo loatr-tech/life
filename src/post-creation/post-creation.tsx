@@ -49,15 +49,6 @@ function PostCreation(props: any) {
           setSelectedCategory={setSelectedCategory}
           showMissingField={showMissingField}
         />
-        <Divider />
-        <Button
-          onClick={() => onPublish()}
-          block
-          loading={publishing}
-          disabled={publishing}
-        >
-          发布
-        </Button>
       </section>
       <section className="post-creation__editor">
         {/* Title */}
@@ -86,6 +77,7 @@ function PostCreation(props: any) {
         {/* Actions */}
         <div className="post-creation__editor-actions">
           <Button
+            type="primary"
             onClick={() => onPublish()}
             loading={publishing}
             disabled={publishing}

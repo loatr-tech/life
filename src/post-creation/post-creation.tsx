@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, Divider, Input } from 'antd';
+import { Button, Input } from 'antd';
 import Editor from 'rich-markdown-editor';
 import './post-creation.scss';
 import api from '../_utils/api';

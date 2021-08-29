@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'antd';
 import Editor from 'rich-markdown-editor';
 import './post-main.scss';
 import PostComments from '../post-comments/post-comments';

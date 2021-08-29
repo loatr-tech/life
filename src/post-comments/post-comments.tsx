@@ -53,7 +53,7 @@ function PostComments({ post }: any) {
       {threads?.length > 0 && (
         <>
           <h3>
-            <i className="far fa-comments"></i> 评论区 ({post.comments})
+            <i className="far fa-comments"></i> 评论区 ({post.interactions?.comments})
           </h3>
           {threads.map((thread: any) => (
             <PostThread thread={thread} key={thread.id} />

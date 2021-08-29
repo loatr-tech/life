@@ -10,7 +10,11 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
   const { loggedIn, userInfo } = useContext(UserContext);
   const [startReply, setStartReply] = useState(false);
   const [reply, setReply] = useState('');
-  const [interaction, setInteraction] = useState({ likes: thread?.likes, dislikes: thread?.dislikes });
+  const [interaction, setInteraction] = useState({
+    likes: thread?.likes,
+    dislikes: thread?.dislikes,
+    interacted: thread?.interacted,
+  });
   const [replySubmitting, setReplySubmitting] = useState(false);
   const [interacting, setInteracting] = useState(false);
 
@@ -48,6 +52,7 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
           <Avatar src={thread?.owner?.avatar_url} />
         </section>
         <section className="post-thread__head-content">
+          {/* Thread Header */}
           <div className="post-thread__head-header">
             <span className="post-thread__head-header-username">
               {thread?.owner?.name}
@@ -56,21 +61,34 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
               {timeSince(thread?.createdAt)}
             </span>
           </div>
+
+          {/* Thread Comment */}
           <p className="post-thread__head-content-message">{thread?.comment}</p>
+
+          {/* Actions */}
           <div className="post-thread__head-action">
             <button
               className="post-card__head-interaction"
               onClick={() => onInteract('like')}
               disabled={interacting}
             >
-              <i className="far fa-thumbs-up"></i> {interaction?.likes || ''}
+              <i
+                className={`${
+                  interaction?.interacted === 1 ? 'fas' : 'far'
+                } fa-thumbs-up`}
+              ></i>{' '}
+              {interaction?.likes || ''}
             </button>
             <button
               className="post-card__head-interaction"
               onClick={() => onInteract('dislike')}
               disabled={interacting}
             >
-              <i className="far fa-thumbs-down"></i>{' '}
+              <i
+                className={`${
+                  interaction?.interacted === -1 ? 'fas' : 'far'
+                } fa-thumbs-down`}
+              ></i>{' '}
               {interaction?.dislikes || ''}
             </button>
             <Button

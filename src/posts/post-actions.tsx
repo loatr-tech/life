@@ -9,16 +9,13 @@ function PostActions({ post }: any) {
   }
   return (
     <section className="post-actions">
-      <Button type="primary" shape="circle" onClick={onLike}>
+      <Button shape="circle" onClick={onLike}>
         <i className="far fa-thumbs-up"></i>
       </Button>
-      <Button type="primary" shape="circle">
-        <i className="far fa-star"></i>
-      </Button>
-      <Button type="primary" shape="circle">
+      <Button shape="circle">
         <i className="fas fa-share-alt"></i>
       </Button>
-      <Button type="primary" shape="circle">
+      <Button shape="circle">
         <i className="far fa-bookmark"></i>
       </Button>
     </section>

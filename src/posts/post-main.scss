@@ -40,13 +40,6 @@
   color: darkgrey;
   user-select: none;
 }
-.post-main__interactions {
-  margin: 24px;
-  text-align: center;
-  > button + button {
-    margin-left: 10px;
-  }
-}
 
 .post-mian__placeholder {
   &.post-main__title-text {

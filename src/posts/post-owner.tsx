@@ -30,13 +30,16 @@ function PostOwner({ post, fetching }: any) {
       {/* Post stats */}
       <section className="post-owner__stats">
         <div className="post-card__stats-icon">
-          <i className="far fa-eye"></i> {displayCount(post.views)}
+          <i className="far fa-eye"></i>{' '}
+          {displayCount(post?.interactions?.views)}
         </div>
         <div className="post-card__stats-icon">
-          <i className="far fa-thumbs-up"></i> {displayCount(post.likes)}
+          <i className="far fa-thumbs-up"></i>{' '}
+          {displayCount(post?.interactions?.likes)}
         </div>
         <div className="post-card__stats-icon">
-          <i className="far fa-comment"></i> {displayCount(post.comments)}
+          <i className="far fa-comment"></i>{' '}
+          {displayCount(post?.interactions?.comments)}
         </div>
       </section>
     </div>

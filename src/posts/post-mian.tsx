@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import Editor from 'rich-markdown-editor';
 import './post-main.scss';
 import PostComments from '../post-comments/post-comments';
+import PostActions from './post-actions';
 
 function PostMain({ post, fetching }: any) {
   return (
@@ -35,20 +36,7 @@ function PostMain({ post, fetching }: any) {
       {/* Interactions */}
       {!fetching && (
         <>
-          <section className="post-main__interactions">
-            <Button type="primary" shape="circle">
-              <i className="far fa-thumbs-up"></i>
-            </Button>
-            <Button type="primary" shape="circle">
-              <i className="far fa-star"></i>
-            </Button>
-            <Button type="primary" shape="circle">
-              <i className="fas fa-share-alt"></i>
-            </Button>
-            <Button type="primary" shape="circle">
-              <i className="far fa-bookmark"></i>
-            </Button>
-          </section>
+          <PostActions post={post} />
           <PostComments post={post} />
         </>
       )}

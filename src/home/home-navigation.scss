@@ -52,12 +52,12 @@
   }
   .home-navigation__subcategories-wrapper {
     max-height: 0;
-    transition: max-height 0.2s linear;
+    transition: max-height 0.3s 0s linear;
   }
   &.home-navigation__section--opened {
     .home-navigation__subcategories-wrapper {
       max-height: 100vh;
-      transition: max-height 0.3s 0.2s linear;
+      transition: max-height 0.3s 0.3s linear;
     }
   }
 }

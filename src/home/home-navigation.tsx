@@ -27,6 +27,14 @@ function HomeNavigation({ onCategoryChange }: any) {
     onCategoryChange?.(category);
   };
 
+  const toggleSection = (topCategory: string) => {
+    if (opnedSection === topCategory) {
+      setOpenedSection('');
+    } else {
+      setOpenedSection(topCategory);
+    }
+  }
+
   return (
     <div className="home-navigation">
       <section
@@ -56,7 +64,7 @@ function HomeNavigation({ onCategoryChange }: any) {
           >
             <h4
               className="home-navigation__top-category"
-              onClick={() => setOpenedSection(topCategory.id)}
+              onClick={() => toggleSection(topCategory.id)}
             >
               <i className={topCategory.icon}></i>
               <span>{topCategory.name}</span>

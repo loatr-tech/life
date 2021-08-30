@@ -6,6 +6,7 @@ import api from '../_utils/api';
 import PostCreationCategory from './post-creation-category';
 import { UserContext } from '../_context/user.context';
 import { Link } from 'react-router-dom';
+import PostCreationInfo from './post-creation-info';
 
 function PostCreation(props: any) {
   const { loggedIn, userInfo } = useContext(UserContext);
@@ -63,6 +64,10 @@ function PostCreation(props: any) {
             onChange={(e) => onChangeTitle(e)}
           />
         </div>
+
+        {/* Infos */}
+        <PostCreationInfo category={selectedCategory} />
+
         {/* Content */}
         <div
           className={`post-creation__editor-content ${

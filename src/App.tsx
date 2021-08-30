@@ -11,6 +11,7 @@ import PostCreation from './post-creation/post-creation';
 import GlobalSidePanel from './global/global-side-panel';
 import Login from './login/login';
 import Calculator from './calculator/calculator';
+import Admin from './admin/admin';
 
 
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/user" component={User} />
           <Route path="/calculator" component={Calculator} />
+          <Route path="/_admin" component={Admin} />
         </Switch>
       </main>
       {screenSize === SCREEN.MOBILE && <GlobalSidePanel />}

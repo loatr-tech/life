@@ -14,6 +14,9 @@ const api = {
   patch: (url: string, payload: any) => {
     return axios.patch(`${BASE_URL}/${url}`, payload);
   },
+  delete: (url: string) => {
+    return axios.delete(`${BASE_URL}/${url}`);
+  },
 };
 
 export default api;

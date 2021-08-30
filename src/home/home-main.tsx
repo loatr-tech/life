@@ -9,6 +9,7 @@ import api from '../_utils/api';
 import PostCardPlaceholder from '../post/post-card-placeholder';
 import { NavigationContext } from '../_context/navigation.context';
 import HomeEmptyPosts from './home-empty-posts';
+import removeMarkdown from '../_utils/remove-markdown';
 
 
 function HomeMain() {
@@ -18,17 +19,30 @@ function HomeMain() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    let destroyed = false;
     const fetchAllPosts = async () => {
       setLoading(true);
       const params: any = {};
-      if (activeCategory && activeCategory.category !== 'all')
+      if (activeCategory && activeCategory.category !== 'all') {
         params.category = activeCategory.category;
+      }
       const { data } = await api.get('posts', { params });
-      setPosts(data.items);
-      setLoading(false);
+
+      if (!destroyed) {
+        setPosts(
+          data.items.map((post: any) => {
+            post.content = removeMarkdown(post.content);
+            return post;
+          })
+        );
+        setLoading(false);
+      }
     };
 
     fetchAllPosts();
+    return () => {
+      destroyed = true;
+    }
   }, [activeCategory]);
   return (
     <main className="home-main">

@@ -3,8 +3,8 @@
 }
 
 .post-creation-tc__field {
-  margin-bottom: 12px;
-  width: 110px;
+  width: 120px;
+  margin: 0px 5px 12px;
   > label {
     display: block;
     margin-bottom: 4px;
@@ -12,18 +12,14 @@
   }
 }
 
-.post-creation-tc__field+.post-creation-tc__field {
-  margin-left: 10px;
-}
-
-.post-creation-tc__basic {
+.post-creation-tc__row {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
-.post-creation-tc__equity {
-  display: flex;
-  justify-content: center;
+.post-creation-tc__section-title {
+  text-align: center;
 }
 
 .post-creation-tc__summary {

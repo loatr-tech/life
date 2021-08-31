@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Divider, Input, Select } from 'antd';
+import { Divider, Input, InputNumber, Select } from 'antd';
 import './post-creation-tc.scss';
+import { displayCurreny } from '../../_utils/number';
 
 function PostCreationTC() {
   const [base, setBase] = useState(0);
@@ -23,7 +24,7 @@ function PostCreationTC() {
       <section className="post-creation-tc__row">
         <div className="post-creation-tc__field">
           <label htmlFor="tc_company">公司名称</label>
-          <Input id="tc_company" />
+          <Input id="tc_company" placeholder="e.g Google"/>
         </div>
         <div className="post-creation-tc__field">
           <label htmlFor="tc_title">头衔(Title/Level)</label>
@@ -75,12 +76,12 @@ function PostCreationTC() {
       <section className="post-creation-tc__row">
         <div className="post-creation-tc__field">
           <label htmlFor="tc_base">基本工资(Base)</label>
-          <Input
+          <InputNumber
             id="tc_base"
-            type="number"
-            prefix="$"
+            formatter={(value) => displayCurreny(`$ ${value}`)}
+            style={{ width: '100%' }}
             value={base}
-            onChange={(e) => onBaseChange(e.target.value)}
+            onChange={onBaseChange}
           />
         </div>
         <div className="post-creation-tc__field">
@@ -100,11 +101,19 @@ function PostCreationTC() {
       <section className="post-creation-tc__row">
         <div className="post-creation-tc__field">
           <label htmlFor="tc_signon1">第一年</label>
-          <Input id="tc_signon1" type="number" prefix="$" />
+          <InputNumber
+            id="tc_signon1"
+            formatter={(value) => displayCurreny(`$ ${value}`)}
+            style={{ width: '100%' }}
+          />
         </div>
         <div className="post-creation-tc__field">
           <label htmlFor="tc_signon2">第二年</label>
-          <Input id="tc_signon2" type="number" prefix="$" />
+          <InputNumber
+            id="tc_signon2"
+            formatter={(value) => displayCurreny(`$ ${value}`)}
+            style={{ width: '100%' }}
+          />
         </div>
       </section>
 
@@ -125,26 +134,38 @@ function PostCreationTC() {
         </div>
         <div className="post-creation-tc__field">
           <label htmlFor="tc_equity_amount">四年股票总值</label>
-          <Input
+          <InputNumber
             id="tc_equity_amount"
-            type="number"
-            prefix="$"
+            formatter={(value) => displayCurreny(`$ ${value}`)}
+            style={{ width: '100%' }}
             value={equity}
-            onChange={(e) => onEquityChange(e.target.value)}
+            onChange={onEquityChange}
           />
         </div>
         <div className="post-creation-tc__field">
           <label htmlFor="tc_equity_units">四年总股数</label>
-          <Input id="tc_equity_units" type="number" suffix="units" />
+          <InputNumber
+            id="tc_equity_units"
+            formatter={(value) => displayCurreny(`${value}`)}
+            style={{ width: '100%' }}
+          />
         </div>
         <div className="post-creation-tc__field">
           <label htmlFor="tc_equity_market_price">授予每股价格</label>
-          <Input id="tc_equity_market_price" type="number" prefix="$" />
+          <InputNumber
+            id="tc_equity_market_price"
+            formatter={(value) => displayCurreny(`$ ${value}`)}
+            style={{ width: '100%' }}
+          />
         </div>
         {equityType === 'option' && (
           <div className="post-creation-tc__field">
             <label htmlFor="tc_equity_strike_price">行权价</label>
-            <Input id="tc_equity_strike_price" type="number" prefix="$" />
+            <InputNumber
+              id="tc_equity_strike_price"
+              formatter={(value) => displayCurreny(`$ ${value}`)}
+              style={{ width: '100%' }}
+            />
           </div>
         )}
       </section>
@@ -155,9 +176,10 @@ function PostCreationTC() {
         <div></div>
         <p>基本工资 &times; (1 + 奖金%) + 股票/4</p>
         <p>
-          ${base || 0} &times; (1+{bonus || 0}%) + ${equity || 0}/4
+          ${displayCurreny(base || 0)} &times; (1+{bonus || 0}%) + $
+          {equity || 0}/4
         </p>
-        <p>= ${base * (1 + bonus / 100) + equity / 4} / year</p>
+        <p>= ${displayCurreny(base * (1 + bonus / 100) + equity / 4)} / year</p>
       </section>
     </div>
   );

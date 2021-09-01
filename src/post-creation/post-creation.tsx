@@ -12,6 +12,7 @@ function PostCreation(props: any) {
   const { loggedIn, userInfo } = useContext(UserContext);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [infos, setInfos] = useState({});
   const [selectedCategory, setSelectedCategory] = useState('');
   const [publishing, setPublishing] = useState(false);
   const [showMissingField, setShowMissingField] = useState(false);
@@ -34,6 +35,7 @@ function PostCreation(props: any) {
         content,
         category: selectedCategory,
         owner_id: userInfo.id,
+        infos,
       };
       await api.post('post', payload);
       setPublishing(false);
@@ -66,7 +68,7 @@ function PostCreation(props: any) {
         </div>
 
         {/* Infos */}
-        <PostCreationInfo category={selectedCategory} />
+        <PostCreationInfo category={selectedCategory} setInfos={setInfos} />
 
         {/* Content */}
         <div

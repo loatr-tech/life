@@ -3,6 +3,7 @@ import Editor from 'rich-markdown-editor';
 import './post-main.scss';
 import PostComments from '../post-comments/post-comments';
 import PostActions from './post-actions';
+import PostInfo from './post-info';
 
 function PostMain({ post, fetching }: any) {
   return (
@@ -17,6 +18,7 @@ function PostMain({ post, fetching }: any) {
           {post.title}
         </h1>
       </header>
+      {post?.infos && <PostInfo category={post.category} infos={post.infos} />}
       {/* Content */}
       <main className="post-main__content">
         {fetching ? (

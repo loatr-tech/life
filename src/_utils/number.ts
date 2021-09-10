@@ -5,6 +5,7 @@ export function displayCount(count: string | number) {
   return isNaN(integer) ? 0 : integer;
 }
 
-export function displayCurreny(amount: string|number) {
-  return `${amount}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+export function displayCurreny(amount?: string|number) {
+  const text = `${parseInt(`${amount || 0}`)}`;
+  return text.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }

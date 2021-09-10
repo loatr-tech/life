@@ -127,7 +127,7 @@ function PostCreationTC({ setInfos }: any) {
           <label htmlFor="tc_base">基本工资(Base)</label>
           <InputNumber
             id="tc_base"
-            formatter={(value) => displayCurreny(`$ ${value}`)}
+            formatter={(value) => `$ ${displayCurreny(value)}`}
             style={{ width: '100%' }}
             value={tcData.base_salary}
             onChange={(value) => onUpdateData(value, 'base_salary')}
@@ -152,7 +152,7 @@ function PostCreationTC({ setInfos }: any) {
           <label htmlFor="tc_signon1">第一年</label>
           <InputNumber
             id="tc_signon1"
-            formatter={(value) => displayCurreny(`$ ${value}`)}
+            formatter={(value) => `$ ${displayCurreny(value)}`}
             style={{ width: '100%' }}
             value={tcData.signon_first_year}
             onChange={(value) => onUpdateData(value, 'signon_first_year')}
@@ -162,7 +162,7 @@ function PostCreationTC({ setInfos }: any) {
           <label htmlFor="tc_signon2">第二年</label>
           <InputNumber
             id="tc_signon2"
-            formatter={(value) => displayCurreny(`$ ${value}`)}
+            formatter={(value) => `$ ${displayCurreny(value)}`}
             style={{ width: '100%' }}
             value={tcData.signon_second_year}
             onChange={(value) => onUpdateData(value, 'signon_second_year')}
@@ -202,7 +202,7 @@ function PostCreationTC({ setInfos }: any) {
             <label htmlFor="tc_equity_amount">四年股票总值</label>
             <InputNumber
               id="tc_equity_amount"
-              formatter={(value) => displayCurreny(`$ ${value}`)}
+              formatter={(value) => `$ ${displayCurreny(value)}`}
               style={{ width: '100%' }}
               value={tcData.total_equity_amount}
               onChange={(value) => onUpdateData(value, 'total_equity_amount')}
@@ -225,7 +225,7 @@ function PostCreationTC({ setInfos }: any) {
               <label htmlFor="tc_equity_market_price">授予每股价格</label>
               <InputNumber
                 id="tc_equity_market_price"
-                formatter={(value) => displayCurreny(`$ ${value}`)}
+                formatter={(value) => `$ ${displayCurreny(value)}`}
                 style={{ width: '100%' }}
                 value={tcData.equity_unit_price}
                 onChange={(value) => onUpdateData(value, 'equity_unit_price')}
@@ -236,7 +236,7 @@ function PostCreationTC({ setInfos }: any) {
                 <label htmlFor="tc_equity_strike_price">行权价</label>
                 <InputNumber
                   id="tc_equity_strike_price"
-                  formatter={(value) => displayCurreny(`$ ${value}`)}
+                  formatter={(value) => `$ ${displayCurreny(value)}`}
                   style={{ width: '100%' }}
                   value={tcData.equity_strike_price}
                   onChange={(value) =>
@@ -256,7 +256,8 @@ function PostCreationTC({ setInfos }: any) {
         <p>基本工资 &times; (1 + 奖金%) + 股票/4</p>
         <p>
           ${displayCurreny(tcData.base_salary || 0)} &times; (1+
-          {tcData.annual_bonus || 0}%) + ${tcData.total_equity_amount || 0}/4
+          {tcData.annual_bonus || 0}%) + $
+          {displayCurreny(tcData.total_equity_amount || 0)}/4
         </p>
         <p>
           = $

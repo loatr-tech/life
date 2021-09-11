@@ -199,7 +199,7 @@ function PostCreationTC({ setInfos }: any) {
         </div>
         {tcData.equity_grant_type === 'total_value' && (
           <div className="post-creation-tc__field">
-            <label htmlFor="tc_equity_amount">四年股票总值</label>
+            <label htmlFor="tc_equity_amount">4年总值</label>
             <InputNumber
               id="tc_equity_amount"
               formatter={(value) => `$ ${displayCurreny(value)}`}

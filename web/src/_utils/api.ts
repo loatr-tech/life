@@ -1,8 +1,8 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from 'axios';
 
 axios.defaults.withCredentials = true;
 
-const BASE_URL = `${process.env.REACT_APP_BASE_URL}life`;
+const BASE_URL = `/life`;
 
 const api = {
   get: (url: string, config?: AxiosRequestConfig) => {

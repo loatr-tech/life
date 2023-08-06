@@ -3,12 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "workspaces": [
-    "web"
+    "web",
+    "server"
   ],
   "scripts": {
     "web": "yarn workspace web dev",
-    "dev": "yarn web",
+    "server": "yarn workspace server dev",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn web\"",
     "build:web": "yarn workspace web build",
+    "build:server": "yarn workspace server build",
     "build": "yarn build:web"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
   }
 }

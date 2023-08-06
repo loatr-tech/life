@@ -68,11 +68,11 @@ function HomeMain() {
 
         {activeCategory.category && activeCategory.category !== 'all' && (
           <Breadcrumb style={{ marginBottom: 12 }}>
-            <Link to="/" onClick={() => setActiveCategory('all')}>
-              <Breadcrumb.Item>
+            <Breadcrumb.Item>
+              <Link to="/" onClick={() => setActiveCategory('all')}>
                 <HomeOutlined /> 主页
-              </Breadcrumb.Item>
-            </Link>
+              </Link>
+            </Breadcrumb.Item>
             <Breadcrumb.Item>
               {CATEGORIES_MAP[activeCategory.category]}
             </Breadcrumb.Item>

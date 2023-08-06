@@ -21,37 +21,41 @@ function LoginForm({ onLoginFinished }: any) {
     event.preventDefault(); // Prevent form default
     if (isSignup) {
       // Sign up
-      try {
-        const { data: userData } = await api.post('signup', {
-        username,
-        email,
-        password,
-      });
-        setupUser(userData);
-        onLoginFinished();
-      } catch ({ response }) {
-        if (response.status === 409) {
-          message.error(response.data);
-        } else {
-          message.error('Oops something wrong happened');
-        }
-      }
+      api
+        .post('signup', {
+          username,
+          email,
+          password,
+        })
+        .then(({ data: userData }) => {
+          setupUser(userData);
+          onLoginFinished();
+        })
+        .catch(({ response }) => {
+          if (response.status === 409) {
+            message.error(response.data);
+          } else {
+            message.error('Oops something wrong happened');
+          }
+        });
     } else {
       // Sign in
-      try {
-        const { data: userData } = await api.post('login', {
-        username,
-        password,
-      });
-        setupUser(userData);
-        onLoginFinished();
-      } catch ({ response }) {
-        if ([401, 404].includes(response.status)) {
-          message.error(response.data);
-        } else {
-          message.error('Oops something wrong happened');
-        }
-      }
+      api
+        .post('login', {
+          username,
+          password,
+        })
+        .then(({ data: userData }) => {
+          setupUser(userData);
+          onLoginFinished();
+        })
+        .catch(({ response }) => {
+          if ([401, 404].includes(response.status)) {
+            message.error(response.data);
+          } else {
+            message.error('Oops something wrong happened');
+          }
+        });
     }
   };
 

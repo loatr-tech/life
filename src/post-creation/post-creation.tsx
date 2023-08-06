@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Button, Input } from 'antd';
-import Editor from 'rich-markdown-editor';
+// import Editor from 'rich-markdown-editor';
 import './post-creation.scss';
 import api from '../_utils/api';
 import PostCreationCategory from './post-creation-category';
@@ -42,7 +42,7 @@ function PostCreation(props: any) {
       // Redirect back to homepage
       props.history.push('/');
     }
-  }
+  };
 
   return loggedIn ? (
     <div className="post-creation">
@@ -76,10 +76,10 @@ function PostCreation(props: any) {
             !content && showMissingField ? 'post-creation__missing-field' : ''
           }`}
         >
-          <Editor
+          {/* <Editor
             placeholder="写下你的心路历程"
             onChange={(e) => onChangeContent(e)}
-          />
+          /> */}
         </div>
         {/* Actions */}
         <div className="post-creation__editor-actions">

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.scss';
 import { SCREEN, ScreenSizeContext } from './_context/screen-size.context';
 import GlobalHeader from './global/global-header';
@@ -13,8 +13,6 @@ import Login from './login/login';
 import Calculator from './calculator/calculator';
 import Admin from './admin/admin';
 
-
-
 function App() {
   const { screenSize, sidePanelOpen } = useContext(ScreenSizeContext);
   return (
@@ -25,15 +23,15 @@ function App() {
         }`}
       >
         <GlobalHeader />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/post/:postId" component={Post} />
-          <Route path="/new-post" component={PostCreation} />
-          <Route path="/login" component={Login} />
-          <Route path="/user" component={User} />
-          <Route path="/calculator" component={Calculator} />
-          <Route path="/_admin" component={Admin} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/post/:postId" element={<Post />} />
+          <Route path="/new-post" element={<PostCreation />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/user" element={<User />} />
+          <Route path="/calculator" element={<Calculator />} />
+          <Route path="/_admin" element={<Admin />} />
+        </Routes>
       </main>
       {screenSize === SCREEN.MOBILE && <GlobalSidePanel />}
     </Router>

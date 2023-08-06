@@ -1,5 +1,5 @@
 import React from 'react';
-import Editor from 'rich-markdown-editor';
+// import Editor from 'rich-markdown-editor';
 import './post-main.scss';
 import PostComments from '../post-comments/post-comments';
 import PostActions from './post-actions';
@@ -28,7 +28,8 @@ function PostMain({ post, fetching }: any) {
             <div className="loading-placeholder"></div>
           </div>
         ) : (
-          <Editor value={post.content} readOnly={true} />
+          <></>
+          // <Editor value={post.content} readOnly={true} />
         )}
       </main>
       <p className="post-main_copyright-disclaimer">

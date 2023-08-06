@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useHistory, Route, Switch, Link } from 'react-router-dom';
+import { useNavigate, Route, Routes, Link } from 'react-router-dom';
 import { Avatar, Button, Divider } from 'antd';
 import HomeNavigation from '../home/home-navigation';
 import { ScreenSizeContext } from '../_context/screen-size.context';
@@ -7,14 +7,14 @@ import './global-side-panel.scss';
 import { UserContext } from '../_context/user.context';
 
 function GlobalSidePanel() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { sidePanelOpen, toggleSidePanel } = useContext(ScreenSizeContext);
   const { loggedIn, userInfo } = useContext(UserContext);
 
   const toUserPage = () => {
     toggleSidePanel();
-    history.push('/user');
-  }
+    navigate('/user');
+  };
 
   return (
     <div
@@ -40,11 +40,14 @@ function GlobalSidePanel() {
         </Link>
       )}
       <Divider />
-      <Switch>
-        <Route path="/" exact>
-          <HomeNavigation onCategoryChange={() => toggleSidePanel()} />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <HomeNavigation onCategoryChange={() => toggleSidePanel()} />
+          }
+        />
+      </Routes>
     </div>
   );
 }

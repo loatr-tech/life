@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Breadcrumb } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
 
@@ -10,20 +9,20 @@ import PostMain from './post-mian';
 import api from '../_utils/api';
 import { CATEGORIES_MAP, CATEGORIES_PARENT } from '../_utils/categories';
 
-
 function Post(props: any) {
+  const { postId } = useParams();
   const [post, setPost] = useState<any>({});
   const [fetching, setFetching] = useState(false);
 
   useEffect(() => {
     const getPostDetails = async () => {
       setFetching(true);
-      const { data } = await api.get(`post/${props.match.params.postId}`);
+      const { data } = await api.get(`post/${postId}`);
       setFetching(false);
       setPost(data);
-    }
+    };
     getPostDetails();
-  }, [props.match.params.postId]);
+  }, [postId]);
 
   return (
     <div className="post">
@@ -40,7 +39,7 @@ function Post(props: any) {
       </section>
       <section className="post__container">
         <PostOwner post={post} />
-        <PostMain post={post} fetching={fetching}/>
+        <PostMain post={post} fetching={fetching} />
       </section>
     </div>
   );

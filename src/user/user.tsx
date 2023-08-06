@@ -2,32 +2,32 @@ import React, { useContext, useEffect } from 'react';
 import './user.scss';
 
 import { Breadcrumb, Button, Divider } from 'antd';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import { UserContext } from '../_context/user.context';
 import UserAvatar from './user-avatar';
 import api from '../_utils/api';
 
 function User() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { userInfo, loggedIn, initialized, logout, setupUser } =
     useContext(UserContext);
 
   useEffect(() => {
-    if (history && initialized && !loggedIn) {
-      history.push('/');
+    if (initialized && !loggedIn) {
+      navigate('/');
     }
-  }, [history, initialized, loggedIn]);
+  }, [initialized, loggedIn]);
 
   const onEdited = async () => {
     const { data } = await api.get('user');
     setupUser(data);
-  }
+  };
 
   const onLogout = () => {
     logout();
-    history.push('/');
-  }
+    navigate('/');
+  };
 
   return (
     <div className="user">
@@ -43,7 +43,7 @@ function User() {
 
       {/* User Header */}
       <header className="user-header">
-        <UserAvatar userInfo={userInfo} onEdited={onEdited}/>
+        <UserAvatar userInfo={userInfo} onEdited={onEdited} />
       </header>
 
       {/* User details */}

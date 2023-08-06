@@ -2,17 +2,17 @@ import React from 'react';
 import './login.scss';
 
 import { Breadcrumb, Divider } from 'antd';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { HomeOutlined } from '@ant-design/icons';
 import LoginGoogle from './login-google';
 import LoginForm from './login-form';
 
 function Login() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const onLoginFinished = () => {
-    history.goBack();
-  }
+    navigate('/'); // todo: original logic is go back, change to go home as temporary solution
+  };
 
   return (
     <div className="login">
@@ -27,7 +27,7 @@ function Login() {
 
       <main className="login-container">
         {/* Login Form */}
-        <LoginForm onLoginFinished={onLoginFinished}/>
+        <LoginForm onLoginFinished={onLoginFinished} />
 
         {/* Other Login Method */}
         <Divider />

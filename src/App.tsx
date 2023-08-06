@@ -12,6 +12,7 @@ import GlobalSidePanel from './global/global-side-panel';
 import Login from './login/login';
 import Calculator from './calculator/calculator';
 import Admin from './admin/admin';
+import NotFound from './not-found/not-found';
 
 function App() {
   const { screenSize, sidePanelOpen } = useContext(ScreenSizeContext);
@@ -31,6 +32,9 @@ function App() {
           <Route path="/user" element={<User />} />
           <Route path="/calculator" element={<Calculator />} />
           <Route path="/_admin" element={<Admin />} />
+
+          {/* Not match, 404 not found */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       {screenSize === SCREEN.MOBILE && <GlobalSidePanel />}

@@ -4,17 +4,18 @@ import './home-main.scss';
 import { SCREEN, ScreenSizeContext } from '../_context/screen-size.context';
 import PostCard from '../post/post-card';
 import HomeNavigation from './home-navigation';
-import { Button } from 'antd';
+import { Breadcrumb, Button } from 'antd';
 import api from '../_utils/api';
 import PostCardPlaceholder from '../post/post-card-placeholder';
 import { NavigationContext } from '../_context/navigation.context';
 import HomeEmptyPosts from './home-empty-posts';
 import removeMarkdown from '../_utils/remove-markdown';
-
+import { CATEGORIES_MAP } from '../_utils/categories';
+import { HomeOutlined } from '@ant-design/icons';
 
 function HomeMain() {
   const { screenSize } = useContext(ScreenSizeContext);
-  const { activeCategory } = useContext(NavigationContext);
+  const { activeCategory, setActiveCategory } = useContext(NavigationContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -42,8 +43,9 @@ function HomeMain() {
     fetchAllPosts();
     return () => {
       destroyed = true;
-    }
+    };
   }, [activeCategory]);
+
   return (
     <main className="home-main">
       {screenSize !== SCREEN.MOBILE && (
@@ -51,6 +53,7 @@ function HomeMain() {
           <HomeNavigation />
         </section>
       )}
+
       <section className="home-content">
         {/* Actions */}
         {screenSize !== SCREEN.DESKTOP && (
@@ -62,6 +65,20 @@ function HomeMain() {
             </Link>
           </div>
         )}
+
+        {activeCategory.category && activeCategory.category !== 'all' && (
+          <Breadcrumb style={{ marginBottom: 12 }}>
+            <Link to="/" onClick={() => setActiveCategory('all')}>
+              <Breadcrumb.Item>
+                <HomeOutlined /> 主页
+              </Breadcrumb.Item>
+            </Link>
+            <Breadcrumb.Item>
+              {CATEGORIES_MAP[activeCategory.category]}
+            </Breadcrumb.Item>
+          </Breadcrumb>
+        )}
+
         {/* Post Lists */}
         {loading ? (
           new Array(5)
@@ -75,6 +92,7 @@ function HomeMain() {
           <HomeEmptyPosts />
         )}
       </section>
+
       <section className="home-sidebar">
         <Link to="/new-post">
           <Button shape="round" size="middle" block type="primary">

@@ -1,5 +1,5 @@
 import React from 'react';
-// import Editor from 'rich-markdown-editor';
+import MDEditor from '@uiw/react-md-editor';
 import './post-main.scss';
 import PostComments from '../post-comments/post-comments';
 import PostActions from './post-actions';
@@ -20,7 +20,7 @@ function PostMain({ post, fetching }: any) {
       </header>
       {post?.infos && <PostInfo category={post.category} infos={post.infos} />}
       {/* Content */}
-      <main className="post-main__content">
+      <main className="post-main__content" data-color-mode="light">
         {fetching ? (
           <div className="post-main__content-placeholder">
             <div className="loading-placeholder"></div>
@@ -28,8 +28,10 @@ function PostMain({ post, fetching }: any) {
             <div className="loading-placeholder"></div>
           </div>
         ) : (
-          <></>
-          // <Editor value={post.content} readOnly={true} />
+          <MDEditor.Markdown
+            source={post.content}
+            style={{ whiteSpace: 'pre-wrap' }}
+          />
         )}
       </main>
       <p className="post-main_copyright-disclaimer">

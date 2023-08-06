@@ -1,14 +1,15 @@
 import React, { useContext, useState } from 'react';
 import { Button, Input } from 'antd';
-// import Editor from 'rich-markdown-editor';
+import MDEditor from '@uiw/react-md-editor';
 import './post-creation.scss';
 import api from '../_utils/api';
 import PostCreationCategory from './post-creation-category';
 import { UserContext } from '../_context/user.context';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PostCreationInfo from './post-creation-info';
 
 function PostCreation(props: any) {
+  const navigate = useNavigate();
   const { loggedIn, userInfo } = useContext(UserContext);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -21,9 +22,8 @@ function PostCreation(props: any) {
     setTitle(event.target.value);
   };
 
-  const onChangeContent = (getValue: Function) => {
-    const value = getValue();
-    setContent(value);
+  const onChangeContent = (text?: string) => {
+    setContent(text ?? '');
   };
 
   const onPublish = async () => {
@@ -40,7 +40,7 @@ function PostCreation(props: any) {
       await api.post('post', payload);
       setPublishing(false);
       // Redirect back to homepage
-      props.history.push('/');
+      navigate('/');
     }
   };
 
@@ -72,14 +72,16 @@ function PostCreation(props: any) {
 
         {/* Content */}
         <div
+          data-color-mode="light"
           className={`post-creation__editor-content ${
             !content && showMissingField ? 'post-creation__missing-field' : ''
           }`}
         >
-          {/* <Editor
+          <MDEditor
             placeholder="写下你的心路历程"
-            onChange={(e) => onChangeContent(e)}
-          /> */}
+            value={content}
+            onChange={onChangeContent}
+          />
         </div>
         {/* Actions */}
         <div className="post-creation__editor-actions">

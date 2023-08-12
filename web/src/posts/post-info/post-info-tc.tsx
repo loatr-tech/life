@@ -19,14 +19,11 @@ function PostInfoTC({ infos }: any) {
       <h2 className="post-info__title">基本信息</h2>
       <section className="post-info-row">
         <InfoField name="公司名称" value={infos.company_name} />
-        <InfoField name="头衔(Title/Level)" value={infos.title_level} />
+        <InfoField name="工种(Position)" value={infos.position} />
       </section>
       <section className="post-info-row">
-        <InfoField name="找工年份" value={infos.year} />
-        <InfoField
-          name="找工季度"
-          value={POST_INFOS.TC.QUARTER[infos.quarter]}
-        />
+        <InfoField name="级别(Title/Level)" value={infos.title_level} />
+        <InfoField name="定薪月份" value={`${infos.year}-${infos.month}`} />
       </section>
       <section className="post-info-row">
         <InfoField
@@ -62,8 +59,14 @@ function PostInfoTC({ infos }: any) {
       {/* Equity */}
       <h4 className="post-info__section-title">股票(Equity)</h4>
       <section className="post-info-row">
-        <InfoField name="股票类型" value={POST_INFOS.TC.EQUITY[infos.equity_type]} />
-        <InfoField name="授予方式" value={POST_INFOS.TC.EQUITY[infos.equity_grant_type]} />
+        <InfoField
+          name="股票类型"
+          value={POST_INFOS.TC.EQUITY[infos.equity_type]}
+        />
+        <InfoField
+          name="授予方式"
+          value={POST_INFOS.TC.EQUITY[infos.equity_grant_type]}
+        />
         {infos.equity_grant_type === 'total_value' && (
           <InfoField
             name="4年总值"

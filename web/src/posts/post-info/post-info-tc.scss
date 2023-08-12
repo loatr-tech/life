@@ -19,6 +19,9 @@
   background: #fbfcfc;
   padding: 8px 12px;
   border-radius: 12px;
+  > h4 {
+    margin: 8px 0;
+  }
 }
 .post-info__summary {
   text-align: center;

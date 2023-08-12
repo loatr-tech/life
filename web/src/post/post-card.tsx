@@ -4,7 +4,7 @@ import { Avatar } from 'antd';
 
 import './post-card.scss';
 import { displayCount } from '../_utils/number';
-import { CATEGORIES_MAP } from '../_utils/categories';
+import { CATEGORIES_MAP, CATEGORY } from '../_utils/categories';
 
 function PostCard({ post }: any) {
   return (
@@ -20,8 +20,12 @@ function PostCard({ post }: any) {
 
         {/* Content */}
         <p className="post-card__content">
-          {post.content ||
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi nemo mollitia repellendus, laudantium unde, vel iste tempora eum nihil aperiam aliquid? Deleniti cum beatae iste sapiente molestias ullam consequatur alias.'}
+          {post.category === CATEGORY.CAREER.TC
+            ? new Array(3).fill(
+                <i className="fas fa-dollar-sign" style={{ marginRight: 1 }} />
+              )
+            : post.content ||
+              'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi nemo mollitia repellendus, laudantium unde, vel iste tempora eum nihil aperiam aliquid? Deleniti cum beatae iste sapiente molestias ullam consequatur alias.'}
         </p>
 
         <hr className="post-card__divider" />

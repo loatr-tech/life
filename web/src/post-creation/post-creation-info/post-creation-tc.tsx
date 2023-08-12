@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { Divider, Input, InputNumber, Select } from 'antd';
+import { DatePicker, Divider, Input, InputNumber, Select } from 'antd';
 import './post-creation-tc.scss';
 import { displayCurreny } from '../../_utils/number';
 
 const DEFAULT_TC_DATA = {
   // Position information
   company_name: '',
+  position: '',
   title_level: '',
   year: '',
-  quarter: '',
+  month: '',
   highest_degree: '',
   year_of_experience: '',
   // Salary
@@ -29,9 +30,9 @@ const DEFAULT_TC_DATA = {
 function PostCreationTC({ setInfos }: any) {
   const [tcData, setTcData] = useState(DEFAULT_TC_DATA);
 
-  const onUpdateData = (value: any, property: string) => {
-    const newTcData: any = { ...tcData };
-    newTcData[property] = value;
+  const onUpdateData = (keyValue: Record<string, any>) => {
+    const newTcData: any = { ...tcData, ...keyValue };
+    console.log(newTcData);
     setTcData(newTcData);
     setInfos(newTcData);
   };
@@ -47,15 +48,16 @@ function PostCreationTC({ setInfos }: any) {
             id="tc_company"
             placeholder="e.g Google"
             value={tcData.company_name}
-            onChange={(e) => onUpdateData(e.target.value, 'company_name')}
+            onChange={(e) => onUpdateData({ company_name: e.target.value })}
           />
         </div>
         <div className="post-creation-tc__field">
           <label htmlFor="tc_title">工种(Position)</label>
           <Input
             id="tc_title"
-            value={tcData.title_level}
-            onChange={(e) => onUpdateData(e.target.value, 'title_level')}
+            placeholder="e.g Software Engineer"
+            value={tcData.position}
+            onChange={(e) => onUpdateData({ position: e.target.value })}
           />
         </div>
       </section>
@@ -66,37 +68,22 @@ function PostCreationTC({ setInfos }: any) {
           <Input
             id="tc_title"
             value={tcData.title_level}
-            onChange={(e) => onUpdateData(e.target.value, 'title_level')}
+            onChange={(e) => onUpdateData({ title_level: e.target.value })}
           />
         </div>
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_year">Offer 日期</label>
-          <Select
-            id="tc_year"
+          <label htmlFor="tc_year">定薪月份</label>
+          <DatePicker
             style={{ width: '100%' }}
-            value={tcData.year}
-            onChange={(value) => onUpdateData(value, 'year')}
-          >
-            <Select.Option value="2018">2018</Select.Option>
-            <Select.Option value="2019">2019</Select.Option>
-            <Select.Option value="2020">2020</Select.Option>
-            <Select.Option value="2021">2021</Select.Option>
-            <Select.Option value="2022">2022</Select.Option>
-          </Select>
-        </div>
-        <div className="post-creation-tc__field">
-          <label htmlFor="tc_month">找工季度</label>
-          <Select
-            id="tc_month"
-            style={{ width: '100%' }}
-            value={tcData.quarter}
-            onChange={(value) => onUpdateData(value, 'quarter')}
-          >
-            <Select.Option value="q1">1月-3月</Select.Option>
-            <Select.Option value="q2">4月-6月</Select.Option>
-            <Select.Option value="q3">7月-9月</Select.Option>
-            <Select.Option value="q4">10月-12月</Select.Option>
-          </Select>
+            picker="month"
+            placeholder="选择月份"
+            onChange={(e) => {
+              onUpdateData({
+                year: e?.get('year')!,
+                month: e?.get('month')! + 1,
+              });
+            }}
+          />
         </div>
       </section>
 
@@ -107,7 +94,7 @@ function PostCreationTC({ setInfos }: any) {
             id="tc_degree"
             style={{ width: '100%' }}
             value={tcData.highest_degree}
-            onChange={(value) => onUpdateData(value, 'highest_degree')}
+            onChange={(value) => onUpdateData({ highest_degree: value })}
           >
             <Select.Option value="undergrad">本科</Select.Option>
             <Select.Option value="master">硕士</Select.Option>
@@ -121,7 +108,9 @@ function PostCreationTC({ setInfos }: any) {
             type="number"
             suffix="年"
             value={tcData.year_of_experience}
-            onChange={(e) => onUpdateData(e.target.value, 'year_of_experience')}
+            onChange={(e) =>
+              onUpdateData({ year_of_experience: e.target.value })
+            }
           />
         </div>
       </section>
@@ -138,7 +127,7 @@ function PostCreationTC({ setInfos }: any) {
             formatter={(value) => `$ ${displayCurreny(value)}`}
             style={{ width: '100%' }}
             value={tcData.base_salary}
-            onChange={(value) => onUpdateData(value, 'base_salary')}
+            onChange={(value) => onUpdateData({ base_salary: value })}
           />
         </div>
         <div className="post-creation-tc__field">
@@ -148,7 +137,7 @@ function PostCreationTC({ setInfos }: any) {
             type="number"
             suffix="%"
             value={tcData.annual_bonus}
-            onChange={(e) => onUpdateData(e.target.value, 'annual_bonus')}
+            onChange={(e) => onUpdateData({ annual_bonus: e.target.value })}
           />
         </div>
       </section>
@@ -163,7 +152,7 @@ function PostCreationTC({ setInfos }: any) {
             formatter={(value) => `$ ${displayCurreny(value)}`}
             style={{ width: '100%' }}
             value={tcData.signon_first_year}
-            onChange={(value) => onUpdateData(value, 'signon_first_year')}
+            onChange={(value) => onUpdateData({ signon_first_year: value })}
           />
         </div>
         <div className="post-creation-tc__field">
@@ -173,7 +162,7 @@ function PostCreationTC({ setInfos }: any) {
             formatter={(value) => `$ ${displayCurreny(value)}`}
             style={{ width: '100%' }}
             value={tcData.signon_second_year}
-            onChange={(value) => onUpdateData(value, 'signon_second_year')}
+            onChange={(value) => onUpdateData({ signon_second_year: value })}
           />
         </div>
       </section>
@@ -187,7 +176,7 @@ function PostCreationTC({ setInfos }: any) {
             id="tc_equity_type"
             style={{ width: '100%' }}
             value={tcData.equity_type}
-            onChange={(value) => onUpdateData(value, 'equity_type')}
+            onChange={(value) => onUpdateData({ equity_type: value })}
           >
             <Select.Option value="rsu">RSUs</Select.Option>
             <Select.Option value="option">Options</Select.Option>
@@ -199,7 +188,7 @@ function PostCreationTC({ setInfos }: any) {
             id="tc_equity_grant_type"
             style={{ width: '100%' }}
             value={tcData.equity_grant_type}
-            onChange={(value) => onUpdateData(value, 'equity_grant_type')}
+            onChange={(value) => onUpdateData({ equity_grant_type: value })}
           >
             <Select.Option value="total_value">总价值</Select.Option>
             <Select.Option value="total_units">股数(Units)</Select.Option>
@@ -213,7 +202,7 @@ function PostCreationTC({ setInfos }: any) {
               formatter={(value) => `$ ${displayCurreny(value)}`}
               style={{ width: '100%' }}
               value={tcData.total_equity_amount}
-              onChange={(value) => onUpdateData(value, 'total_equity_amount')}
+              onChange={(value) => onUpdateData({ total_equity_amount: value })}
             />
           </div>
         )}
@@ -226,7 +215,9 @@ function PostCreationTC({ setInfos }: any) {
                 formatter={(value) => displayCurreny(`${value}`)}
                 style={{ width: '100%' }}
                 value={tcData.total_equity_units}
-                onChange={(value) => onUpdateData(value, 'total_equity_units')}
+                onChange={(value) =>
+                  onUpdateData({ total_equity_units: value })
+                }
               />
             </div>
             <div className="post-creation-tc__field">
@@ -236,7 +227,7 @@ function PostCreationTC({ setInfos }: any) {
                 formatter={(value) => `$ ${displayCurreny(value)}`}
                 style={{ width: '100%' }}
                 value={tcData.equity_unit_price}
-                onChange={(value) => onUpdateData(value, 'equity_unit_price')}
+                onChange={(value) => onUpdateData({ equity_unit_price: value })}
               />
             </div>
             {tcData.equity_type === 'option' && (
@@ -248,7 +239,7 @@ function PostCreationTC({ setInfos }: any) {
                   style={{ width: '100%' }}
                   value={tcData.equity_strike_price}
                   onChange={(value) =>
-                    onUpdateData(value, 'equity_strike_price')
+                    onUpdateData({ equity_strike_price: value })
                   }
                 />
               </div>

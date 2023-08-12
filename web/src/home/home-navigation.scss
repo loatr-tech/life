@@ -24,9 +24,11 @@
   &:hover {
     color: rgba($color: #8854d0, $alpha: 0.7);
   }
+  // Top Category Icon
   > i:first-of-type {
     margin-right: 6px;
   }
+  // Switcher Icon on the right
   > i:last-of-type:not(:first-of-type) {
     margin-left: auto;
     font-size: 11px;
@@ -62,7 +64,6 @@
   }
 }
 
-
 .home-navigation__subcategories-wrapper {
   overflow: hidden;
   .home-navigation__subcategories {
@@ -74,6 +75,7 @@
   font-size: 13px;
   color: #898989;
   font-weight: lighter;
+  margin-top: 0px;
   margin-bottom: 12px;
   &:not(:first-of-type) {
     margin-top: 12px;
@@ -85,7 +87,6 @@
   cursor: pointer;
   border-radius: 4px;
   display: inline-block;
-  margin-right: 4px;
   &:hover {
     background-color: rgba($color: #d1d8e0, $alpha: 0.5);
   }
@@ -94,6 +95,10 @@
     box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
   }
 }
+
+// .home-navigation__category + .home-navigation__category {
+//   margin-left: 2px;
+// }
 
 @media only screen and (max-width: 576px) {
   .home-navigation {

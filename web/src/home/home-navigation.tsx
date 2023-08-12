@@ -3,22 +3,7 @@ import { CATEGORIES, CATEGORIES_MAP } from '../_utils/categories';
 import { NavigationContext } from '../_context/navigation.context';
 import './home-navigation.scss';
 
-function HomeNavigationItem({ activeCategory, category, onSelect }: any) {
-  return (
-    <span
-      className={`home-navigation__category ${
-        activeCategory.category === category.id
-          ? 'home-navigation__category--active'
-          : ''
-      }`}
-      onClick={() => onSelect()}
-    >
-      {CATEGORIES_MAP[category.id]}
-    </span>
-  );
-}
-
-function HomeNavigation({ onCategoryChange }: any) {
+export default function HomeNavigation({ onCategoryChange }: any) {
   const { activeCategory, setActiveCategory } = useContext(NavigationContext);
   const [opnedSection, setOpenedSection] = useState('career');
 
@@ -33,15 +18,14 @@ function HomeNavigation({ onCategoryChange }: any) {
     } else {
       setOpenedSection(topCategory);
     }
-  }
+  };
 
   return (
     <div className="home-navigation">
+      {/* All Posts */}
       <section
         className={`home-navigation__section ${
-          activeCategory.top === 'all'
-            ? 'home-navigation__section--active'
-            : ''
+          activeCategory.top === 'all' ? 'home-navigation__section--active' : ''
         }`}
       >
         <h4
@@ -52,6 +36,8 @@ function HomeNavigation({ onCategoryChange }: any) {
           <span>全部帖子</span>
         </h4>
       </section>
+
+      {/* Categories */}
       {CATEGORIES.map((topCategory) => {
         const isActive = activeCategory.top === topCategory.id;
         const isOpened = opnedSection === topCategory.id;
@@ -62,6 +48,7 @@ function HomeNavigation({ onCategoryChange }: any) {
               isActive ? 'home-navigation__section--active' : ''
             } ${isOpened ? 'home-navigation__section--opened' : ''}`}
           >
+            {/* Top category title swithcer */}
             <h4
               className="home-navigation__top-category"
               onClick={() => toggleSection(topCategory.id)}
@@ -70,17 +57,20 @@ function HomeNavigation({ onCategoryChange }: any) {
               <span>{topCategory.name}</span>
               <i className="fas fa-chevron-down"></i>
             </h4>
+            {/* Sub-Categories */}
             <div className="home-navigation__subcategories-wrapper">
               <div className="home-navigation__subcategories">
                 {topCategory.subcategories.map((subCategory: any) => {
                   return subCategory.type === 'group' ? (
                     [
+                      // Section title
                       <h5
                         key={subCategory.id}
                         className="home-navigation__group-name"
                       >
                         {subCategory.name}
                       </h5>,
+                      // Section categories
                       <div key={`${subCategory.id}-categories`}>
                         {subCategory.subcategories.map((category: any) => {
                           return (
@@ -116,4 +106,17 @@ function HomeNavigation({ onCategoryChange }: any) {
   );
 }
 
-export default HomeNavigation;
+function HomeNavigationItem({ activeCategory, category, onSelect }: any) {
+  return (
+    <span
+      className={`home-navigation__category ${
+        activeCategory.category === category.id
+          ? 'home-navigation__category--active'
+          : ''
+      }`}
+      onClick={() => onSelect()}
+    >
+      {CATEGORIES_MAP[category.id]}
+    </span>
+  );
+}

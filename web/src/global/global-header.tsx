@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { SCREEN, ScreenSizeContext } from '../_context/screen-size.context';
 import { UserContext } from '../_context/user.context';
 
-function GlobalHeader() {
+export default function GlobalHeader() {
   const { screenSize, toggleSidePanel } = useContext(ScreenSizeContext);
   const { loggedIn, userInfo } = useContext(UserContext);
   const onSearch = (value: string) => {
@@ -20,15 +20,18 @@ function GlobalHeader() {
           <h1>上岸</h1>
           <span>beta</span>
         </Link>
+
         {/* Search */}
         <div className="global-header__search">
           <Input.Search
+            disabled
             placeholder="你在想啥？"
             allowClear
             onSearch={onSearch}
             className="global-header__search-input"
           />
         </div>
+
         {/* User */}
         {screenSize === SCREEN.MOBILE ? (
           <Button type="text" onClick={() => toggleSidePanel()}>
@@ -49,5 +52,3 @@ function GlobalHeader() {
     </header>
   );
 }
-
-export default GlobalHeader;

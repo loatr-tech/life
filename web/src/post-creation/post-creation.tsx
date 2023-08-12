@@ -101,7 +101,7 @@ function PostCreation(props: any) {
       <p>登录后即可发布帖子</p>
       <Link to="/login">
         <Button type="primary">
-          <i className="fas fa-sign-in-alt"></i> 登录
+          <i className="fa-solid fa-sign-in-alt"></i> 登录
         </Button>
       </Link>
     </div>

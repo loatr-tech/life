@@ -6,12 +6,19 @@
   border-radius: 4px;
   width: 200px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post-owner__avatar {
+  text-align: center;
 }
 
 .post-owner__user-info {
   text-align: center;
-  .post-owner__avatar {
-    margin-bottom: 12px;
+  h3 {
+    margin: 0 0 6px;
   }
   .post-owner__ago {
     color: darkgrey;
@@ -23,7 +30,6 @@
 }
 
 .post-owner__stats {
-  margin: 12px auto 0 auto;
   max-width: 200px;
   font-size: 13px;
   color: #bbb;
@@ -35,5 +41,22 @@
   .post-owner {
     width: 100%;
     margin-bottom: 24px;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 20px;
+
+    .post-owner__avatar > span.ant-avatar {
+      width: 48px !important;
+      height: 48px !important;
+    }
+
+    .post-owner__user-info {
+      text-align: left;
+    }
+
+    .post-owner__stats {
+      margin-left: auto;
+      flex-direction: column;
+    }
   }
 }

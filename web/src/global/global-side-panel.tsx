@@ -30,12 +30,12 @@ function GlobalSidePanel() {
         >
           <Avatar src={userInfo.avatar_url} />
           <span className="global-side-panel__user-name">{userInfo.name}</span>
-          <i className="fas fa-chevron-right"></i>
+          <i className="fa-solid fa-chevron-right"></i>
         </section>
       ) : (
         <Link to="/login" className="global-side-panel__login">
           <Button type="primary">
-            <i className="fas fa-sign-in-alt"></i> 登录
+            <i className="fa-solid fa-sign-in-alt"></i> 登录
           </Button>
         </Link>
       )}

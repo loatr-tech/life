@@ -10,12 +10,12 @@ function PostCreationCategory(props: any) {
 
   const onCategoryChanged = (evt: any) => {
     setCategory(evt.target.value);
-  }
+  };
 
   const onCategoryConfirmed = () => {
     setSelectedCategory(category);
     setModelOpen(false);
-  }
+  };
 
   return (
     <>
@@ -27,7 +27,7 @@ function PostCreationCategory(props: any) {
           shape={selectedCategory ? 'round' : undefined}
           danger={!selectedCategory && showMissingField ? true : false}
         >
-          {selectedCategory ? <i className="fas fa-pen"></i> : '请选择'}
+          {selectedCategory ? <i className="fa-solid fa-pen"></i> : '请选择'}
           {selectedCategory ? CATEGORIES_MAP[selectedCategory] : ''}
         </Button>
       </h3>

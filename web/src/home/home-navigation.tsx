@@ -32,7 +32,7 @@ export default function HomeNavigation({ onCategoryChange }: any) {
           className="home-navigation__top-category"
           onClick={() => handleClick('all', 'all')}
         >
-          <i className="fas fa-rss"></i>
+          <i className="fa-solid fa-rss"></i>
           <span>全部帖子</span>
         </h4>
       </section>
@@ -55,7 +55,7 @@ export default function HomeNavigation({ onCategoryChange }: any) {
             >
               <i className={topCategory.icon}></i>
               <span>{topCategory.name}</span>
-              <i className="fas fa-chevron-down"></i>
+              <i className="fa-solid fa-chevron-down"></i>
             </h4>
             {/* Sub-Categories */}
             <div className="home-navigation__subcategories-wrapper">

@@ -35,7 +35,7 @@ export default function GlobalHeader() {
         {/* User */}
         {screenSize === SCREEN.MOBILE ? (
           <Button type="text" onClick={() => toggleSidePanel()}>
-            <i className="fas fa-bars"></i>
+            <i className="fa-solid fa-bars"></i>
           </Button>
         ) : loggedIn ? (
           <Link to="/user">
@@ -44,7 +44,7 @@ export default function GlobalHeader() {
         ) : (
           <Link to="/login">
             <Button type="primary">
-              <i className="fas fa-sign-in-alt"></i> 登录
+              <i className="fa-solid fa-sign-in-alt"></i> 登录
             </Button>
           </Link>
         )}

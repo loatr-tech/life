@@ -30,11 +30,11 @@ function PostComments({ post }: any) {
     if (post?.id) {
       _loadComments(post);
     }
-  }, [post])
+  }, [post]);
 
   const onPageChange = (page: number) => {
     _loadComments(post, page);
-  }
+  };
 
   const onComment = async () => {
     setCommentSubmitting(true);
@@ -46,14 +46,15 @@ function PostComments({ post }: any) {
     setComment('');
     setCommentSubmitting(false);
     _loadComments(post);
-  }
+  };
 
   return (
     <section className="post-comments">
       {threads?.length > 0 && (
         <>
           <h3>
-            <i className="far fa-comments"></i> 评论区 ({post.interactions?.comments})
+            <i className="far fa-comments"></i> 评论区 (
+            {post.interactions?.comments})
           </h3>
           {threads.map((thread: any) => (
             <PostThread thread={thread} key={thread.id} />
@@ -97,7 +98,7 @@ function PostComments({ post }: any) {
           <p>登录后即可留言</p>
           <Link to="/login">
             <Button type="primary">
-              <i className="fas fa-sign-in-alt"></i> 登录
+              <i className="fa-solid fa-sign-in-alt"></i> 登录
             </Button>
           </Link>
         </div>

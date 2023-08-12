@@ -18,7 +18,7 @@ function PostThread({ thread }: any) {
   const [fetchingReplies, setFetchingReplies] = useState(false);
   const [fetchingMoreReplies, setFetchingMoreReplies] = useState(false);
 
-  const _loadReplies = async (page: number) =>{
+  const _loadReplies = async (page: number) => {
     const { data } = await api.get(
       `post/${thread.post_id}/thread/${thread.id}/replies`,
       {
@@ -26,7 +26,7 @@ function PostThread({ thread }: any) {
       }
     );
     return data;
-  }
+  };
 
   const onViewReply = async () => {
     if (viewReply) {
@@ -41,14 +41,14 @@ function PostThread({ thread }: any) {
       setReplies(data.replies);
       setTotalReplies(data.count);
     }
-  }
+  };
 
   const refreshReplies = async () => {
     const data = await _loadReplies(1);
     setRepliesPage(1);
     setReplies(data.replies);
     setTotalReplies(data.count);
-  }
+  };
 
   const loadMoreReplies = async () => {
     setFetchingMoreReplies(true);
@@ -58,7 +58,7 @@ function PostThread({ thread }: any) {
     setReplies(replies.concat(data.replies));
     setTotalReplies(data.count);
     setFetchingMoreReplies(false);
-  }
+  };
 
   return (
     <div className="post-thread">
@@ -70,7 +70,7 @@ function PostThread({ thread }: any) {
             type="link"
             onClick={() => onViewReply()}
           >
-            <i className={`fas fa-caret-${viewReply ? 'up' : 'down'}`}></i>{' '}
+            <i className={`fa-solid fa-caret-${viewReply ? 'up' : 'down'}`}></i>{' '}
             {viewReply ? '收起回复' : `查看${totalReplies}条回复`}
           </Button>
         )}

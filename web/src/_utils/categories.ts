@@ -29,7 +29,7 @@ export const CATEGORY = {
   HOUSE_RENTAL: 'house_rental',
 };
 
-export const CATEGORIES_MAP: any = {
+export const CATEGORIES_MAP: Record<string, string> = {
   // 打工人儿
   [CATEGORY.CAREER.EXP_SHARING]: '职场经验',
   [CATEGORY.CAREER.PROMO]: '升职加薪',
@@ -51,7 +51,7 @@ export const CATEGORIES_MAP: any = {
   [CATEGORY.HOUSE_RENTAL]: '房屋出租',
 };
 
-export const CATEGORIES_PARENT: any = {
+export const CATEGORIES_PARENT: Record<string, string> = {
   // 打工人儿
   [CATEGORY.CAREER.EXP_SHARING]: TOP_CATEGORY_TEXT.CAREER,
   [CATEGORY.CAREER.PROMO]: TOP_CATEGORY_TEXT.CAREER,
@@ -77,7 +77,7 @@ export const CATEGORIES = [
   {
     id: 'career',
     name: '打工人儿',
-    icon: 'fas fa-suitcase',
+    icon: 'fa-solid fa-suitcase',
     subcategories: [
       {
         id: 'career_exp',
@@ -150,7 +150,7 @@ export const CATEGORIES = [
             id: CATEGORY.GREEN_CARD,
           },
           {
-            id: CATEGORY.STUDENT_VISA
+            id: CATEGORY.STUDENT_VISA,
           },
         ],
       },
@@ -159,26 +159,26 @@ export const CATEGORIES = [
   {
     id: 'study',
     name: '天天向上',
-    icon: 'fas fa-book-reader',
+    icon: 'fa-solid fa-book-reader',
     subcategories: [
       {
-        id: CATEGORY.LETS_STUDY
+        id: CATEGORY.LETS_STUDY,
       },
       {
-        id: CATEGORY.LEET_CODE
+        id: CATEGORY.LEET_CODE,
       },
     ],
   },
   {
     id: 'neighborhood',
     name: '街坊邻居',
-    icon: 'fas fa-people-arrows',
+    icon: 'fa-solid fa-people-arrows',
     subcategories: [
       {
-        id: CATEGORY.USED_ITEMS
+        id: CATEGORY.USED_ITEMS,
       },
       {
-        id: CATEGORY.HOUSE_RENTAL
+        id: CATEGORY.HOUSE_RENTAL,
       },
     ],
   },

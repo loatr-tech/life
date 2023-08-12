@@ -60,7 +60,7 @@ function User() {
       {/* Logout */}
       <section className="user-logout">
         <Button type="dashed" danger onClick={onLogout}>
-          <i className="fas fa-sign-out-alt"></i> 退出账户
+          <i className="fa-solid fa-sign-out-alt"></i> 退出账户
         </Button>
       </section>
     </div>

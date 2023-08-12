@@ -15,11 +15,11 @@ function UserAvatar({ userInfo, onEdited }: any) {
     setIsUpdating(false);
     setIsModalVisible(false);
     onEdited();
-  }
+  };
 
   const handleCancel = () => {
     if (!isUpdating) setIsModalVisible(false);
-  }
+  };
 
   return (
     <div className="user-avatar">
@@ -29,7 +29,7 @@ function UserAvatar({ userInfo, onEdited }: any) {
         shape="circle"
         onClick={() => setIsModalVisible(true)}
       >
-        <i className="fas fa-pen"></i>
+        <i className="fa-solid fa-pen"></i>
       </Button>
       <Modal
         title="修改用户头像"

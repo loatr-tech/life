@@ -37,7 +37,7 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
       setInteracting(true);
       const { data } = await api.post(`post/thread/${thread.id}/interact`, {
         user_id: userInfo.id,
-        [action]: true
+        [action]: true,
       });
       setInteracting(false);
       setInteraction(data);
@@ -74,7 +74,7 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
             >
               <i
                 className={`${
-                  interaction?.interacted === 1 ? 'fas' : 'far'
+                  interaction?.interacted === 1 ? 'fa-solid' : 'far'
                 } fa-thumbs-up`}
               ></i>{' '}
               {interaction?.likes || ''}
@@ -86,7 +86,7 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
             >
               <i
                 className={`${
-                  interaction?.interacted === -1 ? 'fas' : 'far'
+                  interaction?.interacted === -1 ? 'fa-solid' : 'far'
                 } fa-thumbs-down`}
               ></i>{' '}
               {interaction?.dislikes || ''}
@@ -142,7 +142,7 @@ function PostThreadHead({ thread, refreshReplies, children }: any) {
             <p>登录后即可回复</p>
             <Link to="/login">
               <Button type="primary">
-                <i className="fas fa-sign-in-alt"></i> 登录
+                <i className="fa-solid fa-sign-in-alt"></i> 登录
               </Button>
             </Link>
           </div>

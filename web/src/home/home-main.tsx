@@ -60,7 +60,7 @@ function HomeMain() {
           <div className="home-content__actions">
             <Link to="/new-post">
               <Button shape="round" size="middle" type="primary">
-                <i className="fas fa-pen"></i> 发帖
+                <i className="fa-solid fa-pen"></i> 发帖
               </Button>
             </Link>
           </div>
@@ -96,7 +96,7 @@ function HomeMain() {
       <section className="home-sidebar">
         <Link to="/new-post">
           <Button shape="round" size="middle" block type="primary">
-            <i className="fas fa-plus"></i> 发帖
+            <i className="fa-solid fa-plus"></i> 发帖
           </Button>
         </Link>
       </section>

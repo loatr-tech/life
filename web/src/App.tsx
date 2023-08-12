@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { App as AntdAppWrapper } from 'antd';
 import './App.scss';
 import { SCREEN, ScreenSizeContext } from './_context/screen-size.context';
 import GlobalHeader from './global/global-header';
@@ -17,28 +18,30 @@ import NotFound from './not-found/not-found';
 function App() {
   const { screenSize, sidePanelOpen } = useContext(ScreenSizeContext);
   return (
-    <Router>
-      <main
-        className={`app-container ${
-          sidePanelOpen ? 'app-container-pushed' : ''
-        }`}
-      >
-        <GlobalHeader />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/post/:postId" element={<Post />} />
-          <Route path="/new-post" element={<PostCreation />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/user" element={<User />} />
-          <Route path="/calculator" element={<Calculator />} />
-          <Route path="/_admin" element={<Admin />} />
+    <AntdAppWrapper>
+      <Router>
+        <main
+          className={`app-container ${
+            sidePanelOpen ? 'app-container-pushed' : ''
+          }`}
+        >
+          <GlobalHeader />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/post/:postId" element={<Post />} />
+            <Route path="/new-post" element={<PostCreation />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/user" element={<User />} />
+            <Route path="/calculator" element={<Calculator />} />
+            <Route path="/_admin" element={<Admin />} />
 
-          {/* Not match, 404 not found */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
-      {screenSize === SCREEN.MOBILE && <GlobalSidePanel />}
-    </Router>
+            {/* Not match, 404 not found */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        {screenSize === SCREEN.MOBILE && <GlobalSidePanel />}
+      </Router>
+    </AntdAppWrapper>
   );
 }
 

@@ -51,7 +51,7 @@ function PostCreationTC({ setInfos }: any) {
           />
         </div>
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_title">头衔(Title/Level)</label>
+          <label htmlFor="tc_title">工种(Position)</label>
           <Input
             id="tc_title"
             value={tcData.title_level}
@@ -62,7 +62,15 @@ function PostCreationTC({ setInfos }: any) {
 
       <section className="post-creation-tc__row">
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_year">找工年份</label>
+          <label htmlFor="tc_title">级别(Level/Title)</label>
+          <Input
+            id="tc_title"
+            value={tcData.title_level}
+            onChange={(e) => onUpdateData(e.target.value, 'title_level')}
+          />
+        </div>
+        <div className="post-creation-tc__field">
+          <label htmlFor="tc_year">Offer 日期</label>
           <Select
             id="tc_year"
             style={{ width: '100%' }}

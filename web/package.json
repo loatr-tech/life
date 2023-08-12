@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:3211",
   "dependencies": {
-    "@ant-design/icons": "^4.6.2",
+    "@ant-design/icons": "^5.2.5",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -15,7 +15,7 @@
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "@uiw/react-md-editor": "^3.23.5",
-    "antd": "^4.16.9",
+    "antd": "^5.8.3",
     "axios": "^0.21.1",
     "dotenv": "^10.0.0",
     "node-sass": "^7.0.3",

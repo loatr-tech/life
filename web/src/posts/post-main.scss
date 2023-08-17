@@ -1,5 +1,6 @@
 .post-main {
-  width: calc(100% - 200px - 200px - 24px - 24px);
+  // -200px (left author panel) - 24px (left margin) - 24px (right margin)
+  width: calc(100% - 200px - 24px - 24px);
   margin: 0 24px;
 }
 

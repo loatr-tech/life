@@ -32,7 +32,6 @@ function PostCreationTC({ setInfos }: any) {
 
   const onUpdateData = (keyValue: Record<string, any>) => {
     const newTcData: any = { ...tcData, ...keyValue };
-    console.log(newTcData);
     setTcData(newTcData);
     setInfos(newTcData);
   };

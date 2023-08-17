@@ -1,43 +1,27 @@
 import React, { useState } from 'react';
-import { Button, Modal, Radio } from 'antd';
+import { Radio } from 'antd';
 import './post-creation-category.scss';
 import { CATEGORIES, CATEGORIES_MAP } from '../_utils/categories';
 
 function PostCreationCategory(props: any) {
   const { selectedCategory, setSelectedCategory, showMissingField } = props;
-  const [modalOpen, setModelOpen] = useState(false);
   const [category, setCategory] = useState<string>(selectedCategory);
 
   const onCategoryChanged = (evt: any) => {
     setCategory(evt.target.value);
-  };
-
-  const onCategoryConfirmed = () => {
-    setSelectedCategory(category);
-    setModelOpen(false);
+    setSelectedCategory(evt.target.value);
   };
 
   return (
     <>
-      <h3 className="post-creation-category__btn">
-        文章分类:{' '}
-        <Button
-          onClick={() => setModelOpen(true)}
-          size="small"
-          shape={selectedCategory ? 'round' : undefined}
-          danger={!selectedCategory && showMissingField ? true : false}
-        >
-          {selectedCategory ? <i className="fa-solid fa-pen"></i> : '请选择'}
-          {selectedCategory ? CATEGORIES_MAP[selectedCategory] : ''}
-        </Button>
-      </h3>
-      <Modal
-        className="post-creation-category__modal"
-        title="选择分类"
-        visible={modalOpen}
-        onOk={() => onCategoryConfirmed()}
-        onCancel={() => setModelOpen(false)}
+      <div
+        className={`post-creation__categories ${
+          !selectedCategory && showMissingField
+            ? 'post-creation__missing-field'
+            : ''
+        }`}
       >
+        <span style={{ fontWeight: 200 }}>帖子分类:</span>
         {CATEGORIES.map((topCategory: any) => {
           return (
             <section
@@ -65,7 +49,7 @@ function PostCreationCategory(props: any) {
             </section>
           );
         })}
-      </Modal>
+      </div>
     </>
   );
 }

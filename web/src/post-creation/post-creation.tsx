@@ -46,13 +46,12 @@ function PostCreation(props: any) {
 
   return loggedIn ? (
     <div className="post-creation">
-      <section className="post-creation__actions">
-        <PostCreationCategory
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-          showMissingField={showMissingField}
-        />
-      </section>
+      <PostCreationCategory
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+        showMissingField={showMissingField}
+      />
+
       <section className="post-creation__editor">
         {/* Title */}
         <div
@@ -80,9 +79,11 @@ function PostCreation(props: any) {
           <MDEditor
             placeholder="写下你的心路历程"
             value={content}
+            height={600}
             onChange={onChangeContent}
           />
         </div>
+
         {/* Actions */}
         <div className="post-creation__editor-actions">
           <Button

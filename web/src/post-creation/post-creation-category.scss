@@ -1,10 +1,17 @@
-.post-creation-category__btn {
+.post-creation__categories {
+  box-sizing: border-box;
+  background-color: white;
+  align-self: flex-start;
+  padding: 24px;
+  border-radius: 4px;
+  width: 200px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
-.post-creation-category__modal {
-  top: 20px;
-}
 
-.post-creation-category__modal-section:not(:first-of-type) {
-  margin-top: 12px;
+@media only screen and (max-width: 576px) {
+  .post-creation__categories {
+    width: 100%;
+    margin-bottom: 24px;
+  }
 }

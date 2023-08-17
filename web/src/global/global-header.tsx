@@ -17,7 +17,7 @@ export default function GlobalHeader() {
       <div className="global-header__container">
         {/* Logo */}
         <Link className="global-header__logo" to="/">
-          <h1>上岸</h1>
+          <h1>两分</h1>
           <span>beta</span>
         </Link>
 

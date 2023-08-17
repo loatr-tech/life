@@ -21,12 +21,15 @@ function PostCard({ post }: any) {
         {/* Content */}
         <p className="post-card__content">
           {post.category === CATEGORY.CAREER.TC
-            ? new Array(3).fill(
-                <i
-                  className="fa-solid fa-dollar-sign"
-                  style={{ marginRight: 1, color: 'darkgrey' }}
-                />
-              )
+            ? new Array(3)
+                .fill(null)
+                .map((_, index) => (
+                  <i
+                    className="fa-solid fa-dollar-sign"
+                    style={{ marginRight: 1, color: 'darkgrey' }}
+                    key={index}
+                  />
+                ))
             : post.content ||
               'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi nemo mollitia repellendus, laudantium unde, vel iste tempora eum nihil aperiam aliquid? Deleniti cum beatae iste sapiente molestias ullam consequatur alias.'}
         </p>

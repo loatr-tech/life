@@ -2,7 +2,6 @@ import { Express, Request, Response } from 'express';
 import { Filter, FindOptions, Db, ObjectId } from 'mongodb';
 import { authenticateToken } from './middleware';
 
-
 export default async function postsApi(app: Express, db: Db) {
   /**
    * Endpoints
@@ -12,6 +11,7 @@ export default async function postsApi(app: Express, db: Db) {
   app.post('/life/post', createPost);
   app.post('/life/post/:postId/interact', authenticateToken, interactWithPost);
   app.delete('/life/posts', removePosts);
+  app.delete('/life/posts/:postId', removePosts);
 
   const postCollections = db.collection('post');
 
@@ -146,7 +146,14 @@ export default async function postsApi(app: Express, db: Db) {
   }
 
   async function removePosts(req: Request, res: Response) {
-    await postCollections.deleteMany({});
+    const { postId } = req.params;
+    if (postId) {
+      await postCollections.deleteOne({
+        _id: new ObjectId(postId),
+      });
+    } else {
+      await postCollections.deleteMany({});
+    }
     res.sendStatus(200);
   }
 }

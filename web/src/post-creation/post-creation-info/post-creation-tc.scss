@@ -3,7 +3,9 @@
 }
 
 .post-creation-tc__field {
-  width: 165px;
+  min-width: 165px;
+  max-width: 200px;
+  width: calc(50% - 12px);
   margin: 0px 5px 12px;
   > label {
     display: block;

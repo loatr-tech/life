@@ -1,6 +1,9 @@
 import { Express, Request, Response } from 'express';
 import { Filter, FindOptions, Db, ObjectId } from 'mongodb';
 import { authenticateToken } from './middleware';
+import { decodePostId, encodePostId } from './utils/post-id';
+
+const BASE_COUNT = 1000000;
 
 export default async function postsApi(app: Express, db: Db) {
   /**
@@ -9,6 +12,7 @@ export default async function postsApi(app: Express, db: Db) {
   app.get('/life/posts', getPosts);
   app.get('/life/post/:postId', getPost);
   app.post('/life/post', createPost);
+  app.post('/life/posts', createPosts);
   app.post('/life/post/:postId/interact', authenticateToken, interactWithPost);
   app.delete('/life/posts', removePosts);
   app.delete('/life/posts/:postId', removePosts);
@@ -26,7 +30,7 @@ export default async function postsApi(app: Express, db: Db) {
     const postsCursor = postCollections.find(findFilter, findOptions);
     const posts = (await postsCursor.toArray()).map((post) => {
       return {
-        id: post._id,
+        id: encodePostId(post.numId),
         title: post.title,
         content: post.content,
         category: post.category,
@@ -48,13 +52,12 @@ export default async function postsApi(app: Express, db: Db) {
 
   async function getPost(req: Request, res: Response) {
     const { postId } = req.params;
-    const post: any = await postCollections.findOne({
-      _id: new ObjectId(postId),
-    });
+    const numId = decodePostId(postId);
+    const post: any = await postCollections.findOne({ numId });
 
     // Update the views every time we get post successfully
     postCollections.updateOne(
-      { _id: new ObjectId(postId) },
+      { numId },
       {
         $inc: { 'interactions.views': 1 },
       }
@@ -77,32 +80,89 @@ export default async function postsApi(app: Express, db: Db) {
     );
   }
 
+  function _generatePostObject({
+    title,
+    content,
+    category,
+    infos,
+    owner,
+    totalCount,
+  }: {
+    title: string;
+    content: string;
+    category: string;
+    infos: any;
+    owner: any;
+    totalCount: number;
+  }) {
+    return {
+      title,
+      content,
+      category,
+      owner: {
+        id: owner._id,
+        name: owner.name,
+        avatar_url: owner.avatar_url,
+      },
+      infos,
+      createdAt: new Date(),
+      interactions: {
+        views: 0,
+        likes: 0,
+        comments: 0,
+      },
+      tags: [],
+      numId: BASE_COUNT + totalCount + 1,
+    };
+  }
+
   async function createPost(req: Request, res: Response) {
-    const { title, content, category, owner_id, infos } = req.body;
+    const { title, content, category, infos, owner_id } = req.body;
     if (title && content && category && owner_id) {
       const owner: any = await db
         .collection('user')
         .findOne({ _id: new ObjectId(owner_id) });
       if (owner) {
-        const postObject = {
+        const totalCount = await postCollections.countDocuments();
+        const postObject = _generatePostObject({
           title,
           content,
           category,
-          owner: {
-            id: owner._id,
-            name: owner.name,
-            avatar_url: owner.avatar_url,
-          },
           infos,
-          createdAt: new Date(),
-          interactions: {
-            views: 0,
-            likes: 0,
-            comments: 0,
-          },
-          tags: [],
-        };
+          owner,
+          totalCount,
+        });
         const resultsAfterInsert = await postCollections.insertOne(postObject);
+        res.send(JSON.stringify(resultsAfterInsert));
+      } else {
+        res.status(400).send('Cannot find the author, owner_id is not valid');
+      }
+    } else {
+      res.status(400).send('Missing required fields');
+    }
+  }
+
+  async function createPosts(req: Request, res: Response) {
+    // TODO
+    const { posts, owner_id } = req.body;
+    if (owner_id && posts?.length) {
+      const owner: any = await db
+        .collection('user')
+        .findOne({ _id: new ObjectId(owner_id) });
+      if (owner) {
+        const totalCount = await postCollections.countDocuments();
+        const postsList = posts.map(
+          ({ title, content, category, infos }: any, index: number) =>
+            _generatePostObject({
+              title,
+              content,
+              category,
+              infos,
+              owner,
+              totalCount: totalCount + index,
+            })
+        );
+        const resultsAfterInsert = await postCollections.insertMany(postsList);
         res.send(JSON.stringify(resultsAfterInsert));
       } else {
         res.status(400).send('Cannot find the author, owner_id is not valid');

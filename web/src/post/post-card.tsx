@@ -8,7 +8,7 @@ import { CATEGORIES_MAP, CATEGORY } from '../_utils/categories';
 
 function PostCard({ post }: any) {
   return (
-    <Link to={`/post/${post.id}`} className="post-card">
+    <Link to={`/p/${post.id}`} className="post-card">
       {/* Header */}
       <div className="post-card__header">
         <h3 className="post-card__title">{post.title}</h3>
@@ -19,7 +19,7 @@ function PostCard({ post }: any) {
 
       {/* Content */}
       <p className="post-card__content">
-        {post.category === CATEGORY.CAREER.TC
+        {post.category === CATEGORY.TC
           ? new Array(3)
               .fill(null)
               .map((_, index) => (

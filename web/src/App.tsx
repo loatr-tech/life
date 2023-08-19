@@ -28,7 +28,7 @@ function App() {
           <GlobalHeader />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/post/:postId" element={<Post />} />
+            <Route path="/p/:postId" element={<Post />} />
             <Route path="/new-post" element={<PostCreation />} />
             <Route path="/login" element={<Login />} />
             <Route path="/user" element={<User />} />

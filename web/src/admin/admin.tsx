@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { Button, Input, message } from 'antd';
+import React, { useContext, useState } from 'react';
+import { Button, Input, InputNumber, message } from 'antd';
 import './admin.scss';
 import api from '../_utils/api';
+import { UserContext } from '../_context/user.context';
+import { generatePosts } from './admin-posts';
 
 export default function Admin() {
+  const { userInfo } = useContext(UserContext);
   const [postIdToDelete, setPostIdToDelete] = useState<string>('');
+  const [postCountToCreate, setPostCountToCreate] = useState<number>(0);
 
   const onRemoveAllPosts = async () => {
     await api.delete('posts');
@@ -24,6 +28,15 @@ export default function Admin() {
   const onRemovePost = async () => {
     await api.delete(`posts/${postIdToDelete}`);
     message.info('Post removed');
+  };
+
+  const onAddPost = async () => {
+    const posts = generatePosts(postCountToCreate);
+    await api.post('posts', {
+      posts,
+      owner_id: userInfo.id,
+    });
+    message.info(`${postCountToCreate} posts created`);
   };
 
   return (
@@ -52,6 +65,21 @@ export default function Admin() {
           />
           <Button onClick={() => onRemovePost()} disabled={!postIdToDelete}>
             Remove post
+          </Button>
+        </div>
+      </section>
+      <br />
+      <hr />
+      <h2>Create entities</h2>
+      <section>
+        <div style={{ display: 'flex', gap: 4, width: '50%' }}>
+          <InputNumber
+            placeholder="Post id"
+            value={postCountToCreate}
+            onChange={(count) => setPostCountToCreate(count ?? 0)}
+          />
+          <Button onClick={onAddPost} disabled={postCountToCreate <= 0}>
+            Add posts
           </Button>
         </div>
       </section>

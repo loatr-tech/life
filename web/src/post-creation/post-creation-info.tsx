@@ -4,7 +4,7 @@ import PostCreationTC from './post-creation-info/post-creation-tc';
 
 function PostCreationInfo({ category, setInfos }: any) {
   switch (category) {
-    case CATEGORY.CAREER.TC:
+    case CATEGORY.TC:
       return <PostCreationTC setInfos={setInfos} />;
     default:
       return <></>;

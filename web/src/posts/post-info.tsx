@@ -4,7 +4,7 @@ import PostInfoTC from './post-info/post-info-tc';
 
 function PostInfo({ category, infos }: any) {
   switch (category) {
-    case CATEGORY.CAREER.TC:
+    case CATEGORY.TC:
       return <PostInfoTC infos={infos} />;
     default:
       return <></>;

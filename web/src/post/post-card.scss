@@ -71,7 +71,7 @@
   .post-card__author {
     display: flex;
     align-items: center;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 6px;
     width: 100px;
     .post-card__author-avatar {

@@ -7,14 +7,12 @@ const TOP_CATEGORY_TEXT = {
 
 export const CATEGORY = {
   // 打工人儿
-  CAREER: {
-    EXP_SHARING: 'career_exp_sharing',
-    PROMO: 'career_promo',
-    TC: 'total_package',
-    INTERVIEW_QUESTIONS: 'interview_questions',
-    NEED_REFERRAL: 'need_referral',
-    WE_RE_HIRING: 'we_re_hiring',
-  },
+  EXP_SHARING: 'career_exp_sharing',
+  PROMO: 'career_promo',
+  TC: 'total_package',
+  INTERVIEW_QUESTIONS: 'interview_questions',
+  NEED_REFERRAL: 'need_referral',
+  WE_RE_HIRING: 'we_re_hiring',
   // 留学签证
   APPLY_SCHOOL: 'apply_school',
   APPLY_SCHOOL_RESULTS: 'apply_school_results',
@@ -31,12 +29,12 @@ export const CATEGORY = {
 
 export const CATEGORIES_MAP: Record<string, string> = {
   // 打工人儿
-  [CATEGORY.CAREER.EXP_SHARING]: '职场经验',
-  [CATEGORY.CAREER.PROMO]: '升职加薪',
-  [CATEGORY.CAREER.TC]: '工资包裹',
-  [CATEGORY.CAREER.INTERVIEW_QUESTIONS]: '面试经验',
-  [CATEGORY.CAREER.NEED_REFERRAL]: '跪求内推',
-  [CATEGORY.CAREER.WE_RE_HIRING]: '我要招人',
+  [CATEGORY.EXP_SHARING]: '职场经验',
+  [CATEGORY.PROMO]: '升职加薪',
+  [CATEGORY.TC]: '工资包裹',
+  [CATEGORY.INTERVIEW_QUESTIONS]: '面试经验',
+  [CATEGORY.NEED_REFERRAL]: '跪求内推',
+  [CATEGORY.WE_RE_HIRING]: '我要招人',
   // 留学签证
   [CATEGORY.APPLY_SCHOOL]: '申请学校',
   [CATEGORY.APPLY_SCHOOL_RESULTS]: '申校结果',
@@ -53,12 +51,12 @@ export const CATEGORIES_MAP: Record<string, string> = {
 
 export const CATEGORIES_PARENT: Record<string, string> = {
   // 打工人儿
-  [CATEGORY.CAREER.EXP_SHARING]: TOP_CATEGORY_TEXT.CAREER,
-  [CATEGORY.CAREER.PROMO]: TOP_CATEGORY_TEXT.CAREER,
-  [CATEGORY.CAREER.TC]: TOP_CATEGORY_TEXT.CAREER,
-  [CATEGORY.CAREER.INTERVIEW_QUESTIONS]: TOP_CATEGORY_TEXT.CAREER,
-  [CATEGORY.CAREER.NEED_REFERRAL]: TOP_CATEGORY_TEXT.CAREER,
-  [CATEGORY.CAREER.WE_RE_HIRING]: TOP_CATEGORY_TEXT.CAREER,
+  [CATEGORY.EXP_SHARING]: TOP_CATEGORY_TEXT.CAREER,
+  [CATEGORY.PROMO]: TOP_CATEGORY_TEXT.CAREER,
+  [CATEGORY.TC]: TOP_CATEGORY_TEXT.CAREER,
+  [CATEGORY.INTERVIEW_QUESTIONS]: TOP_CATEGORY_TEXT.CAREER,
+  [CATEGORY.NEED_REFERRAL]: TOP_CATEGORY_TEXT.CAREER,
+  [CATEGORY.WE_RE_HIRING]: TOP_CATEGORY_TEXT.CAREER,
   // 留学移民
   [CATEGORY.APPLY_SCHOOL]: TOP_CATEGORY_TEXT.GO_ABROAD,
   [CATEGORY.APPLY_SCHOOL_RESULTS]: TOP_CATEGORY_TEXT.GO_ABROAD,
@@ -85,10 +83,10 @@ export const CATEGORIES = [
         name: '经验分享',
         subcategories: [
           {
-            id: CATEGORY.CAREER.EXP_SHARING,
+            id: CATEGORY.EXP_SHARING,
           },
           {
-            id: CATEGORY.CAREER.PROMO,
+            id: CATEGORY.PROMO,
           },
         ],
       },
@@ -98,10 +96,10 @@ export const CATEGORIES = [
         name: '数据分享',
         subcategories: [
           {
-            id: CATEGORY.CAREER.TC,
+            id: CATEGORY.TC,
           },
           {
-            id: CATEGORY.CAREER.INTERVIEW_QUESTIONS,
+            id: CATEGORY.INTERVIEW_QUESTIONS,
           },
         ],
       },
@@ -111,10 +109,10 @@ export const CATEGORIES = [
         name: '职位分享',
         subcategories: [
           {
-            id: CATEGORY.CAREER.NEED_REFERRAL,
+            id: CATEGORY.NEED_REFERRAL,
           },
           {
-            id: CATEGORY.CAREER.WE_RE_HIRING,
+            id: CATEGORY.WE_RE_HIRING,
           },
         ],
       },

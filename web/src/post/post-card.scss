@@ -1,6 +1,6 @@
 .post-card {
+  display: block;
   width: 100%;
-  box-sizing: border-box;
   background-color: white;
   box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
   margin-bottom: 16px;
@@ -48,7 +48,7 @@
   white-space: pre-wrap;
   overflow: hidden;
   width: 100%;
-  max-height: 40px;
+  max-height: 20px;
   line-height: 20px;
   margin: 0;
   color: #444b51;

@@ -80,17 +80,19 @@ function HomeMain() {
         )}
 
         {/* Post Lists */}
-        {loading ? (
-          new Array(5)
-            .fill(null)
-            .map((_, index) => <PostCardPlaceholder key={index} />)
-        ) : posts.length ? (
-          posts.map((post: any) => {
-            return <PostCard post={post} key={post.id} />;
-          })
-        ) : (
-          <HomeEmptyPosts />
-        )}
+        <div className="home-content__posts">
+          {loading ? (
+            new Array(6)
+              .fill(null)
+              .map((_, index) => <PostCardPlaceholder key={index} />)
+          ) : posts.length ? (
+            posts.map((post: any) => {
+              return <PostCard post={post} key={post.id} />;
+            })
+          ) : (
+            <HomeEmptyPosts />
+          )}
+        </div>
       </section>
 
       <section className="home-sidebar">

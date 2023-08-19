@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { DatePicker, Divider, Input, InputNumber, Select } from 'antd';
 import './post-creation-tc.scss';
 import { displayCurreny } from '../../_utils/number';
+import PostInfoLabel from '../../post/post-info-label';
+import { POST_METADATA_TC } from '../../_utils/post-infos';
 
 const DEFAULT_TC_DATA = {
   // Position information
@@ -38,11 +40,15 @@ function PostCreationTC({ setInfos }: any) {
 
   return (
     <div className="post-creation-tc">
-      <h2 className="post-creation-tc__section-title">基本信息</h2>
+      <h2 className="post-creation-tc__section-title">
+        <i className="fa-solid fa-address-card"></i> 基本信息
+      </h2>
       {/* Position Information */}
       <section className="post-creation-tc__row">
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_company">公司名称</label>
+          <label htmlFor="tc_company">
+            <PostInfoLabel metadataLabel={POST_METADATA_TC.COMPANY_NAME} />
+          </label>
           <Input
             id="tc_company"
             placeholder="e.g Google"
@@ -51,7 +57,9 @@ function PostCreationTC({ setInfos }: any) {
           />
         </div>
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_title">工种(Position)</label>
+          <label htmlFor="tc_title">
+            <PostInfoLabel metadataLabel={POST_METADATA_TC.POSITION} />
+          </label>
           <Input
             id="tc_title"
             placeholder="e.g Software Engineer"
@@ -63,7 +71,9 @@ function PostCreationTC({ setInfos }: any) {
 
       <section className="post-creation-tc__row">
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_title">级别(Level/Title)</label>
+          <label htmlFor="tc_title">
+            <PostInfoLabel metadataLabel={POST_METADATA_TC.LEVEL} />
+          </label>
           <Input
             id="tc_title"
             value={tcData.title_level}
@@ -71,7 +81,9 @@ function PostCreationTC({ setInfos }: any) {
           />
         </div>
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_year">定薪月份</label>
+          <label htmlFor="tc_year">
+            <PostInfoLabel metadataLabel={POST_METADATA_TC.DATE} />
+          </label>
           <DatePicker
             style={{ width: '100%' }}
             picker="month"
@@ -88,7 +100,9 @@ function PostCreationTC({ setInfos }: any) {
 
       <section className="post-creation-tc__row">
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_degree">最高学历</label>
+          <label htmlFor="tc_degree">
+            <PostInfoLabel metadataLabel={POST_METADATA_TC.DEGREE} />
+          </label>
           <Select
             id="tc_degree"
             style={{ width: '100%' }}
@@ -101,7 +115,9 @@ function PostCreationTC({ setInfos }: any) {
           </Select>
         </div>
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_yoe">工作经验</label>
+          <label htmlFor="tc_yoe">
+            <PostInfoLabel metadataLabel={POST_METADATA_TC.YOE} />
+          </label>
           <Input
             id="tc_yoe"
             type="number"
@@ -116,11 +132,15 @@ function PostCreationTC({ setInfos }: any) {
 
       <Divider />
 
-      <h2 className="post-creation-tc__section-title">薪资</h2>
+      <h2 className="post-creation-tc__section-title">
+        <i className="fa-solid fa-sack-dollar"></i> 薪资
+      </h2>
       {/* Basic */}
       <section className="post-creation-tc__row">
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_base">基本工资(Base)</label>
+          <label htmlFor="tc_base">
+            <PostInfoLabel metadataLabel={POST_METADATA_TC.BASE} />
+          </label>
           <InputNumber
             id="tc_base"
             formatter={(value) => `$ ${displayCurreny(value)}`}
@@ -130,7 +150,9 @@ function PostCreationTC({ setInfos }: any) {
           />
         </div>
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_bonus">奖金(Bonus)</label>
+          <label htmlFor="tc_bonus">
+            <PostInfoLabel metadataLabel={POST_METADATA_TC.BONUS} />
+          </label>
           <Input
             id="tc_bonus"
             type="number"
@@ -145,7 +167,9 @@ function PostCreationTC({ setInfos }: any) {
       <h4 className="post-creation-tc__section-title">签字费(Sign-on bonus)</h4>
       <section className="post-creation-tc__row">
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_signon1">第一年</label>
+          <label htmlFor="tc_signon1">
+            <PostInfoLabel metadataLabel={POST_METADATA_TC.SIGNON_1ST} />
+          </label>
           <InputNumber
             id="tc_signon1"
             formatter={(value) => `$ ${displayCurreny(value)}`}
@@ -155,7 +179,9 @@ function PostCreationTC({ setInfos }: any) {
           />
         </div>
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_signon2">第二年</label>
+          <label htmlFor="tc_signon2">
+            <PostInfoLabel metadataLabel={POST_METADATA_TC.SIGNON_2ND} />
+          </label>
           <InputNumber
             id="tc_signon2"
             formatter={(value) => `$ ${displayCurreny(value)}`}
@@ -170,7 +196,9 @@ function PostCreationTC({ setInfos }: any) {
       <h4 className="post-creation-tc__section-title">股票(Equity)</h4>
       <section className="post-creation-tc__row">
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_equity_type">股票类型</label>
+          <label htmlFor="tc_equity_type">
+            <PostInfoLabel metadataLabel={POST_METADATA_TC.EQUITY_TYPE} />
+          </label>
           <Select
             id="tc_equity_type"
             style={{ width: '100%' }}
@@ -182,7 +210,9 @@ function PostCreationTC({ setInfos }: any) {
           </Select>
         </div>
         <div className="post-creation-tc__field">
-          <label htmlFor="tc_equity_type">授予方式</label>
+          <label htmlFor="tc_equity_type">
+            <PostInfoLabel metadataLabel={POST_METADATA_TC.GRANT_TYPE} />
+          </label>
           <Select
             id="tc_equity_grant_type"
             style={{ width: '100%' }}
@@ -195,7 +225,9 @@ function PostCreationTC({ setInfos }: any) {
         </div>
         {tcData.equity_grant_type === 'total_value' && (
           <div className="post-creation-tc__field">
-            <label htmlFor="tc_equity_amount">4年总值</label>
+            <label htmlFor="tc_equity_amount">
+              <PostInfoLabel metadataLabel={POST_METADATA_TC.TOTAL_VALUE} />
+            </label>
             <InputNumber
               id="tc_equity_amount"
               formatter={(value) => `$ ${displayCurreny(value)}`}
@@ -208,7 +240,9 @@ function PostCreationTC({ setInfos }: any) {
         {tcData.equity_grant_type === 'total_units' && (
           <>
             <div className="post-creation-tc__field">
-              <label htmlFor="tc_equity_units">四年总股数</label>
+              <label htmlFor="tc_equity_units">
+                <PostInfoLabel metadataLabel={POST_METADATA_TC.TOTAL_UNITS} />
+              </label>
               <InputNumber
                 id="tc_equity_units"
                 formatter={(value) => displayCurreny(`${value}`)}
@@ -219,19 +253,13 @@ function PostCreationTC({ setInfos }: any) {
                 }
               />
             </div>
-            <div className="post-creation-tc__field">
-              <label htmlFor="tc_equity_market_price">授予每股价格</label>
-              <InputNumber
-                id="tc_equity_market_price"
-                formatter={(value) => `$ ${displayCurreny(value)}`}
-                style={{ width: '100%' }}
-                value={tcData.equity_unit_price}
-                onChange={(value) => onUpdateData({ equity_unit_price: value })}
-              />
-            </div>
-            {tcData.equity_type === 'option' && (
+            {tcData.equity_type === 'option' ? (
               <div className="post-creation-tc__field">
-                <label htmlFor="tc_equity_strike_price">行权价</label>
+                <label htmlFor="tc_equity_strike_price">
+                  <PostInfoLabel
+                    metadataLabel={POST_METADATA_TC.STRIKE_PRICE}
+                  />
+                </label>
                 <InputNumber
                   id="tc_equity_strike_price"
                   formatter={(value) => `$ ${displayCurreny(value)}`}
@@ -239,6 +267,21 @@ function PostCreationTC({ setInfos }: any) {
                   value={tcData.equity_strike_price}
                   onChange={(value) =>
                     onUpdateData({ equity_strike_price: value })
+                  }
+                />
+              </div>
+            ) : (
+              <div className="post-creation-tc__field">
+                <label htmlFor="tc_equity_market_price">
+                  <PostInfoLabel metadataLabel={POST_METADATA_TC.UNIT_PRICE} />
+                </label>
+                <InputNumber
+                  id="tc_equity_market_price"
+                  formatter={(value) => `$ ${displayCurreny(value)}`}
+                  style={{ width: '100%' }}
+                  value={tcData.equity_unit_price}
+                  onChange={(value) =>
+                    onUpdateData({ equity_unit_price: value })
                   }
                 />
               </div>

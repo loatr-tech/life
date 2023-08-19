@@ -8,6 +8,10 @@ html,
   margin: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .app-container {
   transition: right 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
   position: relative;

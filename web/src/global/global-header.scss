@@ -16,7 +16,6 @@
   margin: 0 auto;
   width: 1280px;
   max-width: 100vw;
-  box-sizing: border-box;
 }
 .global-header__logo {
   display: flex;
@@ -46,5 +45,12 @@
 @media only screen and (max-width: 576px) {
   .global-header__search {
     width: calc(100% - 85px - 45px - 24px - 10px);
+  }
+}
+
+// Large desktop
+@media (min-width: 1920px) {
+  .global-header__container {
+    width: 1920px;
   }
 }

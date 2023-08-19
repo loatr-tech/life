@@ -11,18 +11,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .post-info-field {
   text-align: center;
-  width: 130px;
+  min-width: 165px;
+  max-width: 200px;
+  width: calc(50% - 12px);
   margin: 0px 5px 12px;
   background: #fbfcfc;
   padding: 8px 12px;
   border-radius: 12px;
-  > h4 {
-    margin: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  &:hover {
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
   }
 }
 .post-info__summary {
   text-align: center;
+}
+
+@media (min-width: 1280px) {
+  .post-info-tc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }

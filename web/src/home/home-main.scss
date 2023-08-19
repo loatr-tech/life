@@ -12,6 +12,7 @@
   height: 480px;
 }
 
+// Tablet
 @media only screen and (min-width: 576px) and (max-width: 768px) {
   .home-content {
     width: calc(100% - 200px - 24px);
@@ -22,6 +23,7 @@
   }
 }
 
+// Mobile
 @media only screen and (max-width: 576px) {
   .home-main {
     padding: 24px 8px;
@@ -34,5 +36,21 @@
 
   .home-sidebar {
     display: none;
+  }
+}
+
+// Large desktop
+@media (min-width: 1920px) {
+  .home-main {
+    max-width: 1920px;
+
+    .home-content__posts {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .post-card {
+        width: calc(50% - 6px);
+      }
+    }
   }
 }

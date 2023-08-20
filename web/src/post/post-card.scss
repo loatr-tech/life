@@ -45,8 +45,9 @@
 }
 
 .post-card__content {
-  white-space: pre-wrap;
+  white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
   width: 100%;
   max-height: 20px;
   line-height: 20px;

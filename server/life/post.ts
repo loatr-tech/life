@@ -20,32 +20,48 @@ export default async function postsApi(app: Express, db: Db) {
   const postCollections = db.collection('post');
 
   async function getPosts(req: Request, res: Response) {
-    const { limit = 10, category } = req.query;
+    const { limit = 10, page = 1, category } = req.query;
+    const pageInt = parseInt(page as string);
+    const limitInt = parseInt(limit as string);
     // Get total count
     const totalCount = await postCollections.countDocuments();
     // Find documents
     const findFilter = {} as Filter<any>;
     if (category) findFilter.category = category;
-    const findOptions = { limit, sort: { createdAt: -1 } } as FindOptions<any>;
+    const findOptions = {
+      limit: limitInt,
+      skip: (pageInt - 1) * limitInt,
+      sort: { createdAt: -1 },
+    } as FindOptions<any>;
     const postsCursor = postCollections.find(findFilter, findOptions);
     const posts = (await postsCursor.toArray()).map((post) => {
+      const postContent = `${post.content}`;
       return {
         id: encodePostId(post.numId),
         title: post.title,
-        content: post.content,
+        content:
+          postContent.length > 110
+            ? postContent.substring(0, 110) + '...'
+            : postContent,
         category: post.category,
-        createdAt: post.createdAt,
-        owner: post.owner,
+        // createdAt: post.createdAt, // TBD whether to return right now as we don't show it
+        owner: {
+          avatar_url: post.owner.avatar_url,
+          name: post.owner.name,
+        },
         interactions: post.interactions,
       };
     });
 
+    console.log('query again');
+
     // Send to the client side
-    res.send(
+    res.status(200).send(
       JSON.stringify({
         items: posts,
         count: totalCount,
         limit,
+        page: pageInt,
       })
     );
   }

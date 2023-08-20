@@ -13,22 +13,26 @@ import removeMarkdown from '../_utils/remove-markdown';
 import { CATEGORIES_MAP } from '../_utils/categories';
 import { HomeOutlined } from '@ant-design/icons';
 
+const postLimit = 10;
+
 function HomeMain() {
   const { screenSize } = useContext(ScreenSizeContext);
   const { activeCategory, setActiveCategory } = useContext(NavigationContext);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+  const [endOfPage, setEndOfPage] = useState(false);
 
   useEffect(() => {
     let destroyed = false;
     const fetchAllPosts = async () => {
       setLoading(true);
-      const params: any = {};
+      setPosts([]);
+      const params: any = { limit: postLimit };
       if (activeCategory && activeCategory.category !== 'all') {
         params.category = activeCategory.category;
       }
       const { data } = await api.get('posts', { params });
-
       if (!destroyed) {
         setPosts(
           data.items.map((post: any) => {
@@ -36,7 +40,9 @@ function HomeMain() {
             return post;
           })
         );
+        setPage(data.page);
         setLoading(false);
+        setEndOfPage(data.items.length < postLimit);
       }
     };
 
@@ -45,6 +51,24 @@ function HomeMain() {
       destroyed = true;
     };
   }, [activeCategory]);
+
+  async function loadMore() {
+    const params: any = { page: page + 1 };
+    if (activeCategory && activeCategory.category !== 'all') {
+      params.category = activeCategory.category;
+    }
+    const { data } = await api.get('posts', { params });
+    setPosts((prevPosts) => {
+      return prevPosts.concat(
+        data.items.map((post: any) => {
+          post.content = removeMarkdown(post.content);
+          return post;
+        })
+      );
+    });
+    if (data.items.length) setPage(data.page);
+    if (data.items.length < postLimit) setEndOfPage(true);
+  }
 
   return (
     <main className="home-main">
@@ -89,6 +113,28 @@ function HomeMain() {
                 return <PostCard post={post} key={post.id} />;
               })}
         </div>
+
+        {Boolean(posts.length) &&
+          (endOfPage ? (
+            <div
+              style={{
+                color: 'darkgrey',
+                textAlign: 'center',
+                userSelect: 'none',
+              }}
+            >
+              <i className="fa-solid fa-heart-crack"></i> 没有更多了
+            </div>
+          ) : (
+            <Button
+              style={{ margin: '0 auto', width: '100%' }}
+              type="text"
+              icon={<i className="fa-solid fa-down-long"></i>}
+              onClick={loadMore}
+            >
+              加载更多
+            </Button>
+          ))}
 
         {/* Empty states */}
         {!loading && !posts?.length && <HomeEmptyPosts />}

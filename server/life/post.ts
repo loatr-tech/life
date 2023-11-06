@@ -53,8 +53,6 @@ export default async function postsApi(app: Express, db: Db) {
       };
     });
 
-    console.log('query again');
-
     // Send to the client side
     res.status(200).send(
       JSON.stringify({
